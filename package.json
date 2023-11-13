@@ -4,6 +4,11 @@
   "private": true,
   "homepage": "https://bogdanproto.github.io/exchange-try-react/",
   "dependencies": {
+    "@fontsource/roboto": "^5.0.8",
+    "@hookform/resolvers": "^3.3.2",
+    "@mui/icons-material": "^5.14.16",
+    "@mui/styled-engine-sc": "^6.0.0-alpha.5",
+    "@reduxjs/toolkit": "^1.9.7",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -11,11 +16,18 @@
     "@types/node": "^16.18.61",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
+    "@types/react-redux": "^7.1.30",
+    "firebase": "^10.6.0",
+    "modern-normalize": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.48.2",
+    "react-redux": "^8.1.3",
     "react-scripts": "5.0.1",
+    "styled-components": "^6.1.1",
     "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yup": "^1.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -41,5 +53,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-router-dom": "^5.3.3"
   }
 }
