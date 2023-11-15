@@ -9,7 +9,7 @@ export const schemaLoginForm = yup.object({
   password: yup.string().required('Password is required').trim(),
 });
 
-export const schemaSigninForm = yup.object({
+export const schemaSignupForm = yup.object({
   name: yup.string().required('Name is required').trim(),
   email: yup
     .string()

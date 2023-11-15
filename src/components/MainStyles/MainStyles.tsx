@@ -2,19 +2,25 @@ import { createGlobalStyle } from 'styled-components';
 import 'modern-normalize';
 
 export const MainStyles = createGlobalStyle`
- body {
+
+html {
   margin: 0;
-  background-color: whitesmoke;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  overscroll-behavior: none;
+}
+
+ body {
+  height: 100%;
+  margin: 0;
+  background-color: ${({ theme }) => theme.colorBcg};;
+  font-family: 'Play', sans-serif;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: 'Play', sans-serif;
+
 }
 
 ul {

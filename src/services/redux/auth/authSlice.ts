@@ -1,19 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { logInUser, logOutUser, refreshUser, signUpUser } from './operations';
+import { ISliceAuthUser } from '../../../interfaces/userInterface';
+import {
+  handleFulfilledLogIn,
+  handleFulfilledLogOut,
+  handleFulfilledRefresh,
+  handleFulfilledSigUp,
+  handlePendingAuth,
+  handleRejectedAuth,
+} from './handlesOperationsStatus';
 
-interface AuthUser {
-  user: { name: string | null; email: string | null };
-  uid: string | null;
-  isLoggedIn: boolean;
-  errorAuth: { status: string | null; data: string | null };
-  isRefreshing: string | null;
-}
-
-const initialState: AuthUser = {
+const initialState: ISliceAuthUser = {
   user: { name: null, email: null },
-  uid: null,
+  token: null,
   isLoggedIn: false,
-  errorAuth: { status: null, data: null },
-  isRefreshing: null,
+  errorAuth: null,
+  isRefreshing: false,
 };
 
 const authUserSlice = createSlice({
@@ -23,7 +25,19 @@ const authUserSlice = createSlice({
     // fill in primary logic here
   },
   extraReducers: builder => {
-    builder.addCase('signInUser.pending', (state, action) => {});
+    builder
+      .addCase(signUpUser.pending, handlePendingAuth)
+      .addCase(signUpUser.fulfilled, handleFulfilledSigUp)
+      .addCase(signUpUser.rejected, handleRejectedAuth)
+      .addCase(logInUser.pending, handlePendingAuth)
+      .addCase(logInUser.fulfilled, handleFulfilledLogIn)
+      .addCase(logInUser.rejected, handleRejectedAuth)
+      .addCase(logOutUser.pending, handlePendingAuth)
+      .addCase(logOutUser.fulfilled, handleFulfilledLogOut)
+      .addCase(logOutUser.rejected, handleRejectedAuth)
+      .addCase(refreshUser.pending, handlePendingAuth)
+      .addCase(refreshUser.fulfilled, handleFulfilledRefresh)
+      .addCase(refreshUser.rejected, handleRejectedAuth);
   },
 });
 
