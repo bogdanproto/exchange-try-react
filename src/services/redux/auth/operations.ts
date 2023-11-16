@@ -7,6 +7,8 @@ import {
 } from 'firebase/auth';
 import { IUserLogin, IUserSignUp } from '../../../interfaces/userInterface';
 import { authObserver } from '../../firebase/fireBaseObserver';
+import { handleErrors } from './handleErrors';
+import { errorMessage } from '../../../const/notification';
 
 export const signUpUser = createAsyncThunk(
   'authUser/signUpUser',
@@ -24,7 +26,7 @@ export const signUpUser = createAsyncThunk(
         uid: userCredential.user.uid,
       };
     } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.code);
+      return thunkAPI.rejectWithValue(handleErrors(error.code));
     }
   }
 );
@@ -44,7 +46,7 @@ export const logInUser = createAsyncThunk(
         uid: userCredential.user.uid,
       };
     } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.code);
+      return thunkAPI.rejectWithValue(handleErrors(error.code));
     }
   }
 );
@@ -57,7 +59,7 @@ export const logOutUser = createAsyncThunk(
 
       return await authObserver();
     } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.code);
+      return thunkAPI.rejectWithValue(errorMessage.LOGOUT);
     }
   }
 );
@@ -68,7 +70,7 @@ export const refreshUser = createAsyncThunk(
     try {
       return await authObserver();
     } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.code);
+      return thunkAPI.rejectWithValue(errorMessage.LOADING);
     }
   }
 );

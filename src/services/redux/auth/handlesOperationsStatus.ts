@@ -55,6 +55,7 @@ export const handleFulfilledRefresh = (
   state.isRefreshing = false;
   state.errorAuth = null;
   state.isLoggedIn = isLoggedIn;
+  state.isAppLoaded = true;
   state.token = uid;
   state.user.email = email;
 };

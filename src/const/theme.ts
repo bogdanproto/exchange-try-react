@@ -1,6 +1,7 @@
 export const theme: Record<string, string> = {
   /* Colors */
   colorBcg: 'rgba(21, 21, 21, 100%)',
+  colorLoader: 'rgba(5, 129, 146, 100%)',
   colorLogo: 'rgba(41, 45, 50, 95%)',
   colorTextLogo: 'rgba(5, 129, 146, 90%)',
   colorFixedMenu: 'rgba(36, 36, 36, 95%)',

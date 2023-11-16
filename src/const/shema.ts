@@ -16,5 +16,9 @@ export const schemaSignupForm = yup.object({
     .email('Email must be a valid')
     .required('Email is required')
     .trim(),
-  password: yup.string().required('Password is required').trim(),
+  password: yup
+    .string()
+    .required('Password is required')
+    .min(7, 'Password must be at least 7 characters long')
+    .trim(),
 });

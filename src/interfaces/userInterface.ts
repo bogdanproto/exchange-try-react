@@ -4,6 +4,7 @@ export interface ISliceAuthUser {
   isLoggedIn: boolean;
   errorAuth: string | null;
   isRefreshing: boolean;
+  isAppLoaded: boolean;
 }
 
 export interface IUser {
