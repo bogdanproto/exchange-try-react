@@ -36,7 +36,7 @@ export const theme: Record<string, string> = {
   // --radius-card-bottom: 0 0 12px 12px;
   // --radius-title: 0 0 8px 0;
   // --shadow-card: 10px 10px 8px 2px rgba(0, 0, 0, 0.3);
-  // --shadow-menu: 0 0 5px 2px rgb(36, 36, 36, 95%);
+  shadowMenu: '0 0 5px 2px rgba(36, 36, 36, 95%)',
 
   // /* animation  */
   // --main-delay: 250ms;
