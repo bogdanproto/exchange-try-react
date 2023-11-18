@@ -1,24 +1,24 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { schemaSignupForm } from '../../const/shema';
+import { schemaLoginForm } from '../../../const/shema';
 import { TextField } from '@mui/material';
 import {
   AuthErrorText,
   AuthForm,
-} from '../MainStyles/ComponentCommon/AuthForm.styled';
+} from '../../MainStyles/ComponentCommon/AuthForm.styled';
 import { ThemeProvider, useTheme } from '@mui/material/styles';
-import { formAuthTheme } from '../MainStyles/MaterialTheme';
-import { ButtonFormStyled } from '../MainStyles/ComponentCommon/ButtonForm.styled';
+import { formAuthTheme } from '../../MainStyles/MaterialTheme';
+import { ButtonFormStyled } from '../../MainStyles/ComponentCommon/ButtonForm.styled';
 import {
   AuthLinkContainer,
   NavLinkAuth,
-} from '../MainStyles/ComponentCommon/AuthLinkContainer.styled';
-import { routes } from '../../const/routes';
-import { IUserSignUp } from '../../interfaces/userInterface';
-import { useTypeDispatch } from '../../services/redux/customHook/typeHooks';
-import { signUpUser } from '../../services/redux/auth/operations';
+} from '../../MainStyles/ComponentCommon/AuthLinkContainer.styled';
+import { routes } from '../../../const/routes';
+import { IUserLogin } from '../../../interfaces/userInterface';
+import { useTypeDispatch } from '../../../services/redux/customHook/typeHooks';
+import { logInUser } from '../../../services/redux/auth/operations';
 
-export const SignupForm = () => {
+export const LoginForm = () => {
   const theme = useTheme();
   const dispatch = useTypeDispatch();
 
@@ -27,27 +27,16 @@ export const SignupForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schemaSignupForm),
+    resolver: yupResolver(schemaLoginForm),
   });
 
-  const onSubmit = (data: IUserSignUp) => {
-    dispatch(signUpUser(data));
+  const onSubmit = (data: IUserLogin) => {
+    dispatch(logInUser(data));
   };
 
   return (
     <ThemeProvider theme={formAuthTheme(theme)}>
       <AuthForm onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <TextField
-            {...register('name')}
-            margin="normal"
-            fullWidth
-            label="Name"
-            variant="standard"
-            size="medium"
-          />
-          <AuthErrorText>{errors.name?.message}</AuthErrorText>
-        </div>
         <div>
           <TextField
             {...register('email')}
@@ -71,10 +60,10 @@ export const SignupForm = () => {
           />
           <AuthErrorText>{errors.password?.message}</AuthErrorText>
         </div>
-        <ButtonFormStyled type="submit">Sign Up</ButtonFormStyled>
+        <ButtonFormStyled type="submit">Login</ButtonFormStyled>
         <AuthLinkContainer>
-          <p>Already have an account?</p>
-          <NavLinkAuth to={routes.LOGIN}>LogIn</NavLinkAuth>
+          <p>Don't have an account?</p>
+          <NavLinkAuth to={routes.SIGNUP}>Sign Up</NavLinkAuth>
         </AuthLinkContainer>
       </AuthForm>
     </ThemeProvider>

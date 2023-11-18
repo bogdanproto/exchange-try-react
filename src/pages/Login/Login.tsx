@@ -1,5 +1,5 @@
-import { LoginForm } from '../../components/LoginForm/LoginForm';
-import { Logo } from '../../components/Logo/Logo';
+import { LoginForm } from '../../components/Auth/LoginForm/LoginForm';
+import { Logo } from '../../components/Common/Logo/Logo';
 import { AuthContainer } from '../../components/MainStyles/ComponentCommon/AuthContainer.styled';
 
 export const Login = () => {
