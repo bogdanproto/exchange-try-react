@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import BottomNavigation from '@mui/material/BottomNavigation';
@@ -7,9 +6,29 @@ import HomeIcon from '@mui/icons-material/ScreenRotationAltOutlined';
 import AddIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import UserIcon from '@mui/icons-material/AccountCircleOutlined';
 import { btn } from '../../../const/components';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { routes } from '../../../const/routes';
 
 export const BottomNav = () => {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    switch (value) {
+      case 0:
+        navigate(routes.HOME);
+        break;
+      case 1:
+        navigate(routes.REQUEST);
+        break;
+      case 2:
+        navigate(routes.PROFILE);
+        break;
+      default:
+        navigate(routes.HOME);
+    }
+  }, [navigate, value]);
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -20,7 +39,7 @@ export const BottomNav = () => {
         <BottomNavigation
           showLabels
           value={value}
-          onChange={(event, newValue) => {
+          onChange={(_, newValue) => {
             setValue(newValue);
           }}
         >

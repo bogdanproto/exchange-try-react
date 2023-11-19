@@ -36,3 +36,5 @@ export interface IUserLogin extends Pick<IUser, 'email' | 'password'> {}
 
 export interface IUserSignUp
   extends Pick<IUser, 'name' | 'email' | 'password'> {}
+
+export interface ITest extends Pick<IUser, 'name'> {}

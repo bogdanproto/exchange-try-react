@@ -16,6 +16,7 @@ import { Loader } from '../Common/Loader/Loader';
 import { NotificationBox } from '../Common/Notification/Notification';
 import { Container } from './App.styled';
 import { CommonInterface } from '../CommonInterface/CommonInterface';
+import { Request } from '../../pages/Request/Request';
 
 export const App = () => {
   const { isAppLoaded, isRefreshing, errorAuth } =
@@ -42,7 +43,7 @@ export const App = () => {
             }
           >
             <Route index element={<Home />} />
-            <Route path={routes.REQUEST} element={<p>request</p>} />
+            <Route path={routes.REQUEST} element={<Request />} />
             <Route path={routes.PROFILE} element={<p>profile</p>} />
           </Route>
 

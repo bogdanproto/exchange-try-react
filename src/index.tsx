@@ -1,4 +1,6 @@
 import React from 'react';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import ReactDOM from 'react-dom/client';
 import '../src/fonts/fonts.css';
 import { App } from './components/App/App';
@@ -16,10 +18,12 @@ root.render(
   // <React.StrictMode>
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <BrowserRouter basename="/exchange-try-react">
-        <App />
-      </BrowserRouter>
-      <MainStyles />
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <BrowserRouter basename="/exchange-try-react">
+          <App />
+          <MainStyles />
+        </BrowserRouter>
+      </LocalizationProvider>
     </ThemeProvider>
   </Provider>
   // </React.StrictMode>

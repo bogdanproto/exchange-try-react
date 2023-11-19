@@ -22,3 +22,7 @@ export const schemaSignupForm = yup.object({
     .min(7, 'Password must be at least 7 characters long')
     .trim(),
 });
+
+export const schemaTest = yup.object({
+  name: yup.string().trim(),
+});
