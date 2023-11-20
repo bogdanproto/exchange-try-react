@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material/styles';
-import { cyan } from '@mui/material/colors';
+import { cyan, grey } from '@mui/material/colors';
 
 import PlayRegularWoff2 from '../../fonts/fonts/play-regular.woff2';
 import PlayBoldWoff2 from '../../fonts/fonts/play-bold.woff2';
@@ -9,9 +9,15 @@ export const darkTheme = createTheme({
     mode: 'dark',
     primary: {
       main: cyan[800],
+      contrastText: grey[200],
     },
+    text: {
+      primary: grey[200],
+    },
+
     // secondary: {
-    //   main: cyan[800],
+    //   main: cyan[900],
+    //   contrastText: grey[500],
     // },
   },
 
@@ -47,6 +53,14 @@ export const darkTheme = createTheme({
           '&.Mui-selected': {
             // fontSize: '24',
           },
+        },
+      },
+    },
+
+    MuiFormControlLabel: {
+      styleOverrides: {
+        label: {
+          color: grey[400],
         },
       },
     },

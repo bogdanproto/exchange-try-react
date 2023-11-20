@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaLoginForm } from '../../../const/shema';
 import { TextField } from '@mui/material';
-import { AuthErrorText, AuthForm } from '../Common/AuthForm.styled';
+import { AuthForm } from '../Common/AuthForm.styled';
 import { ButtonFormStyled } from '../Common/ButtonForm.styled';
 import { routes } from '../../../const/routes';
 import { IUserLogin } from '../../../interfaces/userInterface';
@@ -12,6 +12,7 @@ import {
   AuthLinkContainer,
   NavLinkAuth,
 } from '../Common/AuthLinkContainer.styled';
+import { ErrorInputForm } from '../../Common/Error/ErrorInputForm.styled';
 
 export const LoginForm = () => {
   const dispatch = useTypeDispatch();
@@ -39,7 +40,7 @@ export const LoginForm = () => {
           variant="standard"
           size="medium"
         />
-        <AuthErrorText>{errors.email?.message}</AuthErrorText>
+        <ErrorInputForm>{errors.email?.message}</ErrorInputForm>
       </div>
       <div>
         <TextField
@@ -51,7 +52,7 @@ export const LoginForm = () => {
           variant="standard"
           size="medium"
         />
-        <AuthErrorText>{errors.password?.message}</AuthErrorText>
+        <ErrorInputForm>{errors.password?.message}</ErrorInputForm>
       </div>
       <ButtonFormStyled type="submit">Login</ButtonFormStyled>
       <AuthLinkContainer>

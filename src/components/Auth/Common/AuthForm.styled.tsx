@@ -11,9 +11,3 @@ export const AuthForm = styled.form`
     width: 100%;
   }
 `;
-
-export const AuthErrorText = styled.p`
-  position: absolute;
-  font-size: 14px;
-  color: ${({ theme }) => theme.colorErrorsInput};
-`;
