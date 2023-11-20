@@ -1,8 +1,7 @@
-import React from 'react';
+import '../src/fonts/fonts.css';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import ReactDOM from 'react-dom/client';
-import '../src/fonts/fonts.css';
 import { App } from './components/App/App';
 import { MainStyles } from './components/MainStyles/MainStyles';
 import { ThemeProvider } from 'styled-components';
