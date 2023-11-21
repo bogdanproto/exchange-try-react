@@ -9,7 +9,12 @@ import { SelectHeader } from '../../Common/Inputs/SelectHeader/SelectHeader';
 export const Header = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed" component="nav">
+      <AppBar
+        position="fixed"
+        component="nav"
+        color="secondary"
+        enableColorOnDark
+      >
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <SelectHeader />
           <Stack direction="row">

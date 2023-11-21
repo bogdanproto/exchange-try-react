@@ -25,6 +25,7 @@ export const schemaSignupForm = yup.object({
 
 export const schemaRequestForm = yup.object().shape({
   allday: yup.boolean(),
+
   spot: yup.object({
     id: yup.string(),
     label: yup.string(),
