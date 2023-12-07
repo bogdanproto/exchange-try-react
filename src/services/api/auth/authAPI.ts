@@ -10,7 +10,6 @@ const exchangeAPI = axios.create({
 export const signUpAPI = async (objSignUp: IUserSignUp): Promise<any> => {
   const { data } = await exchangeAPI.post(routeAPI.SIGNUP, objSignUp);
 
-  console.log(data);
   return data;
 };
 

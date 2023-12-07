@@ -2,7 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { signUpAPI } from '../../api/auth/authAPI';
 import { IUserLogin, IUserSignUp } from '../../../interfaces/userInterface';
 import { handleErrors } from './handleErrors';
-import { errorMessage } from '../../../const/errorAuthNotification';
 
 export const signUpUser = createAsyncThunk(
   'authUser/signUpUser',
@@ -18,8 +17,6 @@ export const signUpUser = createAsyncThunk(
         token,
       };
     } catch (error: any) {
-      console.log(error.response);
-      console.log(error.response.data);
       return thunkAPI.rejectWithValue(handleErrors(error.response.data));
     }
   }
