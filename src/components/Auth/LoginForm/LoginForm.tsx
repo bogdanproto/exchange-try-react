@@ -6,7 +6,7 @@ import { AuthForm } from '../Common/AuthForm.styled';
 import { ButtonFormStyled } from '../Common/ButtonForm.styled';
 import { routes } from '../../../const/routes';
 import { IUserLogin } from '../../../interfaces/userInterface';
-import { logInUser } from '../../../services/redux/auth/operations';
+// import { logInUser } from '../../../services/redux/auth/operations';
 import { useTypeDispatch } from '../../../services/redux/customHook/typeHooks';
 import {
   AuthLinkContainer,
@@ -26,7 +26,7 @@ export const LoginForm = () => {
   });
 
   const onSubmit = (data: IUserLogin) => {
-    dispatch(logInUser(data));
+    // dispatch(logInUser(data));
   };
 
   return (

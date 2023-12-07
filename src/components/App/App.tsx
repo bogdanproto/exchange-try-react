@@ -4,7 +4,7 @@ import { Signup } from '../../pages/Signup/Signup';
 import { Login } from '../../pages/Login/Login';
 import { Home } from '../../pages/Home/Home';
 import { useEffect } from 'react';
-import { refreshUser } from '../../services/redux/auth/operations';
+// import { refreshUser } from '../../services/redux/auth/operations';
 import {
   useTypeDispatch,
   useTypeSelector,
@@ -24,15 +24,16 @@ export const App = () => {
     useTypeSelector(selectAuthUser);
   const dispatch = useTypeDispatch();
 
-  useEffect(() => {
-    dispatch(refreshUser());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(refreshUser());
+  // }, [dispatch]);
 
   return (
     <ThemeProvider theme={darkTheme}>
       {isRefreshing && <Loader />}
       {errorAuth && <NotificationBox type="error" message={errorAuth} />}
-      {isAppLoaded && (
+      {/* isAppLoaded */}
+      {true && (
         <Routes>
           <Route
             path={routes.HOME}
