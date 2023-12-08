@@ -17,19 +17,20 @@ export interface IUser {
 
 export interface IUserSignUpSuccess {
   name: string;
-  email: string | null;
-  token: string | null;
+  email: string;
+  token: string;
 }
 
 export interface IUserLogInSuccess {
-  email: string | null;
+  name: string;
+  email: string;
   token: string;
 }
 
 export interface IUserRefresh {
-  email: string | null;
-  isLoggedIn: boolean;
-  token: string | null;
+  email: string;
+  name: string;
+  token: string;
 }
 
 export interface IUserLogin extends Pick<IUser, 'email' | 'password'> {}

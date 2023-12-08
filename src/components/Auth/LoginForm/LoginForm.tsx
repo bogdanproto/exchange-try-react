@@ -1,13 +1,13 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { schemaLoginForm } from '../../../const/shema';
+import { schemaLoginForm } from 'const/shema';
 import { TextField } from '@mui/material';
 import { AuthForm } from '../Common/AuthForm.styled';
 import { ButtonFormStyled } from '../Common/ButtonForm.styled';
-import { routes } from '../../../const/routes';
-import { IUserLogin } from '../../../interfaces/userInterface';
-// import { logInUser } from '../../../services/redux/auth/operations';
-import { useTypeDispatch } from '../../../services/redux/customHook/typeHooks';
+import { routes } from 'const/routes';
+import { IUserLogin } from 'interfaces/userInterface';
+import { logInUser } from 'services/redux/auth/operations';
+import { useTypeDispatch } from 'services/redux/customHook/typeHooks';
 import {
   AuthLinkContainer,
   NavLinkAuth,
@@ -26,7 +26,7 @@ export const LoginForm = () => {
   });
 
   const onSubmit = (data: IUserLogin) => {
-    // dispatch(logInUser(data));
+    dispatch(logInUser(data));
   };
 
   return (

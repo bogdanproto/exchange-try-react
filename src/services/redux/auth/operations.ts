@@ -1,8 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { signUpAPI, logInAPI, setAuthToken } from '../../api/auth/authAPI';
-import { IUserLogin, IUserSignUp } from '../../../interfaces/userInterface';
+import {
+  signUpAPI,
+  logInAPI,
+  logOutAPI,
+  refreshUserAPI,
+  setAuthToken,
+  removeAuthToken,
+} from '../../api/auth/authAPI';
+import { IUserLogin, IUserSignUp } from 'interfaces/userInterface';
+import { RootState } from 'services/redux/store';
 import { handleErrors } from './handleErrors';
 
+//--------------SignUp User-----------------
 export const signUpUser = createAsyncThunk(
   'authUser/signUpUser',
   async (objSignUp: IUserSignUp, thunkAPI) => {
@@ -21,6 +30,7 @@ export const signUpUser = createAsyncThunk(
   }
 );
 
+//--------------LogIn User-----------------
 export const logInUser = createAsyncThunk(
   'authUser/logInUser',
   async (objLogin: IUserLogin, thunkAPI) => {
@@ -39,26 +49,48 @@ export const logInUser = createAsyncThunk(
   }
 );
 
+//--------------LogOut User-----------------
 export const logOutUser = createAsyncThunk(
   'authUser/logOutUser',
   async (_, thunkAPI) => {
     try {
-      await signOut(auth);
-
-      return await authObserver();
+      await logOutAPI();
+      removeAuthToken();
     } catch (error: any) {
-      return thunkAPI.rejectWithValue(errorMessage.LOGOUT);
+      return thunkAPI.rejectWithValue(handleErrors(error.response?.data));
     }
   }
 );
 
-// export const refreshUser = createAsyncThunk(
-//   'authUser/refreshUser',
-//   async (_, thunkAPI) => {
-//     try {
-//       return await authObserver();
-//     } catch (error: any) {
-//       return thunkAPI.rejectWithValue(errorMessage.LOADING);
-//     }
-//   }
-// );
+// --------------Refresh User-----------------
+export const refreshUser = createAsyncThunk(
+  'authUser/refreshUser',
+  async (_, thunkAPI) => {
+    try {
+      const {
+        authUser: { token },
+      }: RootState = thunkAPI.getState();
+
+      if (!token) {
+        return thunkAPI.rejectWithValue(
+          handleErrors({
+            status: 401,
+            message: 'user_unauthorized_token',
+            code: 'user_unauthorized_token',
+          })
+        );
+      }
+
+      setAuthToken(token);
+
+      const { user } = await refreshUserAPI();
+      return {
+        name: user.name,
+        email: user.email,
+        token,
+      };
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(handleErrors(error.response?.data));
+    }
+  }
+);

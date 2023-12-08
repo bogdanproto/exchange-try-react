@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { signUpUser } from './operations';
-import { ISliceAuthUser } from '../../../interfaces/userInterface';
+import { signUpUser, logInUser, logOutUser, refreshUser } from './operations';
+import { ISliceAuthUser } from 'interfaces/userInterface';
 import {
   handleFulfilledLogIn,
   handleFulfilledLogOut,
@@ -29,16 +29,16 @@ const authUserSlice = createSlice({
     builder
       .addCase(signUpUser.pending, handlePendingAuth)
       .addCase(signUpUser.fulfilled, handleFulfilledSigUp)
-      .addCase(signUpUser.rejected, handleRejectedAuth);
-    // .addCase(logInUser.pending, handlePendingAuth)
-    // .addCase(logInUser.fulfilled, handleFulfilledLogIn)
-    // .addCase(logInUser.rejected, handleRejectedAuth)
-    // .addCase(logOutUser.pending, handlePendingAuth)
-    // .addCase(logOutUser.fulfilled, handleFulfilledLogOut)
-    // .addCase(logOutUser.rejected, handleRejectedAuth)
-    // .addCase(refreshUser.pending, handlePendingAuth)
-    // .addCase(refreshUser.fulfilled, handleFulfilledRefresh)
-    // .addCase(refreshUser.rejected, handleRejectedAuth);
+      .addCase(signUpUser.rejected, handleRejectedAuth)
+      .addCase(logInUser.pending, handlePendingAuth)
+      .addCase(logInUser.fulfilled, handleFulfilledLogIn)
+      .addCase(logInUser.rejected, handleRejectedAuth)
+      .addCase(logOutUser.pending, handlePendingAuth)
+      .addCase(logOutUser.fulfilled, handleFulfilledLogOut)
+      .addCase(logOutUser.rejected, handleRejectedAuth)
+      .addCase(refreshUser.pending, handlePendingAuth)
+      .addCase(refreshUser.fulfilled, handleFulfilledRefresh)
+      .addCase(refreshUser.rejected, handleRejectedAuth);
   },
 });
 

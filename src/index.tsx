@@ -7,8 +7,9 @@ import { MainStyles } from './components/MainStyles/MainStyles';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './const/theme';
 import { Provider } from 'react-redux';
-import { store } from './services/redux/store';
+import { persistor, store } from './services/redux/store';
 import { BrowserRouter } from 'react-router-dom';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,14 +17,16 @@ const root = ReactDOM.createRoot(
 root.render(
   // <React.StrictMode>
   <Provider store={store}>
-    <ThemeProvider theme={theme}>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <BrowserRouter basename="/exchange-try-react">
-          <App />
-          <MainStyles />
-        </BrowserRouter>
-      </LocalizationProvider>
-    </ThemeProvider>
+    <PersistGate loading={null} persistor={persistor}>
+      <ThemeProvider theme={theme}>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <BrowserRouter basename="/exchange-try-react">
+            <App />
+            <MainStyles />
+          </BrowserRouter>
+        </LocalizationProvider>
+      </ThemeProvider>
+    </PersistGate>
   </Provider>
   // </React.StrictMode>
 );
