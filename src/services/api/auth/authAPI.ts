@@ -13,10 +13,22 @@ export const signUpAPI = async (objSignUp: IUserSignUp): Promise<any> => {
   return data;
 };
 
-// const setAuthToken = token => {
-//   herokuApi.defaults.headers.common.Authorization = `Bearer ${token}`;
-// };
+export const logInAPI = async (objSignUp: IUserLogin): Promise<any> => {
+  const { data } = await exchangeAPI.post(routeAPI.LOGIN, objSignUp);
 
-// const deleteAuthToken = () => {
-//   herokuApi.defaults.headers.common.Authorization = null;
-// };
+  return data;
+};
+
+export const logOutAPI = async (objSignUp: IUserLogin): Promise<any> => {
+  const { data } = await exchangeAPI.post(routeAPI.LOGIN, objSignUp);
+
+  return data;
+};
+
+export const setAuthToken = (token: string): void => {
+  exchangeAPI.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+
+export const removeAuthToken = (token: string): void => {
+  exchangeAPI.defaults.headers.common.Authorization = null;
+};
