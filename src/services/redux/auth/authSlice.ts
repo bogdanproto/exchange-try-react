@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { logInUser, logOutUser, refreshUser, signUpUser } from './operations';
-import { ISliceAuthUser } from '../../../interfaces/userInterface';
+import { signUpUser, logInUser, logOutUser, refreshUser } from './operations';
+import { ISliceAuthUser } from 'interfaces/userInterface';
 import {
   handleFulfilledLogIn,
   handleFulfilledLogOut,

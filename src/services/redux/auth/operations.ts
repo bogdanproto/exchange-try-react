@@ -1,76 +1,96 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { auth } from '../../firebase/firebaseInit';
 import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-} from 'firebase/auth';
-import { IUserLogin, IUserSignUp } from '../../../interfaces/userInterface';
-import { authObserver } from '../../firebase/fireBaseObserver';
+  signUpAPI,
+  logInAPI,
+  logOutAPI,
+  refreshUserAPI,
+  setAuthToken,
+  removeAuthToken,
+} from '../../api/auth/authAPI';
+import { IUserLogin, IUserSignUp } from 'interfaces/userInterface';
+import { RootState } from 'services/redux/store';
 import { handleErrors } from './handleErrors';
-import { errorMessage } from '../../../const/notification';
 
+//--------------SignUp User-----------------
 export const signUpUser = createAsyncThunk(
   'authUser/signUpUser',
   async (objSignUp: IUserSignUp, thunkAPI) => {
     try {
-      const { name, email, password } = objSignUp;
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      const { token, user } = await signUpAPI(objSignUp);
+      setAuthToken(token);
+
       return {
-        name: name,
-        email: userCredential.user.email,
-        uid: userCredential.user.uid,
+        name: user.name,
+        email: user.email,
+        token,
       };
     } catch (error: any) {
-      return thunkAPI.rejectWithValue(handleErrors(error.code));
+      return thunkAPI.rejectWithValue(handleErrors(error.response?.data));
     }
   }
 );
 
+//--------------LogIn User-----------------
 export const logInUser = createAsyncThunk(
   'authUser/logInUser',
   async (objLogin: IUserLogin, thunkAPI) => {
     try {
-      const { email, password } = objLogin;
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      const { token, user } = await logInAPI(objLogin);
+      setAuthToken(token);
+
       return {
-        email: userCredential.user.email,
-        uid: userCredential.user.uid,
+        name: user.name,
+        email: user.email,
+        token,
       };
     } catch (error: any) {
-      return thunkAPI.rejectWithValue(handleErrors(error.code));
+      return thunkAPI.rejectWithValue(handleErrors(error.response?.data));
     }
   }
 );
 
+//--------------LogOut User-----------------
 export const logOutUser = createAsyncThunk(
   'authUser/logOutUser',
   async (_, thunkAPI) => {
     try {
-      await signOut(auth);
-
-      return await authObserver();
+      await logOutAPI();
+      removeAuthToken();
     } catch (error: any) {
-      return thunkAPI.rejectWithValue(errorMessage.LOGOUT);
+      return thunkAPI.rejectWithValue(handleErrors(error.response?.data));
     }
   }
 );
 
+// --------------Refresh User-----------------
 export const refreshUser = createAsyncThunk(
   'authUser/refreshUser',
   async (_, thunkAPI) => {
     try {
-      return await authObserver();
+      const {
+        authUser: { token },
+      }: RootState = thunkAPI.getState();
+
+      if (!token) {
+        return thunkAPI.rejectWithValue(
+          handleErrors({
+            status: 401,
+            message: 'user_unauthorized_token',
+            code: 'user_unauthorized_token',
+          })
+        );
+      }
+
+      setAuthToken(token);
+
+      const { user } = await refreshUserAPI();
+      return {
+        name: user.name,
+        email: user.email,
+        token,
+      };
     } catch (error: any) {
-      return thunkAPI.rejectWithValue(errorMessage.LOADING);
+      return thunkAPI.rejectWithValue(handleErrors(error.response?.data));
     }
   }
 );

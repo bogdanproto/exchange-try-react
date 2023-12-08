@@ -11,25 +11,26 @@ export interface IUser {
   name: string;
   email: string;
   password: string;
-  uid: string | null;
+  token: string | null;
   isLoggedIn: boolean;
 }
 
 export interface IUserSignUpSuccess {
   name: string;
-  email: string | null;
-  uid: string | null;
+  email: string;
+  token: string;
 }
 
 export interface IUserLogInSuccess {
-  email: string | null;
-  uid: string;
+  name: string;
+  email: string;
+  token: string;
 }
 
 export interface IUserRefresh {
-  email: string | null;
-  isLoggedIn: boolean;
-  uid: string | null;
+  email: string;
+  name: string;
+  token: string;
 }
 
 export interface IUserLogin extends Pick<IUser, 'email' | 'password'> {}

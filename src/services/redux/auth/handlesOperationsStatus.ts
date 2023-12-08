@@ -4,7 +4,7 @@ import {
   IUserLogInSuccess,
   IUserRefresh,
   IUserSignUpSuccess,
-} from '../../../interfaces/userInterface';
+} from 'interfaces/userInterface';
 
 //--------------SignUp User-----------------
 
@@ -12,11 +12,11 @@ export const handleFulfilledSigUp = (
   state: ISliceAuthUser,
   action: PayloadAction<IUserSignUpSuccess>
 ) => {
-  const { name, email, uid } = action.payload;
+  const { name, email, token } = action.payload;
   state.isRefreshing = false;
   state.isLoggedIn = true;
   state.errorAuth = null;
-  state.token = uid;
+  state.token = token;
   state.user.name = name;
   state.user.email = email;
 };
@@ -27,11 +27,12 @@ export const handleFulfilledLogIn = (
   state: ISliceAuthUser,
   action: PayloadAction<IUserLogInSuccess>
 ) => {
-  const { email, uid } = action.payload;
+  const { name, email, token } = action.payload;
   state.isRefreshing = false;
   state.isLoggedIn = true;
   state.errorAuth = null;
-  state.token = uid;
+  state.token = token;
+  state.user.name = name;
   state.user.email = email;
 };
 
@@ -51,13 +52,14 @@ export const handleFulfilledRefresh = (
   state: ISliceAuthUser,
   action: PayloadAction<IUserRefresh>
 ) => {
-  const { email, uid, isLoggedIn } = action.payload;
+  const { email, name, token } = action.payload;
   state.isRefreshing = false;
   state.errorAuth = null;
-  state.isLoggedIn = isLoggedIn;
+  state.isLoggedIn = true;
   state.isAppLoaded = true;
-  state.token = uid;
+  state.token = token;
   state.user.email = email;
+  state.user.name = name;
 };
 
 //---------------Pending and Rejected-------------------
@@ -71,5 +73,6 @@ export const handleRejectedAuth = (
   action: PayloadAction<any>
 ) => {
   state.isRefreshing = false;
+  state.isAppLoaded = true;
   state.errorAuth = action.payload;
 };
