@@ -5,13 +5,21 @@ import {
   handleFulfilledLogIn,
   handleFulfilledLogOut,
   handleFulfilledRefresh,
-  handleFulfilledSigUp,
+  handleFulfilledSignUp,
   handlePendingAuth,
   handleRejectedAuth,
 } from './handlesOperationsStatus';
 
 const initialState: ISliceAuthUser = {
-  user: { name: null, email: null },
+  user: {
+    name: null,
+    email: null,
+    phone: null,
+    avatarCloudURL: null,
+    mainsport: null,
+    equipments: null,
+    sports: null,
+  },
   token: null,
   isLoggedIn: false,
   errorAuth: null,
@@ -28,7 +36,7 @@ const authUserSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(signUpUser.pending, handlePendingAuth)
-      .addCase(signUpUser.fulfilled, handleFulfilledSigUp)
+      .addCase(signUpUser.fulfilled, handleFulfilledSignUp)
       .addCase(signUpUser.rejected, handleRejectedAuth)
       .addCase(logInUser.pending, handlePendingAuth)
       .addCase(logInUser.fulfilled, handleFulfilledLogIn)

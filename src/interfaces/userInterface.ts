@@ -1,5 +1,15 @@
+export interface IUser {
+  name: string | null;
+  email: string | null;
+  phone: string | null;
+  avatarCloudURL: string | null;
+  mainsport: string | null;
+  equipments: null | string[] | [];
+  sports: null | string[];
+}
+
 export interface ISliceAuthUser {
-  user: { name: string | null; email: string | null };
+  user: IUser;
   token: string | null;
   isLoggedIn: boolean;
   errorAuth: string | null;
@@ -7,35 +17,39 @@ export interface ISliceAuthUser {
   isAppLoaded: boolean;
 }
 
-export interface IUser {
-  name: string;
-  email: string;
-  password: string;
-  token: string | null;
-  isLoggedIn: boolean;
-}
-
 export interface IUserSignUpSuccess {
-  name: string;
-  email: string;
+  user: {
+    name: string;
+    email: string;
+    mainsport: string;
+    sports: string[];
+  };
   token: string;
 }
 
 export interface IUserLogInSuccess {
-  name: string;
-  email: string;
+  user: {
+    name: string;
+    email: string;
+    phone: string;
+    avatarCloudURL: string;
+    mainsport: string;
+    equipments: string[];
+    sports: string[];
+  };
   token: string;
 }
 
-export interface IUserRefresh {
-  email: string;
+//===========Interface Form================
+export interface IUserForm {
   name: string;
-  token: string;
+  email: string;
+  password: string;
 }
 
-export interface IUserLogin extends Pick<IUser, 'email' | 'password'> {}
+export interface IUserLogin extends Pick<IUserForm, 'email' | 'password'> {}
 
 export interface IUserSignUp
-  extends Pick<IUser, 'name' | 'email' | 'password'> {}
+  extends Pick<IUserForm, 'name' | 'email' | 'password'> {}
 
-export interface ITest extends Pick<IUser, 'name'> {}
+export interface ITest extends Pick<IUserForm, 'name'> {}
