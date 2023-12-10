@@ -23,6 +23,16 @@ export const schemaSignupForm = yup.object({
     .trim(),
 });
 
+export const schemaProfileForm = yup.object().shape({
+  avatar: yup.string(),
+  name: yup.string().trim(),
+  phone: yup.string().trim(),
+  // eqpt: yup.array({
+  //   id: yup.string(),
+  //   label: yup.string(),
+  // }),
+});
+
 export const schemaRequestForm = yup.object().shape({
   allday: yup.boolean(),
 

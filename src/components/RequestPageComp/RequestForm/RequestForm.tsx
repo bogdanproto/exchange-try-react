@@ -18,7 +18,6 @@ interface IRequestForm {
   allday: boolean;
   time: any;
   date: any;
-  spot: string;
   is_phone: boolean;
   auto_accept: boolean;
 }

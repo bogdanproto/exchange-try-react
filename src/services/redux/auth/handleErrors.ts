@@ -1,5 +1,5 @@
-import { errorMessage } from '../../../const/errorAuthNotification';
-import { IErorrAuth } from '../../../interfaces/errorAuthInterface';
+import { errorMessage } from 'const/errorNotification';
+import { IErorr } from 'interfaces/errorInterface';
 
-export const handleErrors = (error: IErorrAuth): string =>
+export const handleErrors = (error: IErorr): string =>
   errorMessage[error.code] || errorMessage.common_auth_error;

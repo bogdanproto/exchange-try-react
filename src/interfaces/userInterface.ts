@@ -40,6 +40,10 @@ export interface IUserLogInSuccess {
   token: string;
 }
 
+export interface IUserAvatarSuccess {
+  avatarCloudURL: string;
+}
+
 //===========Interface Form================
 export interface IUserForm {
   name: string;

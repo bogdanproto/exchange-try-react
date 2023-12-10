@@ -4,7 +4,7 @@ import { Signup } from 'pages/Signup/Signup';
 import { Login } from 'pages/Login/Login';
 import { Home } from 'pages/Home/Home';
 import { useEffect } from 'react';
-import { refreshUser } from 'services/redux/auth/operations';
+import { refreshUser } from 'services/redux/auth/operationsAuth';
 import {
   useTypeDispatch,
   useTypeSelector,
@@ -18,6 +18,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { LayoutInterface } from '../LayoutInterface/LayoutInterface';
 import { Request } from 'pages/Request/Request';
 import { darkTheme } from '../MainStyles/MaterialTheme';
+import { Profile } from 'pages/Profile/Profile';
 
 export const App = () => {
   const { isRefreshing, isAppLoaded, errorAuth } =
@@ -47,7 +48,7 @@ export const App = () => {
           >
             <Route index element={<Home />} />
             <Route path={routes.REQUEST} element={<Request />} />
-            <Route path={routes.PROFILE} element={<p>profile</p>} />
+            <Route path={routes.PROFILE} element={<Profile />} />
           </Route>
 
           <Route

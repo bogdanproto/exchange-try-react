@@ -6,7 +6,7 @@ import { AuthForm } from '../Common/AuthForm.styled';
 import { ButtonFormStyled } from '../Common/ButtonForm.styled';
 import { routes } from '../../../const/routes';
 import { IUserSignUp } from '../../../interfaces/userInterface';
-import { signUpUser } from '../../../services/redux/auth/operations';
+import { signUpUser } from '../../../services/redux/auth/operationsAuth';
 import { useTypeDispatch } from '../../../services/redux/customHook/typeHooks';
 import {
   AuthLinkContainer,
