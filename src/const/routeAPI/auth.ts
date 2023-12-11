@@ -5,6 +5,7 @@ interface RoutesAuthAPI {
   LOGIN: string;
   LOGOUT: string;
   CURRENT: string;
+  AVATAR: string;
 }
 
 export const routeAPI: RoutesAuthAPI = {
@@ -14,4 +15,5 @@ export const routeAPI: RoutesAuthAPI = {
   LOGIN: '/users/login',
   LOGOUT: '/users/logout',
   CURRENT: '/users/current',
+  AVATAR: '/users/avatars',
 };

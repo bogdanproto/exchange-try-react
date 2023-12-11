@@ -1,4 +1,4 @@
-import { logOutUser } from 'services/redux/auth/operations';
+import { logOutUser } from 'services/redux/auth/operationsAuth';
 import { useTypeDispatch } from 'services/redux/customHook/typeHooks';
 
 export const Home = () => {

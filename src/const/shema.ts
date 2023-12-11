@@ -23,6 +23,11 @@ export const schemaSignupForm = yup.object({
     .trim(),
 });
 
+export const schemaProfileForm = yup.object().shape({
+  name: yup.string().trim().min(3, 'Name must be 3 symbol at least'),
+  phone: yup.string().trim().min(3, 'Phone must be 3 symbol at least'),
+});
+
 export const schemaRequestForm = yup.object().shape({
   allday: yup.boolean(),
 

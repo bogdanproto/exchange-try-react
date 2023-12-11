@@ -1,24 +1,24 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import {
   ISliceAuthUser,
+  IUser,
   IUserLogInSuccess,
-  IUserRefresh,
   IUserSignUpSuccess,
 } from 'interfaces/userInterface';
 
 //--------------SignUp User-----------------
 
-export const handleFulfilledSigUp = (
+export const handleFulfilledSignUp = (
   state: ISliceAuthUser,
   action: PayloadAction<IUserSignUpSuccess>
 ) => {
-  const { name, email, token } = action.payload;
+  const { user, token } = action.payload;
+
   state.isRefreshing = false;
   state.isLoggedIn = true;
   state.errorAuth = null;
   state.token = token;
-  state.user.name = name;
-  state.user.email = email;
+  state.user = { ...state.user, ...user };
 };
 
 //--------------LogIn User-----------------
@@ -27,19 +27,25 @@ export const handleFulfilledLogIn = (
   state: ISliceAuthUser,
   action: PayloadAction<IUserLogInSuccess>
 ) => {
-  const { name, email, token } = action.payload;
+  const { user, token } = action.payload;
   state.isRefreshing = false;
   state.isLoggedIn = true;
   state.errorAuth = null;
   state.token = token;
-  state.user.name = name;
-  state.user.email = email;
+  state.user = { ...state.user, ...user };
 };
 
 //--------------LogOut User-----------------
 
 export const handleFulfilledLogOut = (state: ISliceAuthUser) => {
-  state.user = { name: null, email: null };
+  const { user } = state;
+
+  for (const key in user) {
+    if (user.hasOwnProperty(key)) {
+      user[key as keyof IUser] = null;
+    }
+  }
+
   state.token = null;
   state.isLoggedIn = false;
   state.errorAuth = null;
@@ -50,16 +56,15 @@ export const handleFulfilledLogOut = (state: ISliceAuthUser) => {
 
 export const handleFulfilledRefresh = (
   state: ISliceAuthUser,
-  action: PayloadAction<IUserRefresh>
+  action: PayloadAction<IUserLogInSuccess>
 ) => {
-  const { email, name, token } = action.payload;
+  const { user, token } = action.payload;
   state.isRefreshing = false;
   state.errorAuth = null;
   state.isLoggedIn = true;
   state.isAppLoaded = true;
   state.token = token;
-  state.user.email = email;
-  state.user.name = name;
+  state.user = { ...state.user, ...user };
 };
 
 //---------------Pending and Rejected-------------------

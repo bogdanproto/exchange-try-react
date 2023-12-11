@@ -20,8 +20,7 @@ export const signUpUser = createAsyncThunk(
       setAuthToken(token);
 
       return {
-        name: user.name,
-        email: user.email,
+        user,
         token,
       };
     } catch (error: any) {
@@ -39,8 +38,7 @@ export const logInUser = createAsyncThunk(
       setAuthToken(token);
 
       return {
-        name: user.name,
-        email: user.email,
+        user,
         token,
       };
     } catch (error: any) {
@@ -85,8 +83,7 @@ export const refreshUser = createAsyncThunk(
 
       const { user } = await refreshUserAPI();
       return {
-        name: user.name,
-        email: user.email,
+        user,
         token,
       };
     } catch (error: any) {
