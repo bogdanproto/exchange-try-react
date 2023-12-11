@@ -24,13 +24,8 @@ export const schemaSignupForm = yup.object({
 });
 
 export const schemaProfileForm = yup.object().shape({
-  avatar: yup.string(),
-  name: yup.string().trim(),
-  phone: yup.string().trim(),
-  // eqpt: yup.array({
-  //   id: yup.string(),
-  //   label: yup.string(),
-  // }),
+  name: yup.string().trim().min(3, 'Name must be 3 symbol at least'),
+  phone: yup.string().trim().min(3, 'Phone must be 3 symbol at least'),
 });
 
 export const schemaRequestForm = yup.object().shape({

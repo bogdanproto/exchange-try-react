@@ -19,6 +19,9 @@ export const darkTheme = createTheme({
     secondary: {
       main: '#000000',
     },
+    success: {
+      main: grey[400],
+    },
   },
 
   typography: {

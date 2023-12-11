@@ -13,7 +13,6 @@ export const updUserAvatar = createAsyncThunk(
 
       return { avatarCloudURL };
     } catch (error: any) {
-      console.log(error);
       return thunkAPI.rejectWithValue(handleErrors(error.response?.data));
     }
   }

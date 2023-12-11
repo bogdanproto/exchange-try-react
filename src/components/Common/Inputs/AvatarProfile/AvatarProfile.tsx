@@ -1,16 +1,18 @@
 import { Box, IconButton, Avatar, Stack, Badge } from '@mui/material';
-import SettingsSharpIcon from '@mui/icons-material/SettingsSharp';
-import { VisuallyHiddenInput } from '../Inputs/Custom/VisuallyHiddenInput';
-import { useTypeDispatch } from 'services/redux/customHook/typeHooks';
+import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
+import { VisuallyHiddenInput } from '../Custom/VisuallyHiddenInput';
+import {
+  useTypeDispatch,
+  useTypeSelector,
+} from 'services/redux/customHook/typeHooks';
 import { updUserAvatar } from 'services/redux/auth/operationsUserProfile';
 import { useEffect, useState } from 'react';
+import { selectAuthUser } from 'services/redux/auth/selectors';
 
-export interface IAvatarForm {
-  name: string;
-  avatarCloudUrl: string;
-}
-
-export const AvatarProfile = ({ avatarCloudUrl, name }: IAvatarForm) => {
+export const AvatarProfile = () => {
+  const {
+    user: { name, avatarCloudURL },
+  } = useTypeSelector(selectAuthUser);
   const [file, setFile] = useState(null);
   const dispatch = useTypeDispatch();
 
@@ -41,15 +43,23 @@ export const AvatarProfile = ({ avatarCloudUrl, name }: IAvatarForm) => {
           overlap="circular"
           anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
           badgeContent={
-            <IconButton component="label" size="small" color="primary">
-              <SettingsSharpIcon fontSize="medium" />
+            <IconButton
+              component="label"
+              size="medium"
+              color="primary"
+              sx={{
+                backgroundColor: 'rgb(38, 38, 38)',
+                padding: '0',
+              }}
+            >
+              <ChangeCircleIcon fontSize="inherit" />
               <VisuallyHiddenInput type="file" onChange={handleFileChange} />
             </IconButton>
           }
         >
           <Avatar
             alt={name}
-            src={avatarCloudUrl}
+            src={avatarCloudURL}
             sx={{ width: 64, height: 64 }}
           />
         </Badge>
