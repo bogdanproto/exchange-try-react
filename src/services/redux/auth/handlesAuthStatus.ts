@@ -1,7 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import {
   ISliceAuthUser,
-  IUser,
   IUserLogInSuccess,
   IUserSignUpSuccess,
 } from 'interfaces/userInterface';
@@ -61,7 +60,6 @@ export const handleFulfilledRefresh = (
   action: PayloadAction<IUserLogInSuccess>
 ) => {
   const { user, token } = action.payload;
-  console.log(user);
   state.isRefreshing = false;
   state.errorAuth = null;
   state.isLoggedIn = true;
