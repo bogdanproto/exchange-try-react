@@ -6,12 +6,7 @@ import {
   updateUserEqpts,
   updateUserProfile,
 } from 'services/api/auth/userProfileAPI';
-import {
-  IEqptId,
-  IEqptItem,
-  IEqptItemForm,
-  IUserProfile,
-} from 'interfaces/userInterface';
+import { IEqptId, IEqptItemForm, IUserProfile } from 'interfaces/userInterface';
 
 //--------------updateUserAvatar-----------------
 export const updUserAvatar = createAsyncThunk(
