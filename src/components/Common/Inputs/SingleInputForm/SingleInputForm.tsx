@@ -1,34 +1,33 @@
 import { TextField, Box, IconButton } from '@mui/material';
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import { SubmitHandler, useForm } from 'react-hook-form';
-// import { useTypeDispatch } from 'services/redux/customHook/typeHooks';
+import { useTypeDispatch } from 'services/redux/customHook/typeHooks';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaProfileForm } from 'const/shema';
 import { ErrorInputForm } from 'components/Common/Error/ErrorInputForm.styled';
+import { IUserProfile } from 'interfaces/userInterface';
+import { updUserProfile } from 'services/redux/auth/operationsUserProfile';
 
 interface IAddInput {
   name: 'name' | 'phone';
 }
 
-interface IUserPatch {
-  name?: string;
-  phone?: string;
-}
-
 export const SingleInputForm = ({ name }: IAddInput) => {
-  // const dispatch = useTypeDispatch();
+  const dispatch = useTypeDispatch();
 
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
-  } = useForm<IUserPatch>({
+  } = useForm<IUserProfile>({
     resolver: yupResolver(schemaProfileForm),
   });
 
-  const onSubmit: SubmitHandler<IUserPatch> = data => {
-    console.log(data);
+  const onSubmit: SubmitHandler<IUserProfile> = data => {
+    dispatch(updUserProfile(data));
+    reset({ [name]: '' });
   };
 
   const isValid = watch(name);

@@ -11,7 +11,7 @@ import { selectAuthUser } from 'services/redux/auth/selectors';
 
 export const AvatarProfile = () => {
   const {
-    user: { name, avatarCloudURL },
+    user: { name, phone, avatarCloudURL },
   } = useTypeSelector(selectAuthUser);
   const [file, setFile] = useState(null);
   const dispatch = useTypeDispatch();
@@ -65,6 +65,7 @@ export const AvatarProfile = () => {
         </Badge>
       </Stack>
       <p>{name}</p>
+      {phone && <p>{phone}</p>}
     </Box>
   );
 };

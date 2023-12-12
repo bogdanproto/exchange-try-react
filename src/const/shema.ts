@@ -24,7 +24,7 @@ export const schemaSignupForm = yup.object({
 });
 
 export const schemaProfileForm = yup.object().shape({
-  name: yup.string().trim().min(3, 'Name must be 3 symbol at least'),
+  name: yup.string().trim().min(2, 'Name must be 2 symbol at least'),
   phone: yup.string().trim().min(3, 'Phone must be 3 symbol at least'),
 });
 
@@ -39,5 +39,5 @@ export const schemaRequestForm = yup.object().shape({
 
 export const schemaEqptForm = yup.object().shape({
   title: yup.string().required('Equipment is required'),
-  size: yup.number().typeError('Size is number').required('Size is required'),
+  size: yup.string().required('Size is required'),
 });

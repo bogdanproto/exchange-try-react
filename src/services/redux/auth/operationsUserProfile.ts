@@ -1,6 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { handleErrors } from './handleErrors';
-import { updateUserAvatar } from 'services/api/auth/userProfileAPI';
+import {
+  deleteUserEqpt,
+  updateUserAvatar,
+  updateUserEqpts,
+  updateUserProfile,
+} from 'services/api/auth/userProfileAPI';
+import {
+  IEqptId,
+  IEqptItem,
+  IEqptItemForm,
+  IUserProfile,
+} from 'interfaces/userInterface';
 
 //--------------updateUserAvatar-----------------
 export const updUserAvatar = createAsyncThunk(
@@ -12,6 +23,45 @@ export const updUserAvatar = createAsyncThunk(
       } = await updateUserAvatar(file);
 
       return { avatarCloudURL };
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(handleErrors(error.response?.data));
+    }
+  }
+);
+
+//--------------updateUserProfile-----------------
+export const updUserProfile = createAsyncThunk(
+  'authUser/updateUserProfile',
+  async (objProfile: IUserProfile, thunkAPI) => {
+    try {
+      const { user } = await updateUserProfile(objProfile);
+      return user;
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(handleErrors(error.response?.data));
+    }
+  }
+);
+
+//--------------updateUserEqpts-----------------
+export const updUserEqpts = createAsyncThunk(
+  'authUser/updateUserEqpts',
+  async (objEqpt: IEqptItemForm, thunkAPI) => {
+    try {
+      const { eqpt } = await updateUserEqpts(objEqpt);
+      return eqpt;
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(handleErrors(error.response?.data));
+    }
+  }
+);
+
+//--------------deleteUserEqpt-----------------
+export const delUserEqpt = createAsyncThunk(
+  'authUser/deleteUserEqpt',
+  async (id: IEqptId, thunkAPI) => {
+    try {
+      const { deletedEqpt } = await deleteUserEqpt(id);
+      return deletedEqpt;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(handleErrors(error.response?.data));
     }

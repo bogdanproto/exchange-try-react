@@ -14,9 +14,17 @@ import {
   handlePendingAuth,
   handleRejectedAuth,
 } from './handlesAuthStatus';
-import { updUserAvatar } from './operationsUserProfile';
+import {
+  delUserEqpt,
+  updUserAvatar,
+  updUserEqpts,
+  updUserProfile,
+} from './operationsUserProfile';
 import {
   handleFulfilledAvatar,
+  handleFulfilledDeleteEqpt,
+  handleFulfilledProfile,
+  handleFulfilledUpdEqpts,
   handleRejected,
 } from './handlesUserProfileStatus';
 
@@ -27,7 +35,7 @@ const initialState: ISliceAuthUser = {
     phone: null,
     avatarCloudURL: null,
     mainsport: null,
-    equipments: null,
+    equipments: [],
     sports: null,
   },
   token: null,
@@ -59,7 +67,16 @@ const authUserSlice = createSlice({
       .addCase(refreshUser.rejected, handleRejectedAuth)
       .addCase(updUserAvatar.pending, handlePendingAuth)
       .addCase(updUserAvatar.fulfilled, handleFulfilledAvatar)
-      .addCase(updUserAvatar.rejected, handleRejected);
+      .addCase(updUserAvatar.rejected, handleRejected)
+      .addCase(updUserProfile.pending, handlePendingAuth)
+      .addCase(updUserProfile.fulfilled, handleFulfilledProfile)
+      .addCase(updUserProfile.rejected, handleRejected)
+      .addCase(updUserEqpts.pending, handlePendingAuth)
+      .addCase(updUserEqpts.fulfilled, handleFulfilledUpdEqpts)
+      .addCase(updUserEqpts.rejected, handleRejected)
+      .addCase(delUserEqpt.pending, handlePendingAuth)
+      .addCase(delUserEqpt.fulfilled, handleFulfilledDeleteEqpt)
+      .addCase(delUserEqpt.rejected, handleRejected);
   },
 });
 

@@ -5,44 +5,29 @@ import { schemaEqptForm } from 'const/shema';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ErrorInputForm } from 'components/Common/Error/ErrorInputForm.styled';
-
-interface IListEqpt {
-  _id: string;
-  title: string;
-  size: string;
-}
-
-interface IItemEqpt {
-  title: string;
-  size: number;
-}
-
-const listEqpt = [
-  { _id: '1212123143143', title: 'Kite Core XR', size: '12' },
-  { _id: '12121231sd43143', title: 'Kite Core XR', size: '10' },
-  { _id: '1212123112sd43143', title: 'Kite Core XR', size: '13' },
-  { _id: '1212123112sd4323143', title: 'Kite Core XR', size: '14' },
-  { _id: '11212123143143', title: 'Kite Core XR', size: '12' },
-  { _id: '122121231sd43143', title: 'Kite Core XR', size: '10' },
-  { _id: '12132123112sd43143', title: 'Kite Core XR', size: '13' },
-  { _id: '12124123112sd4323143', title: 'Kite Core XR', size: '14' },
-  { _id: '12121523143143', title: 'Kite Core XR', size: '12' },
-  { _id: '121212631sd43143', title: 'Kite Core XR', size: '10' },
-  { _id: '12121237112sd43143', title: 'Kite Core XR', size: '13' },
-  { _id: '12121231812sd4323143', title: 'Kite Core XR', size: '14' },
-];
+import { IEqptItem, IEqptItemForm } from 'interfaces/userInterface';
+import {
+  useTypeDispatch,
+  useTypeSelector,
+} from 'services/redux/customHook/typeHooks';
+import { updUserEqpts } from 'services/redux/auth/operationsUserProfile';
+import { selectUser } from 'services/redux/auth/selectors';
 
 export const ProfileEqptForm = () => {
+  const dispatch = useTypeDispatch();
+  const { equipments } = useTypeSelector(selectUser);
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isValid },
-  } = useForm<IItemEqpt>({
+  } = useForm<IEqptItemForm>({
     resolver: yupResolver(schemaEqptForm),
   });
 
-  const onSubmit: SubmitHandler<IItemEqpt> = data => {
-    console.log(data);
+  const onSubmit: SubmitHandler<IEqptItemForm> = data => {
+    dispatch(updUserEqpts(data));
+    reset();
   };
 
   return (
@@ -53,7 +38,7 @@ export const ProfileEqptForm = () => {
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
       }}
     >
-      <Typography
+      {/* <Typography
         variant="overline"
         display="block"
         sx={{
@@ -61,7 +46,7 @@ export const ProfileEqptForm = () => {
         }}
       >
         YOUR EQUIPMENTS
-      </Typography>
+      </Typography> */}
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box
           style={{
@@ -127,14 +112,26 @@ export const ProfileEqptForm = () => {
           padding: '12px',
         }}
       >
-        {listEqpt &&
-          listEqpt.map(({ _id, title, size }: IListEqpt) => (
+        {Boolean(equipments.length) ? (
+          equipments.map(({ _id, title, size }: IEqptItem) => (
             <ListItemDelete
               key={_id}
               id={_id}
               item={`${title} ${size}`.trim()}
             />
-          ))}
+          ))
+        ) : (
+          <Typography
+            variant="overline"
+            display="block"
+            sx={{
+              height: '18px',
+              color: theme => theme.palette.text.secondary,
+            }}
+          >
+            Add Your Equipments...
+          </Typography>
+        )}
       </List>
     </Box>
   );
