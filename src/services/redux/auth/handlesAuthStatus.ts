@@ -40,11 +40,13 @@ export const handleFulfilledLogIn = (
 export const handleFulfilledLogOut = (state: ISliceAuthUser) => {
   const { user } = state;
 
-  for (const key in user) {
-    if (user.hasOwnProperty(key)) {
-      user[key as keyof IUser] = null;
-    }
-  }
+  user.name = null;
+  user.email = null;
+  user.phone = null;
+  user.avatarCloudURL = null;
+  user.mainsport = null;
+  user.equipments = [];
+  user.sports = null;
 
   state.token = null;
   state.isLoggedIn = false;
@@ -59,6 +61,7 @@ export const handleFulfilledRefresh = (
   action: PayloadAction<IUserLogInSuccess>
 ) => {
   const { user, token } = action.payload;
+  console.log(user);
   state.isRefreshing = false;
   state.errorAuth = null;
   state.isLoggedIn = true;

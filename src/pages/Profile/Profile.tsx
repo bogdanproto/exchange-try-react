@@ -1,4 +1,4 @@
-import { AddListInput } from 'components/Common/Inputs/AddListInput/AddListInput';
+import { ProfileEqptForm } from 'components/ProfilePageComp/ProfileEqptForm/ProfileEqptForm';
 import { ProfileForm } from 'components/ProfilePageComp/ProfileForm/ProfileForm';
 import { Paper } from '@mui/material';
 import { AvatarProfile } from 'components/Common/Inputs/AvatarProfile/AvatarProfile';
@@ -14,7 +14,7 @@ export const Profile = () => {
     >
       <AvatarProfile />
       <ProfileForm />
-      <AddListInput />
+      <ProfileEqptForm />
     </Paper>
   );
 };

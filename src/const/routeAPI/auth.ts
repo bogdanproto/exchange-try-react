@@ -6,6 +6,8 @@ interface RoutesAuthAPI {
   LOGOUT: string;
   CURRENT: string;
   AVATAR: string;
+  PROFILE: string;
+  EQPTS: string;
 }
 
 export const routeAPI: RoutesAuthAPI = {
@@ -16,4 +18,6 @@ export const routeAPI: RoutesAuthAPI = {
   LOGOUT: '/users/logout',
   CURRENT: '/users/current',
   AVATAR: '/users/avatars',
+  PROFILE: '/users/profile',
+  EQPTS: '/users/equipments',
 };

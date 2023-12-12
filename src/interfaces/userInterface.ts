@@ -4,7 +4,7 @@ export interface IUser {
   phone: string | null;
   avatarCloudURL: string | null;
   mainsport: string | null;
-  equipments: null | string[] | [];
+  equipments: IEqptItem[] | [];
   sports: null | string[];
 }
 
@@ -34,7 +34,7 @@ export interface IUserLogInSuccess {
     phone: string;
     avatarCloudURL: string;
     mainsport: string;
-    equipments: string[];
+    equipments: IEqptItem[] | [];
     sports: string[];
   };
   token: string;
@@ -42,6 +42,11 @@ export interface IUserLogInSuccess {
 
 export interface IUserAvatarSuccess {
   avatarCloudURL: string;
+}
+
+export interface IUserProfileSuccess {
+  name: string | null;
+  phone: string | null;
 }
 
 //===========Interface Form================
@@ -56,4 +61,20 @@ export interface IUserLogin extends Pick<IUserForm, 'email' | 'password'> {}
 export interface IUserSignUp
   extends Pick<IUserForm, 'name' | 'email' | 'password'> {}
 
-export interface ITest extends Pick<IUserForm, 'name'> {}
+export interface IUserProfile {
+  name?: string;
+  phone?: string;
+}
+
+//==============EQPTS========================
+export interface IEqptItem {
+  _id: string;
+  title: string;
+  size: string;
+}
+
+export interface IListEqpts {}
+
+export interface IEqptItemForm extends Pick<IEqptItem, 'title' | 'size'> {}
+
+export interface IEqptId extends Pick<IEqptItem, '_id'> {}
