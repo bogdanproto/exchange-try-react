@@ -36,3 +36,8 @@ export const schemaRequestForm = yup.object().shape({
     label: yup.string(),
   }),
 });
+
+export const schemaEqptForm = yup.object().shape({
+  title: yup.string().required('Equipment is required'),
+  size: yup.number().typeError('Size is number').required('Size is required'),
+});

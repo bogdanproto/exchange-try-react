@@ -1,12 +1,12 @@
 import { IconButton, ListItem, ListItemText } from '@mui/material';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
-interface IEqpt {
+interface IItemList {
   id: string;
   item: string;
 }
 
-export const ListItemDelete = ({ id, item }: IEqpt) => {
+export const ListItemDelete = ({ id, item }: IItemList) => {
   return (
     <>
       <ListItem
