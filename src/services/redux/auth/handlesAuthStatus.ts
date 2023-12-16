@@ -44,7 +44,7 @@ export const handleFulfilledLogOut = (state: ISliceAuthUser) => {
   user.phone = null;
   user.avatarCloudURL = null;
   user.mainsport = null;
-  user.equipments = [];
+  user.eqpts = [];
   user.sports = null;
 
   state.token = null;

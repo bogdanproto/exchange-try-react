@@ -15,7 +15,7 @@ import { selectUser } from 'services/redux/auth/selectors';
 
 export const ProfileEqptForm = () => {
   const dispatch = useTypeDispatch();
-  const { equipments } = useTypeSelector(selectUser);
+  const { eqpts } = useTypeSelector(selectUser);
   const {
     register,
     handleSubmit,
@@ -38,15 +38,6 @@ export const ProfileEqptForm = () => {
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
       }}
     >
-      {/* <Typography
-        variant="overline"
-        display="block"
-        sx={{
-          height: '18px',
-        }}
-      >
-        YOUR EQUIPMENTS
-      </Typography> */}
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box
           style={{
@@ -112,8 +103,8 @@ export const ProfileEqptForm = () => {
           padding: '12px',
         }}
       >
-        {Boolean(equipments.length) ? (
-          equipments.map(({ _id, title, size }: IEqptItem) => (
+        {Boolean(eqpts.length) ? (
+          eqpts.map(({ _id, title, size }: IEqptItem) => (
             <ListItemDelete
               key={_id}
               id={_id}

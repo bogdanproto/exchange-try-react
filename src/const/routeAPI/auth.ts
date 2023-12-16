@@ -1,5 +1,4 @@
 interface RoutesAuthAPI {
-  BASEURL: string;
   HOME: string;
   SIGNUP: string;
   LOGIN: string;
@@ -10,8 +9,7 @@ interface RoutesAuthAPI {
   EQPTS: string;
 }
 
-export const routeAPI: RoutesAuthAPI = {
-  BASEURL: 'https://exchange-try-api.onrender.com',
+export const routeAuthAPI: RoutesAuthAPI = {
   HOME: '/',
   SIGNUP: '/users/register',
   LOGIN: '/users/login',
@@ -19,5 +17,5 @@ export const routeAPI: RoutesAuthAPI = {
   CURRENT: '/users/current',
   AVATAR: '/users/avatars',
   PROFILE: '/users/profile',
-  EQPTS: '/users/equipments',
+  EQPTS: '/api/equipments',
 };

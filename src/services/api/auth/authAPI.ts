@@ -1,25 +1,25 @@
 import { IUserLogin, IUserSignUp } from 'interfaces/userInterface';
-import { routeAPI } from 'const/routeAPI/auth';
+import { routeAuthAPI } from 'const/routeAPI/auth';
 import { exchangeAPI } from '../axiosConf/axiosConf';
 
 export const signUpAPI = async (objSignUp: IUserSignUp): Promise<any> => {
-  const { data } = await exchangeAPI.post(routeAPI.SIGNUP, objSignUp);
+  const { data } = await exchangeAPI.post(routeAuthAPI.SIGNUP, objSignUp);
 
   return data;
 };
 
 export const logInAPI = async (objSignUp: IUserLogin): Promise<any> => {
-  const { data } = await exchangeAPI.post(routeAPI.LOGIN, objSignUp);
+  const { data } = await exchangeAPI.post(routeAuthAPI.LOGIN, objSignUp);
 
   return data;
 };
 
 export const logOutAPI = async (): Promise<any> => {
-  await exchangeAPI.post(routeAPI.LOGOUT);
+  await exchangeAPI.post(routeAuthAPI.LOGOUT);
 };
 
 export const refreshUserAPI = async (): Promise<any> => {
-  const { data } = await exchangeAPI.get(routeAPI.CURRENT);
+  const { data } = await exchangeAPI.get(routeAuthAPI.CURRENT);
   return data;
 };
 

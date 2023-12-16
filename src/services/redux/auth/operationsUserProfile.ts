@@ -42,8 +42,8 @@ export const updUserEqpts = createAsyncThunk(
   'authUser/updateUserEqpts',
   async (objEqpt: IEqptItemForm, thunkAPI) => {
     try {
-      const { eqpt } = await updateUserEqpts(objEqpt);
-      return eqpt;
+      const { data } = await updateUserEqpts(objEqpt);
+      return data;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(handleErrors(error.response?.data));
     }
@@ -55,9 +55,12 @@ export const delUserEqpt = createAsyncThunk(
   'authUser/deleteUserEqpt',
   async (id: IEqptId, thunkAPI) => {
     try {
-      const { deletedEqpt } = await deleteUserEqpt(id);
+      const {
+        data: { deletedEqpt },
+      } = await deleteUserEqpt(id);
       return deletedEqpt;
     } catch (error: any) {
+      console.log(error.response?.data);
       return thunkAPI.rejectWithValue(handleErrors(error.response?.data));
     }
   }

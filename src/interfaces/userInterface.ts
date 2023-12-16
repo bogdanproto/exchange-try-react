@@ -4,7 +4,7 @@ export interface IUser {
   phone: string | null;
   avatarCloudURL: string | null;
   mainsport: string | null;
-  equipments: IEqptItem[] | [];
+  eqpts: IEqptItem[] | [];
   sports: null | string[];
 }
 
@@ -34,7 +34,7 @@ export interface IUserLogInSuccess {
     phone: string;
     avatarCloudURL: string;
     mainsport: string;
-    equipments: IEqptItem[] | [];
+    eqpts: IEqptItem[] | [];
     sports: string[];
   };
   token: string;
@@ -78,3 +78,9 @@ export interface IListEqpts {}
 export interface IEqptItemForm extends Pick<IEqptItem, 'title' | 'size'> {}
 
 export interface IEqptId extends Pick<IEqptItem, '_id'> {}
+
+//==============Sports========================
+export interface ISportItem {
+  _id: string;
+  sport: string;
+}
