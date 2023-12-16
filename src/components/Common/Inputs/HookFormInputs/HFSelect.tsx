@@ -1,71 +1,63 @@
-import * as React from 'react';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import ListItemText from '@mui/material/ListItemText';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import Checkbox from '@mui/material/Checkbox';
+import { Controller } from 'react-hook-form';
+import {
+  MenuItem,
+  OutlinedInput,
+  Checkbox,
+  ListItemText,
+  InputLabel,
+  FormControl,
+  Select,
+} from '@mui/material';
+import {
+  HFSelectProps,
+  ISelect,
+} from 'interfaces/component/inputs/selectInterface';
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
-
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
-
-export function MultipleSelectCheckmarks() {
-  const [personName, setPersonName] = React.useState<string[]>([]);
-
-  const handleChange = (event: SelectChangeEvent<typeof personName>) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value
-    );
-  };
-
-  return (
-    <div>
-      <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
+export const HFSelect = ({
+  control,
+  multiple,
+  name,
+  label,
+  options,
+}: HFSelectProps) => (
+  <Controller
+    name={name}
+    control={control}
+    render={({ field }) => (
+      <FormControl>
+        <InputLabel id="labelId">{label}</InputLabel>
         <Select
-          labelId="demo-multiple-checkbox-label"
-          id="demo-multiple-checkbox"
-          multiple
-          value={personName}
-          onChange={handleChange}
-          input={<OutlinedInput label="Tag" />}
-          renderValue={selected => selected.join(', ')}
-          MenuProps={MenuProps}
+          labelId="labelId"
+          id={name}
+          multiple={multiple}
+          value={field.value || []}
+          onChange={e => field.onChange(e.target.value)}
+          input={<OutlinedInput label={label} />}
+          renderValue={selected =>
+            selected
+              .map(
+                (id: string) =>
+                  options.find((item: ISelect) => item.id === id)?.label
+              )
+              .join(', ')
+          }
+          MenuProps={{
+            PaperProps: {
+              style: {
+                maxHeight: 180,
+                width: 'calc(100%-36px)',
+              },
+            },
+          }}
         >
-          {names.map(name => (
-            <MenuItem key={name} value={name}>
-              <Checkbox checked={personName.indexOf(name) > -1} />
-              <ListItemText primary={name} />
+          {options.map(({ id, label }) => (
+            <MenuItem key={id} value={id}>
+              <Checkbox checked={field.value?.indexOf(id) > -1} />
+              <ListItemText primary={label} />
             </MenuItem>
           ))}
         </Select>
       </FormControl>
-    </div>
-  );
-}
+    )}
+  />
+);

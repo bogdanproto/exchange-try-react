@@ -16,9 +16,10 @@ import { Loader } from '../Common/Loader/Loader';
 import { NotificationBox } from '../Common/Notification/Notification';
 import { ThemeProvider } from '@mui/material/styles';
 import { LayoutInterface } from '../LayoutInterface/LayoutInterface';
-import { Request } from 'pages/Request/Request';
+import { Proposal } from 'pages/Proposal/Proposal';
 import { darkTheme } from '../MainStyles/MaterialTheme';
 import { Profile } from 'pages/Profile/Profile';
+import { errorMessage } from 'const/errorNotification';
 
 export const App = () => {
   const { isRefreshing, isAppLoaded, errorAuth } =
@@ -33,7 +34,9 @@ export const App = () => {
   return (
     <ThemeProvider theme={darkTheme}>
       {isRefreshing && <Loader />}
-      {errorAuth && <NotificationBox type="error" message={errorAuth} />}
+      {errorAuth && errorAuth !== errorMessage.user_unauthorized_token && (
+        <NotificationBox type="error" message={errorAuth} />
+      )}
 
       {isAppLoaded && (
         <Routes>
@@ -47,7 +50,7 @@ export const App = () => {
             }
           >
             <Route index element={<Home />} />
-            <Route path={routes.REQUEST} element={<Request />} />
+            <Route path={routes.REQUEST} element={<Proposal />} />
             <Route path={routes.PROFILE} element={<Profile />} />
           </Route>
 

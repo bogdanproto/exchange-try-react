@@ -1,5 +1,5 @@
 export const btn = {
   HOME: 'HOME',
-  REQUEST: 'REQUEST',
+  REQUEST: 'PROPOSAL',
   PROFILE: 'PROFILE',
 };

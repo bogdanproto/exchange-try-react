@@ -1,5 +1,4 @@
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
-import { Switch } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaRequestForm } from '../../../const/shema';
 import { HFAutocompleate } from '../../Common/Inputs/HookFormInputs/HFAutocompleate';
@@ -7,38 +6,35 @@ import { MobileDatePicker, MobileTimePicker } from '@mui/x-date-pickers';
 import {
   Stack,
   Paper,
-  Typography,
   Box,
   FormControlLabel,
   Button,
+  Switch,
 } from '@mui/material';
 import dayjs from 'dayjs';
+import { useEffect, useState } from 'react';
+import { ISelect } from 'interfaces/component';
+import { getAllSpots } from 'services/api/spot/spotAPI';
+import { formatEqptsSelector, formatSpotSelector } from 'services/helpers';
+import { HFSelect } from 'components/Common/Inputs/HookFormInputs/HFSelect';
+import { useTypeSelector } from 'services/redux/customHook/typeHooks';
+import { selectUser } from 'services/redux/auth/selectors';
 
-interface IRequestForm {
+interface IProposalForm {
   allday: boolean;
   time: any;
   date: any;
+  spot: ISelect[];
+  eqpts: any;
   is_phone: boolean;
   auto_accept: boolean;
 }
 
-const optionsSpot = [
-  { id: '1', label: 'tarifa' },
-  { id: '2', label: 'wissant' },
-];
-const optionsEqpt = [
-  { id: '1', label: 'Naish Pivot 8' },
-  { id: '2', label: 'Core XR 10' },
-  { id: '3', label: 'Naish Pivot 18' },
-  { id: '4', label: 'Core XR 11' },
-  { id: '5', label: 'Naish Pivot 28' },
-  { id: '6', label: 'Core XR 210' },
-  { id: '7', label: 'Naish Pivot 38' },
-  { id: '8', label: 'Core XR 310' },
-];
+export const ProposalForm = () => {
+  const [spots, setSpots] = useState<ISelect[]>([]);
+  const { eqpts } = useTypeSelector(selectUser);
 
-export const RequestForm = () => {
-  const { handleSubmit, control } = useForm<IRequestForm>({
+  const { handleSubmit, watch, control } = useForm<IProposalForm>({
     defaultValues: {
       allday: false,
       time: dayjs(),
@@ -49,27 +45,29 @@ export const RequestForm = () => {
     resolver: yupResolver(schemaRequestForm) as any,
   });
 
-  const onSubmit: SubmitHandler<IRequestForm> = data => console.log(data);
+  useEffect(() => {
+    async function getSpots() {
+      try {
+        const { data } = await getAllSpots();
+        setSpots(formatSpotSelector(data.spots));
+      } catch (error) {}
+    }
+
+    getSpots();
+  }, []);
+
+  const onSubmit: SubmitHandler<IProposalForm> = data => console.log(data);
+
+  const isCheckedAllDay = watch('allday');
 
   return (
     <Paper
       elevation={3}
       style={{
         position: 'relative',
-        padding: '24px',
+        padding: '18px',
       }}
     >
-      <Typography
-        style={{
-          position: 'absolute',
-          top: '0',
-          left: '0',
-          padding: '0 5px',
-        }}
-      >
-        NEW REQUEST
-      </Typography>
-
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box
           style={{
@@ -114,7 +112,14 @@ export const RequestForm = () => {
           <Controller
             name="time"
             control={control}
-            render={({ field }) => <MobileTimePicker {...field} label="Time" />}
+            render={({ field }) => (
+              <MobileTimePicker
+                {...field}
+                label="Time"
+                disabled={isCheckedAllDay}
+                ampm={false}
+              />
+            )}
           />
 
           <HFAutocompleate
@@ -122,16 +127,17 @@ export const RequestForm = () => {
             control={control}
             name="spot"
             label="Spot"
-            options={optionsSpot}
+            options={spots}
           />
 
-          <HFAutocompleate
+          <HFSelect
             multiple={true}
             control={control}
-            name="eqpt"
-            label="Equipment"
-            options={optionsEqpt}
+            name="eqpts"
+            label="Equipments"
+            options={formatEqptsSelector(eqpts)}
           />
+
           <Box>
             <Controller
               name="is_phone"
@@ -164,7 +170,6 @@ export const RequestForm = () => {
             <Button type="submit" variant="contained">
               SUBMIT
             </Button>
-            <Button variant="contained">CANCEL</Button>
           </Stack>
         </Box>
       </form>

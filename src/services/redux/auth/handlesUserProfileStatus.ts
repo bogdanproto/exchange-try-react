@@ -43,7 +43,7 @@ export const handleFulfilledUpdEqpts = (
 
   state.isRefreshing = false;
   state.errorAuth = null;
-  state.user.equipments = [...state.user.equipments, objEqpt];
+  state.user.eqpts = [...state.user.eqpts, objEqpt];
 };
 
 //--------------Eqpts update User-----------------
@@ -53,13 +53,13 @@ export const handleFulfilledDeleteEqpt = (
   action: PayloadAction<IEqptItem>
 ) => {
   const { _id } = action.payload;
-  const { equipments } = state.user;
+  const { eqpts } = state.user;
 
-  const updateEqpts = equipments.filter((item: IEqptItem) => item._id !== _id);
+  const updateEqpts = eqpts.filter((item: IEqptItem) => item._id !== _id);
 
   state.isRefreshing = false;
   state.errorAuth = null;
-  state.user.equipments = updateEqpts;
+  state.user.eqpts = updateEqpts;
 };
 
 //--------------- Rejected-------------------

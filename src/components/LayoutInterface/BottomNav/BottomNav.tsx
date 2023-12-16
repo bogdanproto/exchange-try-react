@@ -1,7 +1,10 @@
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import {
+  Box,
+  Paper,
+  Avatar,
+  BottomNavigation,
+  BottomNavigationAction,
+} from '@mui/material';
 import HomeIcon from '@mui/icons-material/ScreenRotationAltOutlined';
 import AddIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import UserIcon from '@mui/icons-material/AccountCircleOutlined';
@@ -9,10 +12,14 @@ import { btn } from '../../../const/components';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { routes } from '../../../const/routes';
+import { useTypeSelector } from 'services/redux/customHook/typeHooks';
+import { selectUser } from 'services/redux/auth/selectors';
+import { formatName } from 'services/helpers';
 
 export const BottomNav = () => {
   const [value, setValue] = useState(0);
   const navigate = useNavigate();
+  const { name, avatarCloudURL } = useTypeSelector(selectUser);
 
   useEffect(() => {
     switch (value) {
@@ -58,8 +65,18 @@ export const BottomNav = () => {
           <BottomNavigationAction
             sx={{ fontWeight: '700' }}
             disableRipple
-            label={btn.PROFILE}
-            icon={<UserIcon sx={{ fontSize: 28 }} />}
+            label={name ? formatName(name) : btn.PROFILE}
+            icon={
+              avatarCloudURL ? (
+                <Avatar
+                  alt={name ?? 'PROFILE'}
+                  src={avatarCloudURL}
+                  sx={{ width: 28, height: 28 }}
+                />
+              ) : (
+                <UserIcon sx={{ fontSize: 28 }} />
+              )
+            }
           />
         </BottomNavigation>
       </Paper>

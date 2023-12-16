@@ -3,14 +3,7 @@ import { Autocomplete, TextField, Checkbox } from '@mui/material';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import { ErrorInputForm } from '../../Error/ErrorInputForm.styled';
-
-interface HFAutocompleateProps {
-  control: any;
-  multiple: boolean;
-  name: string;
-  label: string;
-  options: { id: string; label: string }[];
-}
+import { HFAutocompleateProps } from 'interfaces/component';
 
 export const HFAutocompleate = ({
   control,
@@ -28,14 +21,16 @@ export const HFAutocompleate = ({
           <>
             <Autocomplete
               multiple={multiple}
+              freeSolo
+              disableCloseOnSelect
               onChange={(_, newValue) => {
                 field.onChange(newValue);
               }}
               id={name}
               options={options}
-              sx={{ width: 300 }}
+              sx={{ width: '100%' }}
               limitTags={1}
-              size="small"
+              size="medium"
               renderInput={params => (
                 <TextField {...params} label={label} inputRef={field.ref} />
               )}
