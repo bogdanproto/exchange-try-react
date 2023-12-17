@@ -15,13 +15,14 @@ export const HFSelect = ({
   multiple,
   name,
   label,
+  placeholder,
   options,
 }: HFSelectProps) => (
   <Controller
     name={name}
     control={control}
     render={({ field }) => (
-      <FormControl>
+      <FormControl sx={{ width: '100%' }}>
         <InputLabel id="labelId">{label}</InputLabel>
         <Select
           labelId="labelId"
@@ -31,7 +32,10 @@ export const HFSelect = ({
           onChange={e => field.onChange(e.target.value)}
           input={<OutlinedInput label={label} />}
           renderValue={selected =>
-            selected.map((item: string) => options.get(item)).join(', ')
+            [selected]
+              .flat()
+              .map((item: string) => options.get(item))
+              .join(', ')
           }
           MenuProps={{
             PaperProps: {
@@ -42,12 +46,18 @@ export const HFSelect = ({
             },
           }}
         >
-          {[...options].map(([id, label]) => (
-            <MenuItem key={id} value={id}>
-              <Checkbox checked={field.value?.indexOf(id) > -1} />
-              <ListItemText primary={label} />
+          {[...options].length ? (
+            [...options].map(([id, label]) => (
+              <MenuItem key={id} value={id}>
+                <Checkbox checked={field.value?.indexOf(id) > -1} />
+                <ListItemText primary={label} />
+              </MenuItem>
+            ))
+          ) : (
+            <MenuItem disabled value="">
+              <em>{placeholder}</em>
             </MenuItem>
-          ))}
+          )}
         </Select>
       </FormControl>
     )}

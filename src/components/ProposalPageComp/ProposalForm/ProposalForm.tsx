@@ -1,7 +1,6 @@
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { schemaRequestForm } from '../../../const/shema';
-import { HFAutocompleate } from '../../Common/Inputs/HookFormInputs/HFAutocompleate';
+import { schemaProposalForm } from 'const/shema';
 import { MobileDatePicker, MobileTimePicker } from '@mui/x-date-pickers';
 import {
   Stack,
@@ -13,28 +12,26 @@ import {
 } from '@mui/material';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
-import { ISelect } from 'interfaces/component';
+import { IProposalForm } from 'interfaces/component';
 import { getAllSpots } from 'services/api/spot/spotAPI';
 import { formatEqptsSelector, formatSpotSelector } from 'services/helpers';
 import { HFSelect } from 'components/Common/Inputs/HookFormInputs/HFSelect';
 import { useTypeSelector } from 'services/redux/customHook/typeHooks';
 import { selectUser } from 'services/redux/auth/selectors';
-
-interface IProposalForm {
-  allday: boolean;
-  time: any;
-  date: any;
-  spot: ISelect[];
-  eqpts: any;
-  is_phone: boolean;
-  auto_accept: boolean;
-}
+import { ErrorInputForm } from 'components/Common/Error/ErrorInputForm.styled';
+import { ISpot } from 'interfaces/data';
 
 export const ProposalForm = () => {
-  const [spots, setSpots] = useState<ISelect[]>([]);
+  const [spots, setSpots] = useState<ISpot[]>([]);
   const { eqpts } = useTypeSelector(selectUser);
 
-  const { handleSubmit, watch, control } = useForm<IProposalForm>({
+  const {
+    handleSubmit,
+    watch,
+    reset,
+    control,
+    formState: { isSubmitSuccessful, errors },
+  } = useForm<IProposalForm>({
     defaultValues: {
       allday: false,
       time: dayjs(),
@@ -42,21 +39,29 @@ export const ProposalForm = () => {
       auto_accept: false,
       is_phone: false,
     },
-    resolver: yupResolver(schemaRequestForm) as any,
+    resolver: yupResolver(schemaProposalForm),
   });
 
   useEffect(() => {
     async function getSpots() {
       try {
         const { data } = await getAllSpots();
-        setSpots(formatSpotSelector(data.spots));
+        setSpots(data.spots);
       } catch (error) {}
     }
 
     getSpots();
   }, []);
 
-  const onSubmit: SubmitHandler<IProposalForm> = data => console.log(data);
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful, reset]);
+
+  const onSubmit: SubmitHandler<IProposalForm> = data => {
+    console.log(data);
+  };
 
   const isCheckedAllDay = watch('allday');
 
@@ -91,12 +96,15 @@ export const ProposalForm = () => {
                   right: '2px',
                   padding: '4px',
                 }}
-                control={<Switch {...field} size="small" />}
+                control={
+                  <Switch {...field} checked={field.value} size="small" />
+                }
                 label="ALLDAY"
                 labelPlacement="start"
               />
             )}
           />
+
           <Controller
             name="date"
             control={control}
@@ -121,22 +129,52 @@ export const ProposalForm = () => {
               />
             )}
           />
+          {/* <Box
+            style={{
+              marginBottom: '4px',
+            }}
+          >
+            <HFAutocompleate
+              multiple={false}
+              control={control}
+              name="spot"
+              label="Spot"
+              options={spots}
+            />
+            <ErrorInputForm>{errors.spot?.label?.message}</ErrorInputForm>
+          </Box> */}
 
-          <HFAutocompleate
-            multiple={false}
-            control={control}
-            name="spot"
-            label="Spot"
-            options={spots}
-          />
+          <Box
+            style={{
+              marginBottom: '4px',
+            }}
+          >
+            <HFSelect
+              multiple={false}
+              control={control}
+              name="spot"
+              label="Spot"
+              placeholder="Add equipment to your profile"
+              options={formatSpotSelector(spots)}
+            />
+            <ErrorInputForm>{errors.spot?.message}</ErrorInputForm>
+          </Box>
 
-          <HFSelect
-            multiple={true}
-            control={control}
-            name="eqpts"
-            label="Equipments"
-            options={formatEqptsSelector(eqpts)}
-          />
+          <Box
+            style={{
+              marginBottom: '4px',
+            }}
+          >
+            <HFSelect
+              multiple={true}
+              control={control}
+              name="eqpts"
+              label="Equipments"
+              placeholder="Add equipment to your profile"
+              options={formatEqptsSelector(eqpts)}
+            />
+            <ErrorInputForm>{errors.eqpts?.message}</ErrorInputForm>
+          </Box>
 
           <Box>
             <Controller
@@ -144,7 +182,7 @@ export const ProposalForm = () => {
               control={control}
               render={({ field }) => (
                 <FormControlLabel
-                  control={<Switch {...field} />}
+                  control={<Switch checked={field.value} {...field} />}
                   label="Show my phone number"
                 />
               )}
@@ -155,7 +193,7 @@ export const ProposalForm = () => {
               control={control}
               render={({ field }) => (
                 <FormControlLabel
-                  control={<Switch {...field} />}
+                  control={<Switch {...field} checked={field.value} />}
                   label="Auto accept"
                   color="primary"
                 />

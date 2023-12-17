@@ -31,9 +31,13 @@ export const HFAutocompleate = ({
               sx={{ width: '100%' }}
               limitTags={1}
               size="medium"
-              renderInput={params => (
-                <TextField {...params} label={label} inputRef={field.ref} />
-              )}
+              renderInput={params => {
+                console.log(params);
+
+                return (
+                  <TextField {...params} label={label} inputRef={field.ref} />
+                );
+              }}
               renderOption={(props, option, { selected }) => (
                 <li {...props}>
                   <Checkbox

@@ -28,13 +28,16 @@ export const schemaProfileForm = yup.object().shape({
   phone: yup.string().trim().min(3, 'Phone must be 3 symbol at least'),
 });
 
-export const schemaRequestForm = yup.object().shape({
-  allday: yup.boolean(),
-
-  spot: yup.object({
-    id: yup.string(),
-    label: yup.string(),
-  }),
+export const schemaProposalForm = yup.object().shape({
+  allday: yup.boolean().required(),
+  date: yup.mixed().required(),
+  time: yup.mixed().required(),
+  spot: yup.string().required('Spot is required'),
+  eqpts: yup
+    .array(yup.string().required('Equipment is required'))
+    .required('Equipment is required'),
+  is_phone: yup.boolean().required(),
+  auto_accept: yup.boolean().required(),
 });
 
 export const schemaEqptForm = yup.object().shape({

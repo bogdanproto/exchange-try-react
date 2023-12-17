@@ -18,7 +18,7 @@ export const SelectHeader = () => {
   };
 
   return (
-    <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }} size="small">
+    <FormControl variant="standard" sx={{ m: 1 }} size="small">
       <Select
         disableUnderline
         labelId="select-label"
