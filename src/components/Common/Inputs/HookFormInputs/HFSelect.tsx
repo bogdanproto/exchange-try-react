@@ -8,10 +8,7 @@ import {
   FormControl,
   Select,
 } from '@mui/material';
-import {
-  HFSelectProps,
-  ISelect,
-} from 'interfaces/component/inputs/selectInterface';
+import { HFSelectProps } from 'interfaces/component/inputs/selectInterface';
 
 export const HFSelect = ({
   control,
@@ -34,12 +31,7 @@ export const HFSelect = ({
           onChange={e => field.onChange(e.target.value)}
           input={<OutlinedInput label={label} />}
           renderValue={selected =>
-            selected
-              .map(
-                (id: string) =>
-                  options.find((item: ISelect) => item.id === id)?.label
-              )
-              .join(', ')
+            selected.map((item: string) => options.get(item)).join(', ')
           }
           MenuProps={{
             PaperProps: {
@@ -50,7 +42,7 @@ export const HFSelect = ({
             },
           }}
         >
-          {options.map(({ id, label }) => (
+          {[...options].map(([id, label]) => (
             <MenuItem key={id} value={id}>
               <Checkbox checked={field.value?.indexOf(id) > -1} />
               <ListItemText primary={label} />
