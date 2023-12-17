@@ -1,8 +1,11 @@
-import { ISelect } from 'interfaces/component';
 import { IEqpt } from 'interfaces/data';
 
-export const formatEqptsSelector = (arr: IEqpt[]): ISelect[] =>
-  arr.map(({ _id, title, size }: IEqpt) => ({
-    id: _id,
-    label: `${title} ${size}`,
-  }));
+export const formatEqptsSelector = (arr: IEqpt[]): Map<string, string> => {
+  const mapCollection = new Map();
+
+  arr.forEach(({ _id, title, size }: IEqpt) => {
+    mapCollection.set(_id, `${title} ${size}`);
+  });
+
+  return mapCollection;
+};

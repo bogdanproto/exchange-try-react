@@ -16,5 +16,5 @@ export interface HFSelectProps {
   multiple: boolean;
   name: string;
   label: string;
-  options: ISelect[];
+  options: Map<string, string>;
 }
