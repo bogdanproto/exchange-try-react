@@ -10,8 +10,8 @@ export type {
 } from './component/inputs/selectInterface';
 export type { ISliceData } from './data/IDataSlice';
 export type { IEqpt } from './data/eqpt/IEqpt';
-export type { IProposal } from './data/proposal/IProposal';
-export type { ISpot } from './data/spot/ISpot';
+export type { IProposalPending } from './data/proposal/IProposal';
+export type { ISpot, ISpotView } from './data/spot/ISpot';
 export type { IErrorsList, IErorr } from './error/errorInterface';
 export type {
   IUser,

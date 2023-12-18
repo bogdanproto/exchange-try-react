@@ -8,7 +8,7 @@ import { getAllSpots } from '../operations';
 import { ISliceData } from 'interfaces';
 
 const initialState: ISliceData = {
-  proposals: [],
+  proposalsPending: [],
   spots: [],
   errorData: null,
   isLoading: false,
