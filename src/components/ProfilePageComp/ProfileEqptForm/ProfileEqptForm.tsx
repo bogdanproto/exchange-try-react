@@ -5,7 +5,7 @@ import { schemaEqptForm } from 'const/shema';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ErrorInputForm } from 'components/Common/Error/ErrorInputForm.styled';
-import { IEqptItem, IEqptItemForm } from 'interfaces/userInterface';
+import { IEqptItem, IEqptItemForm } from 'interfaces/user/userInterface';
 import {
   useTypeDispatch,
   useTypeSelector,

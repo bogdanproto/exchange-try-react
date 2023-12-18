@@ -1,8 +1,11 @@
-import { ISelect } from 'interfaces/component';
-import { ISpot } from 'interfaces/data';
+import { ISpot } from 'interfaces';
 
-export const formatSpotSelector = (arr: ISpot[]): ISelect[] =>
-  arr.map(({ _id, spot }: ISpot) => ({
-    id: _id,
-    label: spot.toUpperCase(),
-  }));
+export const formatSpotSelector = (arr: ISpot[]): Map<string, string> => {
+  const mapCollection = new Map();
+
+  arr.forEach(({ _id, spot }: ISpot) => {
+    mapCollection.set(_id, spot.toUpperCase());
+  });
+
+  return mapCollection;
+};

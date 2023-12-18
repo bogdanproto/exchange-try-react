@@ -2,8 +2,8 @@ import { Controller } from 'react-hook-form';
 import { Autocomplete, TextField, Checkbox } from '@mui/material';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import { ErrorInputForm } from '../../Error/ErrorInputForm.styled';
-import { HFAutocompleateProps } from 'interfaces/component';
+import { HFAutocompleateProps } from 'interfaces';
+import { ErrorInputForm } from 'components/Common/Error/ErrorInputForm.styled';
 
 export const HFAutocompleate = ({
   control,
@@ -31,9 +31,13 @@ export const HFAutocompleate = ({
               sx={{ width: '100%' }}
               limitTags={1}
               size="medium"
-              renderInput={params => (
-                <TextField {...params} label={label} inputRef={field.ref} />
-              )}
+              renderInput={params => {
+                console.log(params);
+
+                return (
+                  <TextField {...params} label={label} inputRef={field.ref} />
+                );
+              }}
               renderOption={(props, option, { selected }) => (
                 <li {...props}>
                   <Checkbox

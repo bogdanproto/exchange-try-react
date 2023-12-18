@@ -5,7 +5,7 @@ import {
   logOutUser,
   refreshUser,
 } from './operationsAuth';
-import { ISliceAuthUser } from 'interfaces/userInterface';
+import { ISliceAuthUser } from 'interfaces/user/userInterface';
 import {
   handleFulfilledLogIn,
   handleFulfilledLogOut,

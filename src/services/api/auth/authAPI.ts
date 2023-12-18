@@ -1,4 +1,4 @@
-import { IUserLogin, IUserSignUp } from 'interfaces/userInterface';
+import { IUserLogin, IUserSignUp } from 'interfaces/user/userInterface';
 import { routeAuthAPI } from 'const/routeAPI/auth';
 import { exchangeAPI } from '../axiosConf/axiosConf';
 

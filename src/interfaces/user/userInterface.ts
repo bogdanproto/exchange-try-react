@@ -49,6 +49,12 @@ export interface IUserProfileSuccess {
   phone: string | null;
 }
 
+export interface IUserView {
+  name: string;
+  phone: string;
+  avatarCloudURL: string;
+}
+
 //===========Interface Form================
 export interface IUserForm {
   name: string;

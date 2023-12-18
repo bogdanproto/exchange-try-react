@@ -4,7 +4,7 @@ import {
   ISliceAuthUser,
   IUserAvatarSuccess,
   IUserProfileSuccess,
-} from 'interfaces/userInterface';
+} from 'interfaces/user/userInterface';
 
 //--------------Avatar User-----------------
 

@@ -5,7 +5,7 @@ import { useTypeDispatch } from 'services/redux/customHook/typeHooks';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaProfileForm } from 'const/shema';
 import { ErrorInputForm } from 'components/Common/Error/ErrorInputForm.styled';
-import { IUserProfile } from 'interfaces/userInterface';
+import { IUserProfile } from 'interfaces/user/userInterface';
 import { updUserProfile } from 'services/redux/auth/operationsUserProfile';
 
 interface IAddInput {

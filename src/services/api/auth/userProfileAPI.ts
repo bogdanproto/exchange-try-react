@@ -1,6 +1,10 @@
 import { routeAuthAPI } from 'const/routeAPI/auth';
 import { exchangeAPI } from '../axiosConf/axiosConf';
-import { IEqptId, IEqptItemForm, IUserProfile } from 'interfaces/userInterface';
+import {
+  IEqptId,
+  IEqptItemForm,
+  IUserProfile,
+} from 'interfaces/user/userInterface';
 
 export const updateUserAvatar = async (file: File | null): Promise<any> => {
   if (!file) {

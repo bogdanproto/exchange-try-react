@@ -16,5 +16,6 @@ export interface HFSelectProps {
   multiple: boolean;
   name: string;
   label: string;
+  placeholder: string;
   options: Map<string, string>;
 }

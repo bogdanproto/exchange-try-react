@@ -4,7 +4,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useState } from 'react';
 import { useTypeSelector } from 'services/redux/customHook/typeHooks';
 import { selectUser } from 'services/redux/auth/selectors';
-import { ISportItem } from 'interfaces/userInterface';
+import { ISportItem } from 'interfaces/user/userInterface';
 
 export const SelectHeader = () => {
   const { sports, mainsport } = useTypeSelector(selectUser);
@@ -18,7 +18,7 @@ export const SelectHeader = () => {
   };
 
   return (
-    <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }} size="small">
+    <FormControl variant="standard" sx={{ m: 1 }} size="small">
       <Select
         disableUnderline
         labelId="select-label"

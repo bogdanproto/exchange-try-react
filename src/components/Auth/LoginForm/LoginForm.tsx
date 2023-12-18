@@ -5,7 +5,7 @@ import { TextField } from '@mui/material';
 import { AuthForm } from '../Common/AuthForm.styled';
 import { ButtonFormStyled } from '../Common/ButtonForm.styled';
 import { routes } from 'const/routes';
-import { IUserLogin } from 'interfaces/userInterface';
+import { IUserLogin } from 'interfaces/user/userInterface';
 import { logInUser } from 'services/redux/auth/operationsAuth';
 import { useTypeDispatch } from 'services/redux/customHook/typeHooks';
 import {
