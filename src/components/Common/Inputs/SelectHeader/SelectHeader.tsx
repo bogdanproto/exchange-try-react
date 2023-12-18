@@ -4,7 +4,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useState } from 'react';
 import { useTypeSelector } from 'services/redux/customHook/typeHooks';
 import { selectUser } from 'services/redux/auth/selectors';
-import { ISportItem } from 'interfaces/userInterface';
+import { ISportItem } from 'interfaces/user/userInterface';
 
 export const SelectHeader = () => {
   const { sports, mainsport } = useTypeSelector(selectUser);

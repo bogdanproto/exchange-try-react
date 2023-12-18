@@ -3,7 +3,7 @@ import {
   ISliceAuthUser,
   IUserLogInSuccess,
   IUserSignUpSuccess,
-} from 'interfaces/userInterface';
+} from 'interfaces/user/userInterface';
 
 //--------------SignUp User-----------------
 

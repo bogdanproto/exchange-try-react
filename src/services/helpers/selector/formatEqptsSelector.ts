@@ -1,4 +1,4 @@
-import { IEqpt } from 'interfaces/data';
+import { IEqpt } from 'interfaces';
 
 export const formatEqptsSelector = (arr: IEqpt[]): Map<string, string> => {
   const mapCollection = new Map();

@@ -7,9 +7,9 @@ import {
   setAuthToken,
   removeAuthToken,
 } from '../../api/auth/authAPI';
-import { IUserLogin, IUserSignUp } from 'interfaces/userInterface';
 import { RootState } from 'services/redux/store';
-import { handleErrors } from './handleErrors';
+import { IUserLogin, IUserSignUp } from 'interfaces/user/userInterface';
+import { handleErrors } from 'services/helpers';
 
 //--------------SignUp User-----------------
 export const signUpUser = createAsyncThunk(

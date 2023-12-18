@@ -1,6 +1,5 @@
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { schemaProposalForm } from 'const/shema';
 import { MobileDatePicker, MobileTimePicker } from '@mui/x-date-pickers';
 import {
   Stack,
@@ -11,19 +10,23 @@ import {
   Switch,
 } from '@mui/material';
 import dayjs from 'dayjs';
-import { useEffect, useState } from 'react';
-import { IProposalForm } from 'interfaces/component';
-import { getAllSpots } from 'services/api/spot/spotAPI';
+import { useEffect } from 'react';
 import { formatEqptsSelector, formatSpotSelector } from 'services/helpers';
-import { HFSelect } from 'components/Common/Inputs/HookFormInputs/HFSelect';
-import { useTypeSelector } from 'services/redux/customHook/typeHooks';
+import {
+  useTypeDispatch,
+  useTypeSelector,
+} from 'services/redux/customHook/typeHooks';
 import { selectUser } from 'services/redux/auth/selectors';
-import { ErrorInputForm } from 'components/Common/Error/ErrorInputForm.styled';
-import { ISpot } from 'interfaces/data';
+import { getAllSpots } from 'services/redux/data/operations';
+import { selectSpots } from 'services/redux/data/selectors';
+import { IProposalForm } from 'interfaces';
+import { schemaProposalForm } from 'const';
+import { ErrorInputForm, HFSelect } from 'components/Common';
 
 export const ProposalForm = () => {
-  const [spots, setSpots] = useState<ISpot[]>([]);
+  const dispatch = useTypeDispatch();
   const { eqpts } = useTypeSelector(selectUser);
+  const spots = useTypeSelector(selectSpots);
 
   const {
     handleSubmit,
@@ -43,15 +46,10 @@ export const ProposalForm = () => {
   });
 
   useEffect(() => {
-    async function getSpots() {
-      try {
-        const { data } = await getAllSpots();
-        setSpots(data.spots);
-      } catch (error) {}
+    if (!spots.length) {
+      dispatch(getAllSpots());
     }
-
-    getSpots();
-  }, []);
+  }, [dispatch, spots.length]);
 
   useEffect(() => {
     if (isSubmitSuccessful) {
@@ -111,8 +109,10 @@ export const ProposalForm = () => {
             render={({ field }) => (
               <MobileDatePicker
                 {...field}
+                minDate={dayjs()}
                 label="Date"
                 sx={{ width: '100%' }}
+                format="DD.MM.YYYY"
               />
             )}
           />
@@ -129,20 +129,6 @@ export const ProposalForm = () => {
               />
             )}
           />
-          {/* <Box
-            style={{
-              marginBottom: '4px',
-            }}
-          >
-            <HFAutocompleate
-              multiple={false}
-              control={control}
-              name="spot"
-              label="Spot"
-              options={spots}
-            />
-            <ErrorInputForm>{errors.spot?.label?.message}</ErrorInputForm>
-          </Box> */}
 
           <Box
             style={{
@@ -154,7 +140,7 @@ export const ProposalForm = () => {
               control={control}
               name="spot"
               label="Spot"
-              placeholder="Add equipment to your profile"
+              placeholder="Spots wasn't loaded"
               options={formatSpotSelector(spots)}
             />
             <ErrorInputForm>{errors.spot?.message}</ErrorInputForm>

@@ -1,4 +1,4 @@
-import { ISpot } from 'interfaces/data';
+import { ISpot } from 'interfaces';
 
 export const formatSpotSelector = (arr: ISpot[]): Map<string, string> => {
   const mapCollection = new Map();

@@ -1,12 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { handleErrors } from './handleErrors';
+import { handleErrors } from '../../helpers/error/handleErrors';
 import {
   deleteUserEqpt,
   updateUserAvatar,
   updateUserEqpts,
   updateUserProfile,
 } from 'services/api/auth/userProfileAPI';
-import { IEqptId, IEqptItemForm, IUserProfile } from 'interfaces/userInterface';
+import {
+  IEqptId,
+  IEqptItemForm,
+  IUserProfile,
+} from 'interfaces/user/userInterface';
 
 //--------------updateUserAvatar-----------------
 export const updUserAvatar = createAsyncThunk(

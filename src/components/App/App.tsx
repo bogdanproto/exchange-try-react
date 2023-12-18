@@ -1,29 +1,28 @@
 import { Route, Routes } from 'react-router-dom';
-import { routes } from 'const/routes';
-import { Signup } from 'pages/Signup/Signup';
-import { Login } from 'pages/Login/Login';
-import { Home } from 'pages/Home/Home';
 import { useEffect } from 'react';
 import { refreshUser } from 'services/redux/auth/operationsAuth';
+import { ThemeProvider } from '@mui/material/styles';
 import {
   useTypeDispatch,
   useTypeSelector,
 } from 'services/redux/customHook/typeHooks';
-import { PrivateRoute } from 'pages/PrivateRoute/PrivateRoute';
-import { RestrictedRoute } from 'pages/RestrictedRoute/RestrictedRoute';
-import { selectAuthUser } from 'services/redux/auth/selectors';
-import { Loader } from '../Common/Loader/Loader';
-import { NotificationBox } from '../Common/Notification/Notification';
-import { ThemeProvider } from '@mui/material/styles';
 import { LayoutInterface } from '../LayoutInterface/LayoutInterface';
-import { Proposal } from 'pages/Proposal/Proposal';
 import { darkTheme } from '../MainStyles/MaterialTheme';
-import { Profile } from 'pages/Profile/Profile';
-import { errorMessage } from 'const/errorNotification';
+import { selectService } from 'services/redux/commonSelectors';
+import {
+  Home,
+  Login,
+  PrivateRoute,
+  Profile,
+  Proposal,
+  RestrictedRoute,
+  Signup,
+} from 'pages';
+import { Loader, NotificationBox } from 'components/Common';
+import { errorMessage, routes } from 'const';
 
 export const App = () => {
-  const { isRefreshing, isAppLoaded, errorAuth } =
-    useTypeSelector(selectAuthUser);
+  const { error, isLoading, isAppLoaded } = useTypeSelector(selectService);
 
   const dispatch = useTypeDispatch();
 
@@ -33,9 +32,9 @@ export const App = () => {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      {isRefreshing && <Loader />}
-      {errorAuth && errorAuth !== errorMessage.user_unauthorized_token && (
-        <NotificationBox type="error" message={errorAuth} />
+      {isLoading && <Loader />}
+      {error && error !== errorMessage.user_unauthorized_token && (
+        <NotificationBox type="error" message={error} />
       )}
 
       {isAppLoaded && (
