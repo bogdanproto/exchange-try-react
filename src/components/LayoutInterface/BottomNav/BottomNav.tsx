@@ -27,7 +27,7 @@ export const BottomNav = () => {
         navigate(routes.HOME);
         break;
       case 1:
-        navigate(routes.REQUEST);
+        navigate(routes.PROPOSAL);
         break;
       case 2:
         navigate(routes.PROFILE);

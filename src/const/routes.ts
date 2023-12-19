@@ -2,14 +2,20 @@ interface RoutesApp {
   HOME: string;
   LOGIN: string;
   SIGNUP: string;
-  REQUEST: string;
+  PROPOSAL: string;
   PROFILE: string;
+  GORIDE: string;
+  PROPOSALS: string;
+  PENDING: string;
 }
 
 export const routes: RoutesApp = {
   HOME: '/',
   LOGIN: '/login',
   SIGNUP: '/signup',
-  REQUEST: 'request',
+  PROPOSAL: 'proposal',
   PROFILE: 'profile',
+  GORIDE: '/goride',
+  PROPOSALS: '/proposals',
+  PENDING: '/pending',
 };

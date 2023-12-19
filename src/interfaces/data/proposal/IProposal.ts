@@ -11,6 +11,8 @@ export interface IProposalPending {
   ownerMsg: string | null;
   isShowPhone: boolean;
   isAutoAccept: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface IProposalCreate {

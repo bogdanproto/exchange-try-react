@@ -48,8 +48,12 @@ export const App = () => {
               />
             }
           >
-            <Route index element={<Home />} />
-            <Route path={routes.REQUEST} element={<Proposal />} />
+            <Route path={routes.HOME} element={<Home />}>
+              <Route path={routes.GORIDE} element={<p>Goride</p>} />
+              <Route path={routes.PROPOSALS} element={<p>Proposals</p>} />
+              <Route path={routes.PENDING} element={<p>Pending</p>} />
+            </Route>
+            <Route path={routes.PROPOSAL} element={<Proposal />} />
             <Route path={routes.PROFILE} element={<Profile />} />
           </Route>
 

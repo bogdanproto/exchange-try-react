@@ -22,6 +22,9 @@ export const darkTheme = createTheme({
     success: {
       main: grey[400],
     },
+    info: {
+      main: cyan[900],
+    },
   },
 
   typography: {
@@ -49,6 +52,21 @@ export const darkTheme = createTheme({
       `,
     },
 
+    MuiToggleButton: {
+      styleOverrides: {
+        root: {
+          '&.Mui-selected': {
+            color: grey[400],
+            background: cyan[900],
+            '&:hover': {
+              background: cyan[900],
+            },
+          },
+
+          color: grey[400],
+        },
+      },
+    },
     //-----------Styles BottomNavigation----------
     MuiBottomNavigationAction: {
       styleOverrides: {
