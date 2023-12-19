@@ -36,6 +36,7 @@ export const schemaProposalForm = yup.object().shape({
   eqpts: yup
     .array(yup.string().required('Equipment is required'))
     .required('Equipment is required'),
+  message: yup.mixed().required(),
   is_phone: yup.boolean().required(),
   auto_accept: yup.boolean().required(),
 });

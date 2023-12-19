@@ -1,13 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getAllSpotAPI } from 'services/api';
+import { getAllProposalPendingAPI } from 'services/api';
 import { handleErrors } from 'services/helpers';
 
-export const getAllSpots = createAsyncThunk(
-  'data/getAllSpots',
+export const getAllProposalPending = createAsyncThunk(
+  'data/getAllProposalPending',
   async (_, thunkAPI) => {
     try {
-      const { data } = await getAllSpotAPI();
-      return data.spots;
+      const { data } = await getAllProposalPendingAPI();
+      return data;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(handleErrors(error.response?.data));
     }

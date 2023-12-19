@@ -8,6 +8,7 @@ import {
   FormControlLabel,
   Button,
   Switch,
+  TextField,
 } from '@mui/material';
 import dayjs from 'dayjs';
 import { useEffect } from 'react';
@@ -40,6 +41,7 @@ export const ProposalForm = () => {
       time: dayjs(),
       date: dayjs(),
       auto_accept: false,
+      message: '',
       is_phone: false,
     },
     resolver: yupResolver(schemaProposalForm),
@@ -102,34 +104,50 @@ export const ProposalForm = () => {
               />
             )}
           />
+          <Box
+            style={{
+              paddingTop: '2px',
+            }}
+            sx={{
+              display: 'flex',
 
-          <Controller
-            name="date"
-            control={control}
-            render={({ field }) => (
-              <MobileDatePicker
-                {...field}
-                minDate={dayjs()}
-                label="Date"
-                sx={{ width: '100%' }}
-                format="DD.MM.YYYY"
-              />
-            )}
-          />
+              alignItems: 'center',
+              gap: '4px',
+            }}
+          >
+            <Controller
+              name="date"
+              control={control}
+              render={({ field }) => (
+                <MobileDatePicker
+                  {...field}
+                  minDate={dayjs()}
+                  label="Date"
+                  sx={{ width: '100%' }}
+                  format="DD.MM.YYYY"
+                />
+              )}
+            />
 
-          <Controller
-            name="time"
-            control={control}
-            render={({ field }) => (
-              <MobileTimePicker
-                {...field}
-                label="Time"
-                disabled={isCheckedAllDay}
-                ampm={false}
-              />
-            )}
-          />
-
+            <Controller
+              name="time"
+              control={control}
+              render={({ field }) => (
+                <MobileTimePicker
+                  {...field}
+                  value={
+                    isCheckedAllDay
+                      ? dayjs().startOf('day').toDate()
+                      : field.value
+                  }
+                  label="Time"
+                  disabled={isCheckedAllDay}
+                  ampm={false}
+                  sx={{ width: '96px' }}
+                />
+              )}
+            />
+          </Box>
           <Box
             style={{
               marginBottom: '4px',
@@ -161,6 +179,21 @@ export const ProposalForm = () => {
             />
             <ErrorInputForm>{errors.eqpts?.message}</ErrorInputForm>
           </Box>
+
+          <Controller
+            name="message"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                id="message"
+                label="Message"
+                multiline
+                rows={3}
+                size="small"
+              />
+            )}
+          />
 
           <Box>
             <Controller
