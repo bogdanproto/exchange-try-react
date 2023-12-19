@@ -9,3 +9,12 @@ export const handleFulfilledGetAllProposalPending = (
   state.isLoading = false;
   state.errorData = null;
 };
+
+export const handleFulfilledCreateProposal = (
+  state: ISliceData,
+  action: PayloadAction<IProposalPending>
+) => {
+  state.proposalsPending = [...state.proposalsPending, action.payload];
+  state.isLoading = false;
+  state.errorData = null;
+};

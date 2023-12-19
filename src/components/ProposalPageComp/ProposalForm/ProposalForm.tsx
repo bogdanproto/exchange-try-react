@@ -12,13 +12,17 @@ import {
 } from '@mui/material';
 import dayjs from 'dayjs';
 import { useEffect } from 'react';
-import { formatEqptsSelector, formatSpotSelector } from 'services/helpers';
+import {
+  formatEqptsSelector,
+  formatSpotSelector,
+  toFormatProposalObj,
+} from 'services/helpers';
 import {
   useTypeDispatch,
   useTypeSelector,
 } from 'services/redux/customHook/typeHooks';
 import { selectUser } from 'services/redux/auth/selectors';
-import { getAllSpots } from 'services/redux/data/operations';
+import { createProposal, getAllSpots } from 'services/redux/data/operations';
 import { selectSpots } from 'services/redux/data/selectors';
 import { IProposalForm } from 'interfaces';
 import { schemaProposalForm } from 'const';
@@ -60,7 +64,8 @@ export const ProposalForm = () => {
   }, [isSubmitSuccessful, reset]);
 
   const onSubmit: SubmitHandler<IProposalForm> = data => {
-    console.log(data);
+    const prepareData = toFormatProposalObj(data);
+    dispatch(createProposal(prepareData));
   };
 
   const isCheckedAllDay = watch('allday');

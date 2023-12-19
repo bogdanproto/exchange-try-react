@@ -1,11 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
+  handleFulfilledCreateProposal,
   handleFulfilledGetAllProposalPending,
   handleFulfilledGetAllSpots,
   handlePendingData,
   handleRejectedData,
 } from '../handlesStatus';
-import { getAllProposalPending, getAllSpots } from '../operations';
+import {
+  createProposal,
+  getAllProposalPending,
+  getAllSpots,
+} from '../operations';
 import { ISliceData } from 'interfaces';
 
 const initialState: ISliceData = {
@@ -31,7 +36,10 @@ const dataSlice = createSlice({
       .addCase(
         getAllProposalPending.fulfilled,
         handleFulfilledGetAllProposalPending
-      );
+      )
+      .addCase(createProposal.pending, handlePendingData)
+      .addCase(createProposal.rejected, handleRejectedData)
+      .addCase(createProposal.fulfilled, handleFulfilledCreateProposal);
   },
 });
 

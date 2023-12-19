@@ -12,3 +12,13 @@ export interface IProposalPending {
   isShowPhone: boolean;
   isAutoAccept: boolean;
 }
+
+export interface IProposalCreate {
+  ownerEqpts: string[];
+  spot: string;
+  ownerDate: string;
+  ownerTime: string;
+  ownerMsg: string;
+  isShowPhone: boolean;
+  isAutoAccept: boolean;
+}
