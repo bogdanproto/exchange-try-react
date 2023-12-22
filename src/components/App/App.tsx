@@ -49,7 +49,7 @@ export const App = () => {
               />
             }
           >
-            <Route path={routes.HOME} element={<Home />}>
+            <Route path={routes.BASE} element={<Home />}>
               <Route path={routes.GORIDE} element={<p>Goride</p>} />
               <Route path={routes.PROPOSALS} element={<Proposals />} />
               <Route path={routes.PENDING} element={<p>Pending</p>} />

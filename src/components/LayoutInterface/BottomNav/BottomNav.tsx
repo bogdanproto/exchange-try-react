@@ -25,7 +25,7 @@ export const BottomNav = () => {
     setValue(newValue);
     switch (newValue) {
       case 0:
-        navigate(routes.HOME);
+        navigate(routes.BASE);
         break;
       case 1:
         navigate(routes.PROPOSAL);

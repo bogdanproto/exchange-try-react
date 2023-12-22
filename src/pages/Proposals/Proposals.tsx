@@ -1,20 +1,15 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
+import { Card, Box } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { ProposalForm } from 'components/ProposalPageComp/ProposalForm/ProposalForm';
+import { useTheme } from '@mui/material/styles';
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -22,7 +17,7 @@ interface ExpandMoreProps extends IconButtonProps {
 
 const ExpandMore = styled((props: ExpandMoreProps) => {
   const { expand, ...other } = props;
-  return <IconButton {...other} />;
+  return <IconButton {...other} style={{ padding: '0' }} />;
 })(({ theme, expand }) => ({
   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
   marginLeft: 'auto',
@@ -32,6 +27,7 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 }));
 
 export function Proposals() {
+  const theme = useTheme();
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -39,35 +35,71 @@ export function Proposals() {
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
-      />
-      <CardMedia
-        component="img"
-        height="194"
-        image="/static/images/cards/paella.jpg"
-        alt="Paella dish"
-      />
-      <CardContent>
+    <Card sx={{ borderRadius: '10px' }}>
+      <CardContent style={{ padding: '8px' }}>
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+          <Box
+            display="flex"
+            gap="6px"
+            justifyContent="left"
+            alignItems="center"
+          >
+            <Avatar aria-label="avatar" />
+            <Box
+              display="flex"
+              flexDirection="column"
+              justifyContent="left"
+              alignItems="left"
+            >
+              <Typography
+                variant="overline"
+                style={{ lineHeight: '1.0', fontSize: '12px' }}
+              >
+                Max Sapolsky
+              </Typography>
+              <Typography
+                variant="caption"
+                color="text.secondary"
+                style={{ fontSize: '10px' }}
+              >
+                10 years expirience
+              </Typography>
+            </Box>
+          </Box>
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="left"
+            alignItems="left"
+          >
+            <Typography
+              variant="overline"
+              style={{ lineHeight: '1.2', fontSize: '14px' }}
+            >
+              10.09.2024 10:00
+            </Typography>
+            <Typography
+              variant="overline"
+              style={{ lineHeight: '1.1', fontSize: '14px' }}
+            >
+              tarifa
+            </Typography>
+          </Box>
+        </Box>
+      </CardContent>
+
+      <CardContent
+        style={{
+          padding: '16px',
+          backgroundColor: theme.palette.info.main,
+          borderRadius: '0 0 6px 6px',
+        }}
+      >
         <Typography variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
+          Kite Core XR 12, Kiteboard Core Fusion 136
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
+      <CardActions disableSpacing style={{ padding: '4px' }}>
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
@@ -79,7 +111,6 @@ export function Proposals() {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Method:</Typography>
           <ProposalForm />
         </CardContent>
       </Collapse>
