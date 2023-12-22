@@ -1,12 +1,32 @@
 import { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { useTypeDispatch } from 'services/redux/customHook/typeHooks';
 import { getAllProposalPending } from 'services/redux/data/operations';
-import { ToggleButtonGroup, ToggleButton } from '@mui/material';
+import { ToggleButtonGroup, ToggleButton, Box } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import { routes } from 'const';
 
 export const Home = () => {
+  const theme = useTheme();
   const dispatch = useTypeDispatch();
-  const [alignment, setAlignment] = useState('web');
+  const [alignment, setAlignment] = useState('proposals');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    switch (alignment) {
+      case 'goride':
+        navigate(routes.GORIDE);
+        break;
+      case 'proposals':
+        navigate(routes.PROPOSALS);
+        break;
+      case 'pending':
+        navigate(routes.PENDING);
+        break;
+      default:
+        navigate(routes.PROPOSALS);
+    }
+  }, [navigate, alignment]);
 
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,
@@ -21,31 +41,46 @@ export const Home = () => {
 
   return (
     <>
-      <ToggleButtonGroup
-        color="primary"
-        value={alignment}
-        exclusive
-        onChange={handleChange}
-        aria-label="Platform"
-        fullWidth
-        size="small"
+      <Box
+        style={{
+          position: 'fixed',
+          top: '55px',
+          left: '0',
+          width: '100%',
+          paddingLeft: '16px',
+          paddingRight: '16px',
+          zIndex: '1110',
+          backgroundColor: theme.palette.background.default,
+        }}
       >
-        <ToggleButton value="web" color="info" sx={{ fontWeight: 'bold' }}>
-          GO RIDE
-        </ToggleButton>
-        <ToggleButton
-          value="android"
-          color="success"
-          sx={{ fontWeight: 'bold' }}
+        <ToggleButtonGroup
+          color="primary"
+          value={alignment}
+          exclusive
+          onChange={handleChange}
+          aria-label="Platform proposals"
+          fullWidth
+          size="small"
+          style={{ height: '28px' }}
         >
-          PROPOSALS
-        </ToggleButton>
-        <ToggleButton value="ios" color="success" sx={{ fontWeight: 'bold' }}>
-          PENDING
-        </ToggleButton>
-      </ToggleButtonGroup>
-
-      <Outlet />
+          <ToggleButton value="goride" sx={{ fontWeight: 'bold' }}>
+            GO RIDE
+          </ToggleButton>
+          <ToggleButton value="proposals" sx={{ fontWeight: 'bold' }}>
+            PROPOSALS
+          </ToggleButton>
+          <ToggleButton value="pending" sx={{ fontWeight: 'bold' }}>
+            PENDING
+          </ToggleButton>
+        </ToggleButtonGroup>
+      </Box>
+      <Box
+        style={{
+          paddingTop: '28px',
+        }}
+      >
+        <Outlet />
+      </Box>
     </>
   );
 };

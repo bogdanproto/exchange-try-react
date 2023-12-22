@@ -9,7 +9,7 @@ import HomeIcon from '@mui/icons-material/ScreenRotationAltOutlined';
 import AddIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import UserIcon from '@mui/icons-material/AccountCircleOutlined';
 import { btn } from '../../../const/components';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { routes } from '../../../const/routes';
 import { useTypeSelector } from 'services/redux/customHook/typeHooks';
@@ -21,8 +21,9 @@ export const BottomNav = () => {
   const navigate = useNavigate();
   const { name, avatarCloudURL } = useTypeSelector(selectUser);
 
-  useEffect(() => {
-    switch (value) {
+  const handleClick = (_: any, newValue: number) => {
+    setValue(newValue);
+    switch (newValue) {
       case 0:
         navigate(routes.HOME);
         break;
@@ -35,7 +36,7 @@ export const BottomNav = () => {
       default:
         navigate(routes.HOME);
     }
-  }, [navigate, value]);
+  };
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -43,13 +44,7 @@ export const BottomNav = () => {
         sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
         elevation={3}
       >
-        <BottomNavigation
-          showLabels
-          value={value}
-          onChange={(_, newValue) => {
-            setValue(newValue);
-          }}
-        >
+        <BottomNavigation showLabels value={value} onChange={handleClick}>
           <BottomNavigationAction
             sx={{ fontWeight: '700' }}
             disableRipple

@@ -1,4 +1,5 @@
 interface RoutesApp {
+  BASE: string;
   HOME: string;
   LOGIN: string;
   SIGNUP: string;
@@ -10,12 +11,13 @@ interface RoutesApp {
 }
 
 export const routes: RoutesApp = {
-  HOME: '/',
+  BASE: '/',
+  HOME: 'home/',
   LOGIN: '/login',
   SIGNUP: '/signup',
   PROPOSAL: 'proposal',
   PROFILE: 'profile',
-  GORIDE: '/goride',
-  PROPOSALS: '/proposals',
-  PENDING: '/pending',
+  GORIDE: 'goride',
+  PROPOSALS: 'proposals',
+  PENDING: 'pending',
 };

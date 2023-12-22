@@ -15,6 +15,7 @@ import {
   PrivateRoute,
   Profile,
   Proposal,
+  Proposals,
   RestrictedRoute,
   Signup,
 } from 'pages';
@@ -40,7 +41,7 @@ export const App = () => {
       {isAppLoaded && (
         <Routes>
           <Route
-            path={routes.HOME}
+            path={routes.BASE}
             element={
               <PrivateRoute
                 redirectTo={routes.LOGIN}
@@ -50,7 +51,7 @@ export const App = () => {
           >
             <Route path={routes.HOME} element={<Home />}>
               <Route path={routes.GORIDE} element={<p>Goride</p>} />
-              <Route path={routes.PROPOSALS} element={<p>Proposals</p>} />
+              <Route path={routes.PROPOSALS} element={<Proposals />} />
               <Route path={routes.PENDING} element={<p>Pending</p>} />
             </Route>
             <Route path={routes.PROPOSAL} element={<Proposal />} />
@@ -60,14 +61,14 @@ export const App = () => {
           <Route
             path={routes.LOGIN}
             element={
-              <RestrictedRoute redirectTo={routes.HOME} component={<Login />} />
+              <RestrictedRoute redirectTo={routes.BASE} component={<Login />} />
             }
           />
           <Route
             path={routes.SIGNUP}
             element={
               <RestrictedRoute
-                redirectTo={routes.HOME}
+                redirectTo={routes.BASE}
                 component={<Signup />}
               />
             }
