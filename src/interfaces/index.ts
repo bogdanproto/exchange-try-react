@@ -3,6 +3,7 @@ export type {
   IPropsNotification,
 } from './component/compInterfaces';
 export type { IProposalForm } from './component/form/IProposalForm';
+export type { IOfferForm } from './component/form/IOfferForm';
 export type {
   ISelect,
   HFAutocompleateProps,
@@ -10,7 +11,10 @@ export type {
 } from './component/inputs/selectInterface';
 export type { ISliceData } from './data/IDataSlice';
 export type { IEqpt } from './data/eqpt/IEqpt';
-export type { IProposalPending } from './data/proposal/IProposal';
+export type {
+  IProposalPending,
+  ICardInforoposal,
+} from './data/proposal/IProposal';
 export type { ISpot, ISpotView } from './data/spot/ISpot';
 export type { IErrorsList, IErorr } from './error/errorInterface';
 export type {
