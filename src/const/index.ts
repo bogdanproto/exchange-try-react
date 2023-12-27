@@ -1,6 +1,7 @@
 export * from './routeAPI/auth';
 export * from './routeAPI/baseRoute';
 export * from './routeAPI/spot';
+export * from './routeAPI/proposal';
 export * from './components';
 export * from './errorNotification';
 export * from './routes';

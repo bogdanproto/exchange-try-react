@@ -1,29 +1,48 @@
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { MobileDatePicker, MobileTimePicker } from '@mui/x-date-pickers';
-import {
-  Stack,
-  Paper,
-  Box,
-  FormControlLabel,
-  Button,
-  Switch,
-} from '@mui/material';
+import { Paper, Box, FormControlLabel, Switch, TextField } from '@mui/material';
 import dayjs from 'dayjs';
 import { useEffect } from 'react';
-import { formatEqptsSelector, formatSpotSelector } from 'services/helpers';
+import {
+  formatEqptsSelector,
+  formatSpotSelector,
+  toFormatProposalObj,
+} from 'services/helpers';
 import {
   useTypeDispatch,
   useTypeSelector,
 } from 'services/redux/customHook/typeHooks';
 import { selectUser } from 'services/redux/auth/selectors';
-import { getAllSpots } from 'services/redux/data/operations';
+import { createProposal, getAllSpots } from 'services/redux/data/operations';
 import { selectSpots } from 'services/redux/data/selectors';
 import { IProposalForm } from 'interfaces';
 import { schemaProposalForm } from 'const';
-import { ErrorInputForm, HFSelect } from 'components/Common';
+import { ButtonForm, ErrorInputForm, HFSelect } from 'components/Common';
 
-export const ProposalForm = () => {
+interface IProposalFormProps {
+  _id?: string;
+  ownerTime?: any;
+  ownerDate?: any;
+  ownerSpot?: string[];
+  ownerEqpts?: string[];
+  ownerMsg?: any;
+  ownerisShowPhone?: boolean;
+  ownerisAutoAccept?: boolean;
+  handleExpandClose?: () => void;
+}
+
+export const ProposalForm: React.FC<IProposalFormProps> = ({
+  _id,
+  ownerTime,
+  ownerDate,
+  ownerSpot,
+  ownerEqpts,
+  ownerMsg,
+  ownerisShowPhone,
+  ownerisAutoAccept,
+  handleExpandClose,
+}) => {
   const dispatch = useTypeDispatch();
   const { eqpts } = useTypeSelector(selectUser);
   const spots = useTypeSelector(selectSpots);
@@ -36,11 +55,15 @@ export const ProposalForm = () => {
     formState: { isSubmitSuccessful, errors },
   } = useForm<IProposalForm>({
     defaultValues: {
-      allday: false,
-      time: dayjs(),
-      date: dayjs(),
-      auto_accept: false,
-      is_phone: false,
+      allday: ownerTime === 'allday' ? true : false,
+      time:
+        ownerTime !== 'allday' && ownerTime
+          ? dayjs(ownerTime, 'HH:mm')
+          : dayjs(),
+      date: ownerDate ? dayjs(ownerDate) : dayjs(),
+      auto_accept: ownerisAutoAccept ?? false,
+      message: ownerMsg ?? '',
+      is_phone: ownerisShowPhone ?? false,
     },
     resolver: yupResolver(schemaProposalForm),
   });
@@ -58,7 +81,12 @@ export const ProposalForm = () => {
   }, [isSubmitSuccessful, reset]);
 
   const onSubmit: SubmitHandler<IProposalForm> = data => {
-    console.log(data);
+    if (_id) {
+      console.log(data);
+      return;
+    }
+    const prepareData = toFormatProposalObj(data);
+    dispatch(createProposal(prepareData));
   };
 
   const isCheckedAllDay = watch('allday');
@@ -102,34 +130,50 @@ export const ProposalForm = () => {
               />
             )}
           />
+          <Box
+            style={{
+              paddingTop: '2px',
+            }}
+            sx={{
+              display: 'flex',
 
-          <Controller
-            name="date"
-            control={control}
-            render={({ field }) => (
-              <MobileDatePicker
-                {...field}
-                minDate={dayjs()}
-                label="Date"
-                sx={{ width: '100%' }}
-                format="DD.MM.YYYY"
-              />
-            )}
-          />
+              alignItems: 'center',
+              gap: '4px',
+            }}
+          >
+            <Controller
+              name="date"
+              control={control}
+              render={({ field }) => (
+                <MobileDatePicker
+                  {...field}
+                  minDate={dayjs()}
+                  label="Date"
+                  sx={{ width: '100%' }}
+                  format="DD.MM.YYYY"
+                />
+              )}
+            />
 
-          <Controller
-            name="time"
-            control={control}
-            render={({ field }) => (
-              <MobileTimePicker
-                {...field}
-                label="Time"
-                disabled={isCheckedAllDay}
-                ampm={false}
-              />
-            )}
-          />
-
+            <Controller
+              name="time"
+              control={control}
+              render={({ field }) => (
+                <MobileTimePicker
+                  {...field}
+                  value={
+                    isCheckedAllDay
+                      ? dayjs().startOf('day').toDate()
+                      : field.value
+                  }
+                  label="Time"
+                  disabled={isCheckedAllDay}
+                  ampm={false}
+                  sx={{ width: '96px' }}
+                />
+              )}
+            />
+          </Box>
           <Box
             style={{
               marginBottom: '4px',
@@ -153,6 +197,7 @@ export const ProposalForm = () => {
           >
             <HFSelect
               multiple={true}
+              defaultValue={ownerEqpts}
               control={control}
               name="eqpts"
               label="Equipments"
@@ -161,6 +206,21 @@ export const ProposalForm = () => {
             />
             <ErrorInputForm>{errors.eqpts?.message}</ErrorInputForm>
           </Box>
+
+          <Controller
+            name="message"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                id="message"
+                label="Message"
+                multiline
+                rows={3}
+                size="small"
+              />
+            )}
+          />
 
           <Box>
             <Controller
@@ -186,15 +246,11 @@ export const ProposalForm = () => {
               )}
             />
           </Box>
-          <Stack
-            spacing={2}
-            direction="row"
-            sx={{ display: 'flex', justifyContent: 'space-around' }}
-          >
-            <Button type="submit" variant="contained">
-              SUBMIT
-            </Button>
-          </Stack>
+          <ButtonForm
+            mainBtn={_id ? 'UPGRADE' : 'SUBMIT'}
+            secondaryBtn={_id && 'CLOSE'}
+            handleSecondary={handleExpandClose}
+          />
         </Box>
       </form>
     </Paper>

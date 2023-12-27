@@ -5,8 +5,15 @@ import Stack from '@mui/material/Stack';
 import Badge from '@mui/material/Badge';
 import Notifications from '@mui/icons-material/NotificationsNoneOutlined';
 import { SelectHeader } from '../../Common/Inputs/SelectHeader/SelectHeader';
+import { logOutUser } from 'services/redux/auth/operationsAuth';
+import { useTypeDispatch } from 'services/redux/customHook/typeHooks';
 
 export const Header = () => {
+  const dispatch = useTypeDispatch();
+
+  const LogOutUser = () => {
+    dispatch(logOutUser());
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -17,6 +24,10 @@ export const Header = () => {
       >
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <SelectHeader />
+          <button type="button" onClick={LogOutUser}>
+            LogOut
+          </button>
+
           <Stack direction="row">
             <Badge badgeContent={1} color="primary">
               <Notifications sx={{ fontSize: 28 }} />

@@ -5,3 +5,4 @@ export * from './Profile/Profile';
 export * from './Proposal/Proposal';
 export * from './RestrictedRoute/RestrictedRoute';
 export * from './Signup/Signup';
+export * from './Proposals/Proposals';

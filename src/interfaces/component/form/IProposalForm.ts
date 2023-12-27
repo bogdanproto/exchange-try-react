@@ -4,6 +4,7 @@ export interface IProposalForm {
   date: any;
   spot: string;
   eqpts: string[];
+  message: any;
   is_phone: boolean;
   auto_accept: boolean;
 }
