@@ -1,50 +1,73 @@
-import { CardContent, CardActions, Collapse, styled } from '@mui/material';
-import IconButton, { IconButtonProps } from '@mui/material/IconButton';
-import AbcIcon from '@mui/icons-material/Abc';
-import { useState } from 'react';
+import {
+  CardContent,
+  CardActions,
+  Collapse,
+  IconButton,
+  Button,
+} from '@mui/material';
+
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useState } from 'react';
 import { OfferForm } from '../OfferForm/OfferForm';
+import { CardAdditionalInfo } from '../CardAdditionalInfo/CardAdditionalInfo';
+import { ICardControlProposal, IEqptItem } from 'interfaces';
+import { useTypeSelector } from 'services/redux/customHook/typeHooks';
+import { selectUser } from 'services/redux/auth/selectors';
+import { CardOwnerControl } from '../CardOwnerControl/CardOwnerControl';
+import { ProposalForm } from 'components/ProposalPageComp/ProposalForm/ProposalForm';
 
-interface ExpandMoreProps extends IconButtonProps {
-  expand: boolean;
-}
+export type SwitcherType = 'offer' | 'edit' | 'more' | '';
 
-const ExpandMore = styled((props: ExpandMoreProps) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} style={{ padding: '0' }} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
-
-export const CardControl = () => {
+export const CardControl = ({
+  ownerId,
+  ownerMsg,
+  ownerEqpts,
+  ownerDate,
+  ownerTime,
+  isShowPhone,
+  isAutoAccept,
+  spot,
+  _id,
+}: ICardControlProposal) => {
   const [expanded, setExpanded] = useState(false);
-  const [switchCollaps, setswitchCollaps] = useState('form');
+  const [switchCollaps, setswitchCollaps] = useState<SwitcherType>('');
+  const { name } = useTypeSelector(selectUser);
 
-  const handleExpandClick = () => {
-    setswitchCollaps('form');
+  const handleExpandMore = (switcher: SwitcherType) => {
+    if (!expanded) {
+      setswitchCollaps(switcher);
+    }
+
     setExpanded(!expanded);
   };
-  const handleMoreInfoClick = () => {
-    setswitchCollaps('more');
+
+  const handleExpandClose = () => {
     setExpanded(!expanded);
   };
+
   return (
     <>
-      <CardActions disableSpacing style={{ padding: '4px' }}>
-        <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
+      <CardActions
+        disableSpacing
+        style={{ padding: '4px', justifyContent: 'space-between' }}
+      >
+        <IconButton
+          style={{ padding: '0' }}
+          onClick={() => handleExpandMore('more')}
         >
           <ExpandMoreIcon />
-        </ExpandMore>
-        <IconButton onClick={handleMoreInfoClick}>
-          <AbcIcon />
         </IconButton>
+
+        {name === ownerId.name ? (
+          <CardOwnerControl _id={_id} handleExpandMore={handleExpandMore} />
+        ) : (
+          <Button
+            style={{ padding: '0', fontWeight: 'bold' }}
+            onClick={() => handleExpandMore('offer')}
+          >
+            OFFER
+          </Button>
+        )}
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent
@@ -52,10 +75,22 @@ export const CardControl = () => {
             padding: '0 14px 14px 14px',
           }}
         >
-          {switchCollaps === 'form' ? (
-            <OfferForm handleExpandClick={handleExpandClick} />
+          {switchCollaps === 'offer' ? (
+            <OfferForm handleExpandClose={handleExpandClose} _id={_id} />
+          ) : switchCollaps === 'edit' ? (
+            <ProposalForm
+              _id={_id}
+              ownerMsg={ownerMsg}
+              ownerEqpts={ownerEqpts.map(({ _id }: IEqptItem) => _id)}
+              // ownerSpot={}
+              ownerDate={ownerDate}
+              ownerTime={ownerTime}
+              ownerisShowPhone={isShowPhone}
+              ownerisAutoAccept={isAutoAccept}
+              handleExpandClose={handleExpandClose}
+            />
           ) : (
-            <p>test</p>
+            <CardAdditionalInfo ownerId={ownerId} ownerMsg={ownerMsg} />
           )}
         </CardContent>
       </Collapse>

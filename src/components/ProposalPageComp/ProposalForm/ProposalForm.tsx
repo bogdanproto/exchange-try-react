@@ -1,15 +1,7 @@
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { MobileDatePicker, MobileTimePicker } from '@mui/x-date-pickers';
-import {
-  Stack,
-  Paper,
-  Box,
-  FormControlLabel,
-  Button,
-  Switch,
-  TextField,
-} from '@mui/material';
+import { Paper, Box, FormControlLabel, Switch, TextField } from '@mui/material';
 import dayjs from 'dayjs';
 import { useEffect } from 'react';
 import {
@@ -26,9 +18,31 @@ import { createProposal, getAllSpots } from 'services/redux/data/operations';
 import { selectSpots } from 'services/redux/data/selectors';
 import { IProposalForm } from 'interfaces';
 import { schemaProposalForm } from 'const';
-import { ErrorInputForm, HFSelect } from 'components/Common';
+import { ButtonForm, ErrorInputForm, HFSelect } from 'components/Common';
 
-export const ProposalForm = () => {
+interface IProposalFormProps {
+  _id?: string;
+  ownerTime?: any;
+  ownerDate?: any;
+  ownerSpot?: string[];
+  ownerEqpts?: string[];
+  ownerMsg?: any;
+  ownerisShowPhone?: boolean;
+  ownerisAutoAccept?: boolean;
+  handleExpandClose?: () => void;
+}
+
+export const ProposalForm: React.FC<IProposalFormProps> = ({
+  _id,
+  ownerTime,
+  ownerDate,
+  ownerSpot,
+  ownerEqpts,
+  ownerMsg,
+  ownerisShowPhone,
+  ownerisAutoAccept,
+  handleExpandClose,
+}) => {
   const dispatch = useTypeDispatch();
   const { eqpts } = useTypeSelector(selectUser);
   const spots = useTypeSelector(selectSpots);
@@ -41,12 +55,15 @@ export const ProposalForm = () => {
     formState: { isSubmitSuccessful, errors },
   } = useForm<IProposalForm>({
     defaultValues: {
-      allday: false,
-      time: dayjs(),
-      date: dayjs(),
-      auto_accept: false,
-      message: '',
-      is_phone: false,
+      allday: ownerTime === 'allday' ? true : false,
+      time:
+        ownerTime !== 'allday' && ownerTime
+          ? dayjs(ownerTime, 'HH:mm')
+          : dayjs(),
+      date: ownerDate ? dayjs(ownerDate) : dayjs(),
+      auto_accept: ownerisAutoAccept ?? false,
+      message: ownerMsg ?? '',
+      is_phone: ownerisShowPhone ?? false,
     },
     resolver: yupResolver(schemaProposalForm),
   });
@@ -64,6 +81,10 @@ export const ProposalForm = () => {
   }, [isSubmitSuccessful, reset]);
 
   const onSubmit: SubmitHandler<IProposalForm> = data => {
+    if (_id) {
+      console.log(data);
+      return;
+    }
     const prepareData = toFormatProposalObj(data);
     dispatch(createProposal(prepareData));
   };
@@ -176,6 +197,7 @@ export const ProposalForm = () => {
           >
             <HFSelect
               multiple={true}
+              defaultValue={ownerEqpts}
               control={control}
               name="eqpts"
               label="Equipments"
@@ -224,15 +246,11 @@ export const ProposalForm = () => {
               )}
             />
           </Box>
-          <Stack
-            spacing={2}
-            direction="row"
-            sx={{ display: 'flex', justifyContent: 'space-around' }}
-          >
-            <Button type="submit" variant="contained">
-              SUBMIT
-            </Button>
-          </Stack>
+          <ButtonForm
+            mainBtn={_id ? 'UPGRADE' : 'SUBMIT'}
+            secondaryBtn={_id && 'CLOSE'}
+            handleSecondary={handleExpandClose}
+          />
         </Box>
       </form>
     </Paper>

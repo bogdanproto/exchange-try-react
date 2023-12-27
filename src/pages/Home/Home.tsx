@@ -9,7 +9,7 @@ import { routes } from 'const';
 export const Home = () => {
   const theme = useTheme();
   const dispatch = useTypeDispatch();
-  const [alignment, setAlignment] = useState('proposals');
+  const [alignment, setAlignment] = useState(routes.PROPOSALS);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,6 +49,7 @@ export const Home = () => {
           width: '100%',
           paddingLeft: '16px',
           paddingRight: '16px',
+          paddingBottom: '4px',
           zIndex: '1110',
           backgroundColor: theme.palette.background.default,
         }}

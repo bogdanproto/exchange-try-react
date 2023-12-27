@@ -15,10 +15,14 @@ import { schemaOfferForm } from 'const';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 interface IOfferFormProps {
-  handleExpandClick: () => void;
+  handleExpandClose: () => void;
+  _id: string;
 }
 
-export const OfferForm: React.FC<IOfferFormProps> = ({ handleExpandClick }) => {
+export const OfferForm: React.FC<IOfferFormProps> = ({
+  handleExpandClose,
+  _id,
+}) => {
   //   const dispatch = useTypeDispatch();
   const { eqpts } = useTypeSelector(selectUser);
 
@@ -43,6 +47,7 @@ export const OfferForm: React.FC<IOfferFormProps> = ({ handleExpandClick }) => {
 
   const onSubmit: SubmitHandler<IOfferForm> = data => {
     console.log(data);
+    console.log(_id);
     // const prepareData = toFormatProposalObj(data);
     // dispatch(createProposal(prepareData));
   };
@@ -113,7 +118,7 @@ export const OfferForm: React.FC<IOfferFormProps> = ({ handleExpandClick }) => {
             <Button
               type="button"
               variant="contained"
-              onClick={handleExpandClick}
+              onClick={handleExpandClose}
             >
               CLOSE
             </Button>

@@ -18,4 +18,5 @@ export interface HFSelectProps {
   label: string;
   placeholder: string;
   options: Map<string, string>;
+  defaultValue?: string[];
 }

@@ -1,7 +1,7 @@
 import { CardContent, Box, Avatar, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import dayjs from 'dayjs';
-import { ICardInforoposal, IEqpt } from 'interfaces';
+import { ICardInfoProposal, IEqpt } from 'interfaces';
 
 export const CardInfo = ({
   ownerId: { name, avatarCloudURL },
@@ -9,7 +9,7 @@ export const CardInfo = ({
   ownerDate,
   ownerTime,
   spot: { spot },
-}: ICardInforoposal) => {
+}: ICardInfoProposal) => {
   const theme = useTheme();
   return (
     <>

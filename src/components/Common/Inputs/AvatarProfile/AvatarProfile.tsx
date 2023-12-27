@@ -1,5 +1,5 @@
 import { Box, IconButton, Avatar, Stack, Badge } from '@mui/material';
-import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
+import PartyModeIcon from '@mui/icons-material/PartyMode';
 import { VisuallyHiddenInput } from '../Custom/VisuallyHiddenInput';
 import {
   useTypeDispatch,
@@ -49,10 +49,10 @@ export const AvatarProfile = () => {
               color="primary"
               sx={{
                 backgroundColor: 'rgb(38, 38, 38)',
-                padding: '0',
+                padding: '3px',
               }}
             >
-              <ChangeCircleIcon fontSize="inherit" />
+              <PartyModeIcon fontSize="small" />
               <VisuallyHiddenInput type="file" onChange={handleFileChange} />
             </IconButton>
           }

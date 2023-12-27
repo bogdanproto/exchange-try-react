@@ -15,11 +15,28 @@ export interface IProposalPending {
   updatedAt: string;
 }
 
-export interface ICardInforoposal
+export interface ICardInfoProposal
   extends Pick<
     IProposalPending,
     'ownerId' | 'spot' | 'ownerEqpts' | 'ownerDate' | 'ownerTime'
   > {}
+
+export interface ICardControlProposal
+  extends Pick<
+    IProposalPending,
+    | 'ownerId'
+    | 'ownerMsg'
+    | '_id'
+    | 'ownerEqpts'
+    | 'ownerDate'
+    | 'ownerTime'
+    | 'spot'
+    | 'isShowPhone'
+    | 'isAutoAccept'
+  > {}
+
+export interface ICardAdditionalProposal
+  extends Pick<IProposalPending, 'ownerId' | 'ownerMsg'> {}
 
 export interface IProposalCreate {
   ownerEqpts: string[];

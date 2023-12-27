@@ -3,9 +3,9 @@ import { CardControl, CardInfo } from 'components/HomePageComp';
 import { IProposalPending } from 'interfaces';
 import { useTypeSelector } from 'services/redux/customHook/typeHooks';
 import { selectProposalsPending } from 'services/redux/data/selectors';
+
 export const Proposals = () => {
   const proposalsPend = useTypeSelector(selectProposalsPending);
-  console.log(proposalsPend);
 
   return (
     <Box
@@ -23,7 +23,10 @@ export const Proposals = () => {
             ownerEqpts,
             ownerDate,
             ownerTime,
+            ownerMsg,
             spot,
+            isShowPhone,
+            isAutoAccept,
           }: IProposalPending) => (
             <Paper
               key={_id}
@@ -41,7 +44,17 @@ export const Proposals = () => {
                   ownerTime={ownerTime}
                   spot={spot}
                 />
-                <CardControl />
+                <CardControl
+                  _id={_id}
+                  ownerId={ownerId}
+                  ownerMsg={ownerMsg}
+                  ownerEqpts={ownerEqpts}
+                  ownerDate={ownerDate}
+                  ownerTime={ownerTime}
+                  spot={spot}
+                  isShowPhone={isShowPhone}
+                  isAutoAccept={isAutoAccept}
+                />
               </Card>
             </Paper>
           )

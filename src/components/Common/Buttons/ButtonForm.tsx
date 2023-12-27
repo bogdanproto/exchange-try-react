@@ -1,22 +1,30 @@
 import { Stack, Button } from '@mui/material';
 
 export interface IButtonForm {
-  name: string;
+  mainBtn?: string;
+  secondaryBtn?: string;
+  handleSecondary?: () => void;
 }
 
-export const ButtonForm = ({ name }: IButtonForm) => {
+export const ButtonForm = ({
+  mainBtn,
+  secondaryBtn,
+  handleSecondary,
+}: IButtonForm) => {
   return (
     <Stack
-      style={{
-        marginTop: '18px',
-      }}
       spacing={2}
       direction="row"
       sx={{ display: 'flex', justifyContent: 'space-around' }}
     >
       <Button type="submit" variant="contained">
-        {name}
+        {mainBtn}
       </Button>
+      {secondaryBtn && (
+        <Button type="button" variant="contained" onClick={handleSecondary}>
+          {secondaryBtn}
+        </Button>
+      )}
     </Stack>
   );
 };
