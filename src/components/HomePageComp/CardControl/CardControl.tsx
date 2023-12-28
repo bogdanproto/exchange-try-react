@@ -31,7 +31,7 @@ export const CardControl = ({
 }: ICardControlProposal) => {
   const [expanded, setExpanded] = useState(false);
   const [switchCollaps, setswitchCollaps] = useState<SwitcherType>('');
-  const { name } = useTypeSelector(selectUser);
+  const { _id: userId } = useTypeSelector(selectUser);
 
   const handleExpandMore = (switcher: SwitcherType) => {
     if (!expanded) {
@@ -58,7 +58,7 @@ export const CardControl = ({
           <ExpandMoreIcon />
         </IconButton>
 
-        {name === ownerId.name ? (
+        {userId === ownerId._id ? (
           <CardOwnerControl _id={_id} handleExpandMore={handleExpandMore} />
         ) : (
           <Button
@@ -82,7 +82,7 @@ export const CardControl = ({
               _id={_id}
               ownerMsg={ownerMsg}
               ownerEqpts={ownerEqpts.map(({ _id }: IEqptItem) => _id)}
-              // ownerSpot={}
+              ownerSpot={spot._id}
               ownerDate={ownerDate}
               ownerTime={ownerTime}
               ownerisShowPhone={isShowPhone}

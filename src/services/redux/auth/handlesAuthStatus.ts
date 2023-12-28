@@ -39,6 +39,7 @@ export const handleFulfilledLogIn = (
 export const handleFulfilledLogOut = (state: ISliceAuthUser) => {
   const { user } = state;
 
+  user._id = null;
   user.name = null;
   user.email = null;
   user.phone = null;

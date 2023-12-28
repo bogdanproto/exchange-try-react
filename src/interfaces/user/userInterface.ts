@@ -1,4 +1,5 @@
 export interface IUser {
+  _id: string | null;
   name: string | null;
   email: string | null;
   phone: string | null;
@@ -50,6 +51,7 @@ export interface IUserProfileSuccess {
 }
 
 export interface IUserView {
+  _id: string;
   name: string;
   phone: string;
   avatarCloudURL: string;

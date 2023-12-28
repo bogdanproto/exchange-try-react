@@ -24,7 +24,7 @@ interface IProposalFormProps {
   _id?: string;
   ownerTime?: any;
   ownerDate?: any;
-  ownerSpot?: string[];
+  ownerSpot?: string;
   ownerEqpts?: string[];
   ownerMsg?: any;
   ownerisShowPhone?: boolean;
@@ -181,6 +181,7 @@ export const ProposalForm: React.FC<IProposalFormProps> = ({
           >
             <HFSelect
               multiple={false}
+              defaultValue={ownerSpot}
               control={control}
               name="spot"
               label="Spot"

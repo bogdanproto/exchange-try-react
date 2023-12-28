@@ -3,4 +3,4 @@ export interface ISpot {
   spot: string;
 }
 
-export interface ISpotView extends Pick<ISpot, 'spot'> {}
+export interface ISpotView extends Pick<ISpot, 'spot' | '_id'> {}
