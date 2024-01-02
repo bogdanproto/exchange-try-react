@@ -1,20 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
   handleFulfilledCreateProposal,
-  handleFulfilledGetAllProposalPending,
+  handleFulfilledDeleteProposal,
+  handleFulfilledGetAllProposal,
   handleFulfilledGetAllSpots,
+  handleFulfilledUpdateProposal,
   handlePendingData,
   handleRejectedData,
 } from '../handlesStatus';
 import {
   createProposal,
-  getAllProposalPending,
+  deleteProposal,
+  getAllProposal,
   getAllSpots,
+  updateProposal,
 } from '../operations';
 import { ISliceData } from 'interfaces';
 
 const initialState: ISliceData = {
-  proposalsPending: [],
+  proposals: [],
   spots: [],
   errorData: null,
   isLoading: false,
@@ -31,15 +35,18 @@ const dataSlice = createSlice({
       .addCase(getAllSpots.pending, handlePendingData)
       .addCase(getAllSpots.rejected, handleRejectedData)
       .addCase(getAllSpots.fulfilled, handleFulfilledGetAllSpots)
-      .addCase(getAllProposalPending.pending, handlePendingData)
-      .addCase(getAllProposalPending.rejected, handleRejectedData)
-      .addCase(
-        getAllProposalPending.fulfilled,
-        handleFulfilledGetAllProposalPending
-      )
+      .addCase(getAllProposal.pending, handlePendingData)
+      .addCase(getAllProposal.rejected, handleRejectedData)
+      .addCase(getAllProposal.fulfilled, handleFulfilledGetAllProposal)
       .addCase(createProposal.pending, handlePendingData)
       .addCase(createProposal.rejected, handleRejectedData)
-      .addCase(createProposal.fulfilled, handleFulfilledCreateProposal);
+      .addCase(createProposal.fulfilled, handleFulfilledCreateProposal)
+      .addCase(deleteProposal.pending, handlePendingData)
+      .addCase(deleteProposal.rejected, handleRejectedData)
+      .addCase(deleteProposal.fulfilled, handleFulfilledDeleteProposal)
+      .addCase(updateProposal.pending, handlePendingData)
+      .addCase(updateProposal.rejected, handleRejectedData)
+      .addCase(updateProposal.fulfilled, handleFulfilledUpdateProposal);
   },
 });
 

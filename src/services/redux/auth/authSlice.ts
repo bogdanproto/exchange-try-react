@@ -34,6 +34,7 @@ const initialState: ISliceAuthUser = {
     name: null,
     email: null,
     phone: null,
+    experience: null,
     avatarCloudURL: null,
     mainsport: null,
     eqpts: [],

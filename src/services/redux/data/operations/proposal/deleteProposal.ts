@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getAllProposalPendingAPI } from 'services/api';
+import { deleteProposalAPI } from 'services/api';
 import { handleErrors } from 'services/helpers';
 
-export const getAllProposalPending = createAsyncThunk(
-  'data/getAllProposalPending',
-  async (_, thunkAPI) => {
+export const deleteProposal = createAsyncThunk(
+  'data/deleteProposal',
+  async (id: string, thunkAPI) => {
     try {
-      const { data } = await getAllProposalPendingAPI();
+      const { data } = await deleteProposalAPI(id);
       return data;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(handleErrors(error.response?.data));

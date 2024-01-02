@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import { ICardInfoProposal, IEqpt } from 'interfaces';
 
 export const CardInfo = ({
-  ownerId: { name, avatarCloudURL },
+  ownerId: { name, avatarCloudURL, experience },
   ownerEqpts,
   ownerDate,
   ownerTime,
@@ -39,7 +39,9 @@ export const CardInfo = ({
                 color="text.secondary"
                 style={{ fontSize: '10px' }}
               >
-                10 years expirience
+                {experience
+                  ? `${experience} year expirience`
+                  : 'without expirience'}
               </Typography>
             </Box>
           </Box>

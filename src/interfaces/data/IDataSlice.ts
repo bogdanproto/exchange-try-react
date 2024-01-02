@@ -1,8 +1,8 @@
-import { IProposalPending } from './proposal/IProposal';
+import { IProposal } from './proposal/IProposal';
 import { ISpot } from './spot/ISpot';
 
 export interface ISliceData {
-  proposalsPending: IProposalPending[] | [];
+  proposals: IProposal[] | [];
   spots: ISpot[] | [];
   errorData: string | null;
   isLoading: boolean;

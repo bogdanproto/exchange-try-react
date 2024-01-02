@@ -1,7 +1,7 @@
 import { IEqptItem, IUserView } from 'interfaces/user/userInterface';
 import { ISpotView } from '../spot/ISpot';
 
-export interface IProposalPending {
+export interface IProposal {
   _id: string;
   ownerId: IUserView;
   ownerEqpts: IEqptItem[] | [];
@@ -11,19 +11,45 @@ export interface IProposalPending {
   ownerMsg: string | null;
   isShowPhone: boolean;
   isAutoAccept: boolean;
+  customerId: string | null;
+  customerEqpts: IEqptItem[] | [];
+  customerTime: string | null;
+  customerMsg: string | null;
   createdAt: string;
   updatedAt: string;
 }
 
+export interface IProposalCreate {
+  _id?: string;
+  ownerEqpts: string[];
+  spot: string;
+  ownerDate: string;
+  ownerTime: string;
+  ownerMsg: string;
+  isShowPhone: boolean;
+  isAutoAccept: boolean;
+}
+
+export interface IProposalDelete {
+  _id: string;
+}
+
+export interface IProposalUpdbyCustomer {
+  _id?: string;
+  customerEqpts: string[];
+  customerTime: string;
+  customerMsg: string;
+}
+
 export interface ICardInfoProposal
   extends Pick<
-    IProposalPending,
+    IProposal,
     'ownerId' | 'spot' | 'ownerEqpts' | 'ownerDate' | 'ownerTime'
   > {}
 
 export interface ICardControlProposal
   extends Pick<
-    IProposalPending,
+    IProposal,
     | 'ownerId'
     | 'ownerMsg'
     | '_id'
@@ -36,14 +62,4 @@ export interface ICardControlProposal
   > {}
 
 export interface ICardAdditionalProposal
-  extends Pick<IProposalPending, 'ownerId' | 'ownerMsg'> {}
-
-export interface IProposalCreate {
-  ownerEqpts: string[];
-  spot: string;
-  ownerDate: string;
-  ownerTime: string;
-  ownerMsg: string;
-  isShowPhone: boolean;
-  isAutoAccept: boolean;
-}
+  extends Pick<IProposal, 'ownerId' | 'ownerMsg'> {}

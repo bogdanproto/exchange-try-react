@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import { useEffect } from 'react';
 import { selectUser } from 'services/redux/auth/selectors';
 import {
-  //   useTypeDispatch,
+  useTypeDispatch,
   useTypeSelector,
 } from 'services/redux/customHook/typeHooks';
 import { Paper, Box, TextField, Stack, Button } from '@mui/material';
@@ -13,6 +13,8 @@ import { formatEqptsSelector } from 'services/helpers';
 import { IOfferForm } from 'interfaces';
 import { schemaOfferForm } from 'const';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { toFormatProposalObjByCustomer } from 'services/helpers/form/toFormatProposalObjByCustomer';
+import { updateProposalByCustomer } from 'services/redux/data/operations';
 
 interface IOfferFormProps {
   handleExpandClose: () => void;
@@ -23,7 +25,7 @@ export const OfferForm: React.FC<IOfferFormProps> = ({
   handleExpandClose,
   _id,
 }) => {
-  //   const dispatch = useTypeDispatch();
+  const dispatch = useTypeDispatch();
   const { eqpts } = useTypeSelector(selectUser);
 
   const {
@@ -46,10 +48,9 @@ export const OfferForm: React.FC<IOfferFormProps> = ({
   }, [isSubmitSuccessful, reset]);
 
   const onSubmit: SubmitHandler<IOfferForm> = data => {
-    console.log(data);
-    console.log(_id);
-    // const prepareData = toFormatProposalObj(data);
-    // dispatch(createProposal(prepareData));
+    const prepareData = toFormatProposalObjByCustomer(data);
+    dispatch(updateProposalByCustomer({ ...prepareData, _id }));
+    handleExpandClose();
   };
 
   return (

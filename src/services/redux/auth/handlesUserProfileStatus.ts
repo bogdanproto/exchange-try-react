@@ -25,12 +25,13 @@ export const handleFulfilledProfile = (
   state: ISliceAuthUser,
   action: PayloadAction<IUserProfileSuccess>
 ) => {
-  const { name, phone } = action.payload;
+  const { name, phone, experience } = action.payload;
 
   state.isRefreshing = false;
   state.errorAuth = null;
   state.user.name = name;
   state.user.phone = phone;
+  state.user.experience = experience;
 };
 
 //--------------Eqpts update User-----------------
