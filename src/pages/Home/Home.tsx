@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useTypeDispatch } from 'services/redux/customHook/typeHooks';
-import { getAllProposalPending } from 'services/redux/data/operations';
 import { ToggleButtonGroup, ToggleButton, Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { routes } from 'const';
+import { getAllProposal } from 'services/redux/data/operations';
 
 export const Home = () => {
   const theme = useTheme();
@@ -36,7 +36,7 @@ export const Home = () => {
   };
 
   useEffect(() => {
-    dispatch(getAllProposalPending());
+    dispatch(getAllProposal());
   }, [dispatch]);
 
   return (

@@ -9,7 +9,7 @@ import { IUserProfile } from 'interfaces/user/userInterface';
 import { updUserProfile } from 'services/redux/auth/operationsUserProfile';
 
 interface IAddInput {
-  name: 'name' | 'phone';
+  name: 'name' | 'phone' | 'experience';
 }
 
 export const SingleInputForm = ({ name }: IAddInput) => {

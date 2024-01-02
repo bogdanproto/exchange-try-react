@@ -62,12 +62,3 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 list of tasks backend:
 
-1. User add field expirience
-2. Add patch for proposal from another user
-3. Add patch for update proposal for owner
-4. Add delete proposal
-5. Add \_id to Spots
-6. Add \_id to User
-7. add get all pending proposals
-8. Add get all user proposals and have status pending => quantity for
-   notification

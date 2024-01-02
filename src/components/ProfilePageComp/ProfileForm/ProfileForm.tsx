@@ -16,6 +16,7 @@ export const ProfileForm = () => {
     >
       <SingleInputForm name={'name'} />
       <SingleInputForm name={'phone'} />
+      <SingleInputForm name={'experience'} />
     </Box>
   );
 };

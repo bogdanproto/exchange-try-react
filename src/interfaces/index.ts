@@ -12,10 +12,12 @@ export type {
 export type { ISliceData } from './data/IDataSlice';
 export type { IEqpt } from './data/eqpt/IEqpt';
 export type {
-  IProposalPending,
+  IProposal,
+  IProposalDelete,
   ICardInfoProposal,
   ICardControlProposal,
   ICardAdditionalProposal,
+  IProposalUpdbyCustomer,
 } from './data/proposal/IProposal';
 export type { ISpot, ISpotView } from './data/spot/ISpot';
 export type { IErrorsList, IErorr } from './error/errorInterface';

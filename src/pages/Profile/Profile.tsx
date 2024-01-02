@@ -2,6 +2,8 @@ import { ProfileEqptForm } from 'components/ProfilePageComp/ProfileEqptForm/Prof
 import { ProfileForm } from 'components/ProfilePageComp/ProfileForm/ProfileForm';
 import { Paper } from '@mui/material';
 import { AvatarProfile } from 'components/Common/Inputs/AvatarProfile/AvatarProfile';
+import { LogOut } from 'components/Auth/LogOut/LogOut';
+import { Box } from '@mui/material';
 
 export const Profile = () => {
   return (
@@ -9,9 +11,13 @@ export const Profile = () => {
       elevation={3}
       style={{
         padding: '18px',
-        height: 'calc(100vh - 132px)',
+        height: '100%',
+        position: 'relative',
       }}
     >
+      <Box style={{ position: 'absolute', top: 0, right: 0 }}>
+        <LogOut />
+      </Box>
       <AvatarProfile />
       <ProfileForm />
       <ProfileEqptForm />

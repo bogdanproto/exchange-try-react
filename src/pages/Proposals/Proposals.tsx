@@ -1,11 +1,11 @@
 import { Card, Box, Paper } from '@mui/material';
 import { CardControl, CardInfo } from 'components/HomePageComp';
-import { IProposalPending } from 'interfaces';
+import { IProposal } from 'interfaces';
 import { useTypeSelector } from 'services/redux/customHook/typeHooks';
-import { selectProposalsPending } from 'services/redux/data/selectors';
+import { selectProposals } from 'services/redux/data/selectors';
 
 export const Proposals = () => {
-  const proposalsPend = useTypeSelector(selectProposalsPending);
+  const proposals = useTypeSelector(selectProposals);
 
   return (
     <Box
@@ -15,8 +15,8 @@ export const Proposals = () => {
         gap: '16px',
       }}
     >
-      {proposalsPend.length > 0 &&
-        proposalsPend?.map(
+      {proposals.length > 0 &&
+        proposals?.map(
           ({
             _id,
             ownerId,
@@ -27,7 +27,7 @@ export const Proposals = () => {
             spot,
             isShowPhone,
             isAutoAccept,
-          }: IProposalPending) => (
+          }: IProposal) => (
             <Paper
               key={_id}
               elevation={2}

@@ -1,4 +1,11 @@
-import { Box, IconButton, Avatar, Stack, Badge } from '@mui/material';
+import {
+  Box,
+  IconButton,
+  Avatar,
+  Stack,
+  Badge,
+  Typography,
+} from '@mui/material';
 import PartyModeIcon from '@mui/icons-material/PartyMode';
 import { VisuallyHiddenInput } from '../Custom/VisuallyHiddenInput';
 import {
@@ -11,7 +18,7 @@ import { selectAuthUser } from 'services/redux/auth/selectors';
 
 export const AvatarProfile = () => {
   const {
-    user: { name, phone, avatarCloudURL },
+    user: { name, phone, experience, avatarCloudURL },
   } = useTypeSelector(selectAuthUser);
   const [file, setFile] = useState(null);
   const dispatch = useTypeDispatch();
@@ -64,8 +71,31 @@ export const AvatarProfile = () => {
           />
         </Badge>
       </Stack>
-      <p>{name}</p>
-      {phone && <p>{phone}</p>}
+      {name && (
+        <Typography
+          variant="body2"
+          style={{ lineHeight: '1.0', fontSize: '14px' }}
+        >
+          {name}
+        </Typography>
+      )}
+      {experience && (
+        <Typography
+          variant="caption"
+          style={{ lineHeight: '1.0', fontSize: '12px' }}
+        >
+          {experience} years experience
+        </Typography>
+      )}
+
+      {phone && (
+        <Typography
+          variant="caption"
+          style={{ lineHeight: '1.0', fontSize: '12px' }}
+        >
+          phone: {phone}
+        </Typography>
+      )}
     </Box>
   );
 };

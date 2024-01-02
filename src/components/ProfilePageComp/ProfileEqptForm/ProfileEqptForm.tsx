@@ -53,13 +53,14 @@ export const ProfileEqptForm = () => {
           <Box
             style={{
               marginBottom: '4px',
+              width: '100%',
             }}
           >
             <TextField
               {...register('title')}
               margin="dense"
               fullWidth
-              label="Equipment"
+              label="EQUIPMENT"
               variant="outlined"
               size="small"
             />
@@ -76,7 +77,7 @@ export const ProfileEqptForm = () => {
               {...register('size')}
               margin="dense"
               fullWidth
-              label="Size"
+              label="SIZE"
               variant="outlined"
               size="small"
               sx={{ width: '64px' }}
@@ -97,8 +98,7 @@ export const ProfileEqptForm = () => {
       </form>
       <List
         sx={{
-          height: 'max(25vh)',
-          maxHeight: '80vh',
+          maxHeight: 110,
           overflow: 'auto',
           padding: '12px',
         }}

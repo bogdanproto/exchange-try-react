@@ -1,7 +1,9 @@
 export interface IUser {
+  _id: string | null;
   name: string | null;
   email: string | null;
   phone: string | null;
+  experience: number | null;
   avatarCloudURL: string | null;
   mainsport: string | null;
   eqpts: IEqptItem[] | [];
@@ -32,6 +34,7 @@ export interface IUserLogInSuccess {
     name: string;
     email: string;
     phone: string;
+    experience: number;
     avatarCloudURL: string;
     mainsport: string;
     eqpts: IEqptItem[] | [];
@@ -47,11 +50,14 @@ export interface IUserAvatarSuccess {
 export interface IUserProfileSuccess {
   name: string | null;
   phone: string | null;
+  experience: number | null;
 }
 
 export interface IUserView {
+  _id: string;
   name: string;
   phone: string;
+  experience: string;
   avatarCloudURL: string;
 }
 
@@ -70,6 +76,7 @@ export interface IUserSignUp
 export interface IUserProfile {
   name?: string;
   phone?: string;
+  experience?: number;
 }
 
 //==============EQPTS========================

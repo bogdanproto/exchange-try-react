@@ -14,7 +14,11 @@ import {
   useTypeSelector,
 } from 'services/redux/customHook/typeHooks';
 import { selectUser } from 'services/redux/auth/selectors';
-import { createProposal, getAllSpots } from 'services/redux/data/operations';
+import {
+  createProposal,
+  getAllSpots,
+  updateProposal,
+} from 'services/redux/data/operations';
 import { selectSpots } from 'services/redux/data/selectors';
 import { IProposalForm } from 'interfaces';
 import { schemaProposalForm } from 'const';
@@ -24,7 +28,7 @@ interface IProposalFormProps {
   _id?: string;
   ownerTime?: any;
   ownerDate?: any;
-  ownerSpot?: string[];
+  ownerSpot?: string;
   ownerEqpts?: string[];
   ownerMsg?: any;
   ownerisShowPhone?: boolean;
@@ -81,11 +85,14 @@ export const ProposalForm: React.FC<IProposalFormProps> = ({
   }, [isSubmitSuccessful, reset]);
 
   const onSubmit: SubmitHandler<IProposalForm> = data => {
-    if (_id) {
-      console.log(data);
+    const prepareData = toFormatProposalObj(data);
+
+    if (_id && handleExpandClose) {
+      dispatch(updateProposal({ ...prepareData, _id }));
+      handleExpandClose();
       return;
     }
-    const prepareData = toFormatProposalObj(data);
+
     dispatch(createProposal(prepareData));
   };
 
@@ -181,6 +188,7 @@ export const ProposalForm: React.FC<IProposalFormProps> = ({
           >
             <HFSelect
               multiple={false}
+              defaultValue={ownerSpot}
               control={control}
               name="spot"
               label="Spot"

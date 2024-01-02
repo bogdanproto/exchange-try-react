@@ -30,9 +30,11 @@ import {
 
 const initialState: ISliceAuthUser = {
   user: {
+    _id: null,
     name: null,
     email: null,
     phone: null,
+    experience: null,
     avatarCloudURL: null,
     mainsport: null,
     eqpts: [],
