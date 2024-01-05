@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { useTypeDispatch } from 'services/redux/customHook/typeHooks';
 import { ToggleButtonGroup, ToggleButton, Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { routes } from 'const';
-import { getAllProposal } from 'services/redux/data/operations';
 
 export const Home = () => {
   const theme = useTheme();
-  const dispatch = useTypeDispatch();
   const [alignment, setAlignment] = useState(routes.PROPOSALS);
   const navigate = useNavigate();
 
@@ -34,10 +31,6 @@ export const Home = () => {
   ) => {
     setAlignment(newAlignment);
   };
-
-  useEffect(() => {
-    dispatch(getAllProposal());
-  }, [dispatch]);
 
   return (
     <>

@@ -15,9 +15,13 @@ export type {
   IProposal,
   IProposalDelete,
   ICardInfoProposal,
+  ICardInfoProposalPending,
   ICardControlProposal,
+  ICardControlHistory,
   ICardAdditionalProposal,
   IProposalUpdbyCustomer,
+  ICardPendingUser,
+  ICardControlPending,
 } from './data/proposal/IProposal';
 export type { ISpot, ISpotView } from './data/spot/ISpot';
 export type { IErrorsList, IErorr } from './error/errorInterface';

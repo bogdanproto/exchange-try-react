@@ -1,21 +1,24 @@
 import { Card, Box, Paper } from '@mui/material';
-import { CardControl, CardInfo } from 'components/HomePageComp';
+import {
+  CardControlHistory,
+  CardControlPending,
+  CardInfoPending,
+} from 'components/HomePageComp';
 import { IProposal } from 'interfaces';
 import { useEffect } from 'react';
 import {
   useTypeDispatch,
   useTypeSelector,
 } from 'services/redux/customHook/typeHooks';
-import { getAllProposal } from 'services/redux/data/operations';
-import { selectProposals } from 'services/redux/data/selectors';
+import { getAllProposalPending } from 'services/redux/data/operations';
+import { selectProposalsPending } from 'services/redux/data/selectors';
 
-export const Proposals = () => {
-  const proposals = useTypeSelector(selectProposals);
-
+export const Pending = () => {
+  const proposals = useTypeSelector(selectProposalsPending);
   const dispatch = useTypeDispatch();
 
   useEffect(() => {
-    dispatch(getAllProposal());
+    dispatch(getAllProposalPending());
   }, [dispatch]);
 
   return (
@@ -36,8 +39,10 @@ export const Proposals = () => {
             ownerTime,
             ownerMsg,
             spot,
-            isShowPhone,
-            isAutoAccept,
+            customerId,
+            customerEqpts,
+            customerTime,
+            customerMsg,
           }: IProposal) => (
             <Paper
               key={_id}
@@ -48,23 +53,30 @@ export const Proposals = () => {
               }}
             >
               <Card sx={{ borderRadius: '10px' }}>
-                <CardInfo
-                  ownerId={ownerId}
-                  ownerEqpts={ownerEqpts}
-                  ownerDate={ownerDate}
-                  ownerTime={ownerTime}
-                  spot={spot}
-                />
-                <CardControl
+                <CardControlPending
                   _id={_id}
                   ownerId={ownerId}
-                  ownerMsg={ownerMsg}
+                  customerId={customerId}
+                  customerEqpts={customerEqpts}
+                  customerTime={customerTime}
+                  customerMsg={customerMsg}
+                />
+                <CardInfoPending
+                  ownerId={ownerId}
                   ownerEqpts={ownerEqpts}
                   ownerDate={ownerDate}
                   ownerTime={ownerTime}
                   spot={spot}
-                  isShowPhone={isShowPhone}
-                  isAutoAccept={isAutoAccept}
+                  customerId={customerId}
+                  customerEqpts={customerEqpts}
+                />
+                <CardControlHistory
+                  ownerId={ownerId}
+                  ownerMsg={ownerMsg}
+                  ownerTime={ownerTime}
+                  customerId={customerId}
+                  customerMsg={customerMsg}
+                  customerTime={customerTime}
                 />
               </Card>
             </Paper>

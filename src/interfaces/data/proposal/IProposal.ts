@@ -11,7 +11,7 @@ export interface IProposal {
   ownerMsg: string | null;
   isShowPhone: boolean;
   isAutoAccept: boolean;
-  customerId: string | null;
+  customerId: IUserView;
   customerEqpts: IEqptItem[] | [];
   customerTime: string | null;
   customerMsg: string | null;
@@ -47,6 +47,23 @@ export interface ICardInfoProposal
     'ownerId' | 'spot' | 'ownerEqpts' | 'ownerDate' | 'ownerTime'
   > {}
 
+export interface ICardInfoProposalPending
+  extends Pick<
+    IProposal,
+    | 'ownerId'
+    | 'spot'
+    | 'ownerEqpts'
+    | 'ownerDate'
+    | 'ownerTime'
+    | 'customerId'
+    | 'customerEqpts'
+  > {}
+
+export interface ICardPendingUser {
+  user: IUserView;
+  userEqpts: IEqptItem[] | [];
+}
+
 export interface ICardControlProposal
   extends Pick<
     IProposal,
@@ -59,6 +76,27 @@ export interface ICardControlProposal
     | 'spot'
     | 'isShowPhone'
     | 'isAutoAccept'
+  > {}
+export interface ICardControlPending
+  extends Pick<
+    IProposal,
+    | 'ownerId'
+    | '_id'
+    | 'customerId'
+    | 'customerMsg'
+    | 'customerTime'
+    | 'customerEqpts'
+  > {}
+
+export interface ICardControlHistory
+  extends Pick<
+    IProposal,
+    | 'ownerId'
+    | 'ownerMsg'
+    | 'ownerTime'
+    | 'customerId'
+    | 'customerMsg'
+    | 'customerTime'
   > {}
 
 export interface ICardAdditionalProposal
