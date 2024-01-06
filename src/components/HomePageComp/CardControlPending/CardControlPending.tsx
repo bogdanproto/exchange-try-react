@@ -1,19 +1,13 @@
-import {
-  CardContent,
-  CardActions,
-  Collapse,
-  Typography,
-  Box,
-} from '@mui/material';
+import { CardContent, CardActions, Collapse, Typography } from '@mui/material';
 
 import { useState } from 'react';
 import { OfferForm } from '../OfferForm/OfferForm';
-import { CardAdditionalInfo } from '../CardAdditionalInfo/CardAdditionalInfo';
 import { ICardControlPending, IEqptItem } from 'interfaces';
-import { CardOwnerControl } from '../CardOwnerControl/CardOwnerControl';
-import { ProposalForm } from 'components/ProposalPageComp/ProposalForm/ProposalForm';
+import { CardUserControl } from '../CardUserControl/CardUserControl';
 import { useTheme } from '@mui/material/styles';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import { useTypeSelector } from 'services/redux/customHook/typeHooks';
+import { selectUser } from 'services/redux/auth/selectors';
+import { CardOwnerControl } from '../CardOwnerControl/CardOwnerControl';
 
 export const CardControlPending = ({
   _id,
@@ -25,6 +19,7 @@ export const CardControlPending = ({
 }: ICardControlPending) => {
   const theme = useTheme();
   const [expanded, setExpanded] = useState(false);
+  const { _id: userId } = useTypeSelector(selectUser);
 
   const handleExpandMore = () => {
     setExpanded(!expanded);
@@ -35,22 +30,28 @@ export const CardControlPending = ({
       <CardActions
         disableSpacing
         style={{
+          height: '34px',
           padding: '6px',
           justifyContent: 'space-between',
           backgroundColor: theme.palette.info.main,
         }}
       >
-        <Box display="flex" justifyContent="left" alignItems="center" gap="2px">
-          <AccessTimeIcon style={{ fontSize: '14px' }} />
+        <Typography
+          variant="overline"
+          style={{ lineHeight: '1.2', fontSize: '14px' }}
+        >
+          {userId === ownerId?._id ? 'your dicision' : 'awaiting dicision'}
+        </Typography>
 
-          <Typography
-            variant="caption"
-            style={{ lineHeight: '1.2', fontSize: '14px' }}
-          >
-            awaiting dicision
-          </Typography>
-        </Box>
-        <CardOwnerControl _id={_id} handleExpandMore={handleExpandMore} />
+        {userId === ownerId?._id ? (
+          <CardOwnerControl />
+        ) : (
+          <CardUserControl
+            _id={_id}
+            user={'customer'}
+            handleExpandMore={handleExpandMore}
+          />
+        )}
       </CardActions>
 
       <Collapse in={expanded} timeout="auto" unmountOnExit>
@@ -60,7 +61,13 @@ export const CardControlPending = ({
           }}
         >
           {expanded && (
-            <OfferForm handleExpandClose={handleExpandMore} _id={_id} />
+            <OfferForm
+              handleExpandClose={handleExpandMore}
+              _id={_id}
+              customerEqpts={customerEqpts.map(({ _id }: IEqptItem) => _id)}
+              customerTime={customerTime}
+              customerMsg={customerMsg}
+            />
           )}
         </CardContent>
       </Collapse>

@@ -37,7 +37,11 @@ export const CardControlHistory = ({
       </Collapse>
       <CardActions
         disableSpacing
-        style={{ justifyContent: 'center', paddingBottom: '2px' }}
+        style={{
+          justifyContent: 'center',
+          paddingBottom: '6px',
+          paddingTop: '6px',
+        }}
       >
         <Button
           variant="contained"

@@ -255,7 +255,7 @@ export const ProposalForm: React.FC<IProposalFormProps> = ({
             />
           </Box>
           <ButtonForm
-            mainBtn={_id ? 'UPGRADE' : 'SUBMIT'}
+            mainBtn={_id ? 'UPDATE' : 'SUBMIT'}
             secondaryBtn={_id && 'CLOSE'}
             handleSecondary={handleExpandClose}
           />

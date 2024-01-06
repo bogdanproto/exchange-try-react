@@ -8,7 +8,6 @@ export const updateProposalByCustomer = createAsyncThunk(
   async (obj: IProposalUpdbyCustomer, thunkAPI) => {
     try {
       const { data } = await updateProposalByCustomerAPI(obj);
-      console.log(data);
       return data;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(handleErrors(error.response?.data));

@@ -13,7 +13,7 @@ import { CardAdditionalInfo } from '../CardAdditionalInfo/CardAdditionalInfo';
 import { ICardControlProposal, IEqptItem } from 'interfaces';
 import { useTypeSelector } from 'services/redux/customHook/typeHooks';
 import { selectUser } from 'services/redux/auth/selectors';
-import { CardOwnerControl } from '../CardOwnerControl/CardOwnerControl';
+import { CardUserControl } from '../CardUserControl/CardUserControl';
 import { ProposalForm } from 'components/ProposalPageComp/ProposalForm/ProposalForm';
 
 export type SwitcherType = 'offer' | 'edit' | 'more' | '';
@@ -59,7 +59,11 @@ export const CardControl = ({
         </IconButton>
 
         {userId === ownerId._id ? (
-          <CardOwnerControl _id={_id} handleExpandMore={handleExpandMore} />
+          <CardUserControl
+            _id={_id}
+            user={'owner'}
+            handleExpandMore={handleExpandMore}
+          />
         ) : (
           <Button
             style={{ padding: '0', fontWeight: 'bold' }}

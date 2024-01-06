@@ -49,3 +49,17 @@ export const handleFulfilledUpdateProposal = (
   state.isLoading = false;
   state.errorData = null;
 };
+
+export const handleFulfilledUpdateProposalByCustomer = (
+  state: ISliceData,
+  action: PayloadAction<IProposal>
+) => {
+  const updProposal = action.payload;
+
+  state.proposals = state.proposals.filter(
+    proposal => proposal._id !== updProposal._id
+  );
+  state.proposalsPending = [...state.proposalsPending, updProposal];
+  state.isLoading = false;
+  state.errorData = null;
+};

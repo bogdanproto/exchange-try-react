@@ -5,10 +5,10 @@ import {
   useTypeDispatch,
   useTypeSelector,
 } from 'services/redux/customHook/typeHooks';
-import { Paper, Box, TextField, Stack, Button } from '@mui/material';
+import { Paper, Box, TextField } from '@mui/material';
 import { MobileTimePicker } from '@mui/x-date-pickers';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { ErrorInputForm, HFSelect } from 'components/Common';
+import { ButtonForm, ErrorInputForm, HFSelect } from 'components/Common';
 import { formatEqptsSelector } from 'services/helpers';
 import { IOfferForm } from 'interfaces';
 import { schemaOfferForm } from 'const';
@@ -19,11 +19,17 @@ import { updateProposalByCustomer } from 'services/redux/data/operations';
 interface IOfferFormProps {
   handleExpandClose: () => void;
   _id: string;
+  customerEqpts?: string[];
+  customerTime?: any;
+  customerMsg?: any;
 }
 
 export const OfferForm: React.FC<IOfferFormProps> = ({
   handleExpandClose,
   _id,
+  customerEqpts,
+  customerTime,
+  customerMsg,
 }) => {
   const dispatch = useTypeDispatch();
   const { eqpts } = useTypeSelector(selectUser);
@@ -35,8 +41,8 @@ export const OfferForm: React.FC<IOfferFormProps> = ({
     formState: { isSubmitSuccessful, errors },
   } = useForm<IOfferForm>({
     defaultValues: {
-      time: dayjs(),
-      message: '',
+      time: customerTime ? dayjs(customerTime, 'HH:mm') : dayjs(),
+      message: customerMsg ?? '',
     },
     resolver: yupResolver(schemaOfferForm),
   });
@@ -49,6 +55,12 @@ export const OfferForm: React.FC<IOfferFormProps> = ({
 
   const onSubmit: SubmitHandler<IOfferForm> = data => {
     const prepareData = toFormatProposalObjByCustomer(data);
+
+    if (_id && customerEqpts) {
+      console.log(data);
+      handleExpandClose();
+      return;
+    }
     dispatch(updateProposalByCustomer({ ...prepareData, _id }));
     handleExpandClose();
   };
@@ -85,6 +97,7 @@ export const OfferForm: React.FC<IOfferFormProps> = ({
             <HFSelect
               multiple={true}
               control={control}
+              defaultValue={customerEqpts}
               name="eqpts"
               label="Equipments"
               placeholder="Add equipment to your profile"
@@ -108,22 +121,11 @@ export const OfferForm: React.FC<IOfferFormProps> = ({
             )}
           />
 
-          <Stack
-            spacing={2}
-            direction="row"
-            sx={{ display: 'flex', justifyContent: 'space-around' }}
-          >
-            <Button type="submit" variant="contained">
-              OFFER
-            </Button>
-            <Button
-              type="button"
-              variant="contained"
-              onClick={handleExpandClose}
-            >
-              CLOSE
-            </Button>
-          </Stack>
+          <ButtonForm
+            mainBtn={customerEqpts ? 'UPDATE' : 'OFFER'}
+            secondaryBtn={'CLOSE'}
+            handleSecondary={handleExpandClose}
+          />
         </Box>
       </form>
     </Paper>

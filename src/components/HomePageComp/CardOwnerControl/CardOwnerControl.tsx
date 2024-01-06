@@ -1,40 +1,38 @@
-import { Box, IconButton } from '@mui/material';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import EditNoteIcon from '@mui/icons-material/EditNote';
-import { SwitcherType } from '../CardControl/CardControl';
-import { useTypeDispatch } from 'services/redux/customHook/typeHooks';
-import { deleteProposal } from 'services/redux/data/operations';
+import { Stack, Button } from '@mui/material';
 
-interface ICardOwnerControl {
-  handleExpandMore: (arg: SwitcherType) => void;
-  _id: string;
-}
+type action = 'accept' | 'reject';
 
-export const CardOwnerControl: React.FC<ICardOwnerControl> = ({
-  _id,
-  handleExpandMore,
-}) => {
-  const dispatch = useTypeDispatch();
-
-  const handleClickDelete = (_id: string) => {
-    dispatch(deleteProposal(_id));
+export const CardOwnerControl = () => {
+  const handleClick = (action: action) => {
+    console.log(action);
   };
-
   return (
-    <Box display="flex" gap="6px" justifyContent="left" alignItems="center">
-      <IconButton
-        style={{ padding: '0' }}
-        onClick={() => handleExpandMore('edit')}
+    <Stack
+      spacing={2}
+      direction="row"
+      sx={{ display: 'flex', justifyContent: 'space-around' }}
+    >
+      <Button
+        onClick={() => handleClick('accept')}
+        style={{ height: '20px' }}
+        size="small"
+        type="button"
+        variant="contained"
+        color="secondary"
       >
-        <EditNoteIcon sx={{ fontSize: 26 }} />
-      </IconButton>
+        ACCEPT
+      </Button>
 
-      <IconButton
-        style={{ padding: '0' }}
-        onClick={() => handleClickDelete(_id)}
+      <Button
+        onClick={() => handleClick('reject')}
+        style={{ height: '20px' }}
+        size="small"
+        type="button"
+        variant="contained"
+        color="secondary"
       >
-        <DeleteForeverIcon sx={{ fontSize: 20 }} />
-      </IconButton>
-    </Box>
+        REJECT
+      </Button>
+    </Stack>
   );
 };
