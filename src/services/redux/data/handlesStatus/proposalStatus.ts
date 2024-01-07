@@ -10,6 +10,15 @@ export const handleFulfilledGetAllProposal = (
   state.errorData = null;
 };
 
+export const handleFulfilledGetAllProposalPending = (
+  state: ISliceData,
+  action: PayloadAction<IProposal[]>
+) => {
+  state.proposalsPending = action.payload;
+  state.isLoading = false;
+  state.errorData = null;
+};
+
 export const handleFulfilledCreateProposal = (
   state: ISliceData,
   action: PayloadAction<IProposal>
@@ -37,6 +46,20 @@ export const handleFulfilledUpdateProposal = (
   state.proposals = [...state.proposals].map(proposal =>
     proposal._id === updProposal._id ? updProposal : proposal
   );
+  state.isLoading = false;
+  state.errorData = null;
+};
+
+export const handleFulfilledUpdateProposalByCustomer = (
+  state: ISliceData,
+  action: PayloadAction<IProposal>
+) => {
+  const updProposal = action.payload;
+
+  state.proposals = state.proposals.filter(
+    proposal => proposal._id !== updProposal._id
+  );
+  state.proposalsPending = [...state.proposalsPending, updProposal];
   state.isLoading = false;
   state.errorData = null;
 };

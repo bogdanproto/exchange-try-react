@@ -3,8 +3,10 @@ import {
   handleFulfilledCreateProposal,
   handleFulfilledDeleteProposal,
   handleFulfilledGetAllProposal,
+  handleFulfilledGetAllProposalPending,
   handleFulfilledGetAllSpots,
   handleFulfilledUpdateProposal,
+  handleFulfilledUpdateProposalByCustomer,
   handlePendingData,
   handleRejectedData,
 } from '../handlesStatus';
@@ -12,13 +14,16 @@ import {
   createProposal,
   deleteProposal,
   getAllProposal,
+  getAllProposalPending,
   getAllSpots,
   updateProposal,
+  updateProposalByCustomer,
 } from '../operations';
 import { ISliceData } from 'interfaces';
 
 const initialState: ISliceData = {
   proposals: [],
+  proposalsPending: [],
   spots: [],
   errorData: null,
   isLoading: false,
@@ -38,6 +43,12 @@ const dataSlice = createSlice({
       .addCase(getAllProposal.pending, handlePendingData)
       .addCase(getAllProposal.rejected, handleRejectedData)
       .addCase(getAllProposal.fulfilled, handleFulfilledGetAllProposal)
+      .addCase(getAllProposalPending.pending, handlePendingData)
+      .addCase(getAllProposalPending.rejected, handleRejectedData)
+      .addCase(
+        getAllProposalPending.fulfilled,
+        handleFulfilledGetAllProposalPending
+      )
       .addCase(createProposal.pending, handlePendingData)
       .addCase(createProposal.rejected, handleRejectedData)
       .addCase(createProposal.fulfilled, handleFulfilledCreateProposal)
@@ -46,7 +57,13 @@ const dataSlice = createSlice({
       .addCase(deleteProposal.fulfilled, handleFulfilledDeleteProposal)
       .addCase(updateProposal.pending, handlePendingData)
       .addCase(updateProposal.rejected, handleRejectedData)
-      .addCase(updateProposal.fulfilled, handleFulfilledUpdateProposal);
+      .addCase(updateProposal.fulfilled, handleFulfilledUpdateProposal)
+      .addCase(updateProposalByCustomer.pending, handlePendingData)
+      .addCase(updateProposalByCustomer.rejected, handleRejectedData)
+      .addCase(
+        updateProposalByCustomer.fulfilled,
+        handleFulfilledUpdateProposalByCustomer
+      );
   },
 });
 

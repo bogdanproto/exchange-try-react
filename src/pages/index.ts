@@ -6,3 +6,4 @@ export * from './Proposal/Proposal';
 export * from './RestrictedRoute/RestrictedRoute';
 export * from './Signup/Signup';
 export * from './Proposals/Proposals';
+export * from './Pending/Pending';
