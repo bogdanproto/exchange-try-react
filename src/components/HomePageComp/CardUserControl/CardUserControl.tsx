@@ -3,7 +3,10 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import { SwitcherType } from '../CardControl/CardControl';
 import { useTypeDispatch } from 'services/redux/customHook/typeHooks';
-import { deleteProposal } from 'services/redux/data/operations';
+import {
+  deleteProposal,
+  removeOfferCustomer,
+} from 'services/redux/data/operations';
 
 interface ICardUserontrol {
   handleExpandMore: (arg: SwitcherType) => void;
@@ -23,7 +26,7 @@ export const CardUserControl: React.FC<ICardUserontrol> = ({
       dispatch(deleteProposal(_id));
       return;
     }
-    console.log(_id);
+    dispatch(removeOfferCustomer(_id));
   };
 
   return (

@@ -22,6 +22,7 @@ import {
 } from 'pages';
 import { Loader, NotificationBox } from 'components/Common';
 import { errorMessage, routes } from 'const';
+import { Goride } from 'pages/Goride/Goride';
 
 export const App = () => {
   const { error, isLoading, isAppLoaded } = useTypeSelector(selectService);
@@ -51,7 +52,7 @@ export const App = () => {
             }
           >
             <Route path={routes.BASE} element={<Home />}>
-              <Route path={routes.GORIDE} element={<p>Goride</p>} />
+              <Route path={routes.GORIDE} element={<Goride />} />
               <Route path={routes.PROPOSALS} element={<Proposals />} />
               <Route path={routes.PENDING} element={<Pending />} />
             </Route>

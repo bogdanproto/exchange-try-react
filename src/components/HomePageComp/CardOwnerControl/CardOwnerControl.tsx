@@ -8,13 +8,13 @@ export const CardOwnerControl = () => {
   };
   return (
     <Stack
-      spacing={2}
+      spacing={1}
       direction="row"
       sx={{ display: 'flex', justifyContent: 'space-around' }}
     >
       <Button
         onClick={() => handleClick('accept')}
-        style={{ height: '20px' }}
+        style={{ height: '22px' }}
         size="small"
         type="button"
         variant="contained"
@@ -25,7 +25,7 @@ export const CardOwnerControl = () => {
 
       <Button
         onClick={() => handleClick('reject')}
-        style={{ height: '20px' }}
+        style={{ height: '22px' }}
         size="small"
         type="button"
         variant="contained"

@@ -12,7 +12,6 @@ import { CardOwnerControl } from '../CardOwnerControl/CardOwnerControl';
 export const CardControlPending = ({
   _id,
   ownerId,
-  customerId,
   customerEqpts,
   customerTime,
   customerMsg,
@@ -31,7 +30,7 @@ export const CardControlPending = ({
         disableSpacing
         style={{
           height: '34px',
-          padding: '6px',
+          padding: '6px 8px 6px 8px',
           justifyContent: 'space-between',
           backgroundColor: theme.palette.info.main,
         }}

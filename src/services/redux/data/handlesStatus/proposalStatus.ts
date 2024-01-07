@@ -19,6 +19,15 @@ export const handleFulfilledGetAllProposalPending = (
   state.errorData = null;
 };
 
+export const handleFulfilledGetAllProposalAccepted = (
+  state: ISliceData,
+  action: PayloadAction<IProposal[]>
+) => {
+  state.proposalsAccepted = action.payload;
+  state.isLoading = false;
+  state.errorData = null;
+};
+
 export const handleFulfilledCreateProposal = (
   state: ISliceData,
   action: PayloadAction<IProposal>
@@ -56,10 +65,33 @@ export const handleFulfilledUpdateProposalByCustomer = (
 ) => {
   const updProposal = action.payload;
 
-  state.proposals = state.proposals.filter(
+  const isProposalInPending = state.proposalsPending.find(
+    ({ _id }) => _id === updProposal._id
+  );
+  if (isProposalInPending) {
+    state.proposalsPending = state.proposalsPending.map(proposal =>
+      proposal._id === updProposal._id ? updProposal : proposal
+    );
+  } else {
+    state.proposals = state.proposals.filter(
+      proposal => proposal._id !== updProposal._id
+    );
+    state.proposalsPending = [...state.proposalsPending, updProposal];
+  }
+
+  state.isLoading = false;
+  state.errorData = null;
+};
+
+export const handleFulfilledRemoveOfferCustomer = (
+  state: ISliceData,
+  action: PayloadAction<IProposal>
+) => {
+  const updProposal = action.payload;
+  state.proposalsPending = state.proposalsPending.filter(
     proposal => proposal._id !== updProposal._id
   );
-  state.proposalsPending = [...state.proposalsPending, updProposal];
+  state.proposals = [...state.proposals, updProposal];
   state.isLoading = false;
   state.errorData = null;
 };

@@ -1,15 +1,3 @@
-1. Update proposal by action from Customer - Edit offer Proposal
-
-2. Update proposal - delete customer offer
-
-3. Update Proposal - accepted
-
-4. Update proposal - rejected
-
-5. Fix Mistake - that customer can make offer without message
-
-6. getallProposal width status accepted
-
 # Getting Started with Create React App
 
 This project was bootstrapped with
