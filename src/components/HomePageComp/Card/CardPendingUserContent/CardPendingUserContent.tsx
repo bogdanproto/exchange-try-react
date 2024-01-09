@@ -2,7 +2,7 @@ import { Box, Avatar, Typography, Paper } from '@mui/material';
 import { ICardPendingUser, IEqpt } from 'interfaces';
 
 export const CardPendingUserContent = ({
-  user: { name, avatarCloudURL, experience, phone },
+  user: { name, avatarCloudURL, experience },
   userEqpts,
 }: ICardPendingUser) => {
   return (
@@ -11,6 +11,7 @@ export const CardPendingUserContent = ({
       style={{
         borderRadius: '6px',
         width: '50%',
+        height: 'auto',
       }}
     >
       <Box
@@ -21,7 +22,15 @@ export const CardPendingUserContent = ({
           padding: '6px',
         }}
       >
-        <Box display="flex" gap="6px" justifyContent="left" alignItems="center">
+        <Box
+          display="flex"
+          gap="6px"
+          justifyContent="left"
+          alignItems="center"
+          style={{
+            minHeight: '40px',
+          }}
+        >
           <Avatar
             alt={name}
             src={avatarCloudURL}

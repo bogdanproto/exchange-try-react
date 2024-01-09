@@ -9,6 +9,7 @@ import {
   handleFulfilledRemoveOfferCustomer,
   handleFulfilledUpdateProposal,
   handleFulfilledUpdateProposalByCustomer,
+  handleFulfilledUpdateProposalStatus,
   handlePendingData,
   handleRejectedData,
 } from '../handlesStatus';
@@ -22,6 +23,7 @@ import {
   removeOfferCustomer,
   updateProposal,
   updateProposalByCustomer,
+  updateProposalStatus,
 } from '../operations';
 import { ISliceData } from 'interfaces';
 
@@ -80,6 +82,12 @@ const dataSlice = createSlice({
       .addCase(
         removeOfferCustomer.fulfilled,
         handleFulfilledRemoveOfferCustomer
+      )
+      .addCase(updateProposalStatus.pending, handlePendingData)
+      .addCase(updateProposalStatus.rejected, handleRejectedData)
+      .addCase(
+        updateProposalStatus.fulfilled,
+        handleFulfilledUpdateProposalStatus
       );
   },
 });

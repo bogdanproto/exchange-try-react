@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+
 import { useEffect } from 'react';
 import { refreshUser } from 'services/redux/auth/operationsAuth';
 import { ThemeProvider } from '@mui/material/styles';
@@ -8,7 +9,7 @@ import {
 } from 'services/redux/customHook/typeHooks';
 import { LayoutInterface } from '../LayoutInterface/LayoutInterface';
 import { darkTheme } from '../MainStyles/MaterialTheme';
-import { selectService } from 'services/redux/commonSelectors';
+import { selectIsAppLoaded } from 'services/redux/commonSelectors';
 import {
   Home,
   Login,
@@ -20,12 +21,14 @@ import {
   RestrictedRoute,
   Signup,
 } from 'pages';
-import { Loader, NotificationBox } from 'components/Common';
-import { errorMessage, routes } from 'const';
+import { routes } from 'const';
 import { Goride } from 'pages/Goride/Goride';
+import { Notification } from 'components/Notification/Notification';
 
 export const App = () => {
-  const { error, isLoading, isAppLoaded } = useTypeSelector(selectService);
+  const isAppLoaded = useTypeSelector(selectIsAppLoaded);
+
+  console.log('in App');
 
   const dispatch = useTypeDispatch();
 
@@ -35,11 +38,7 @@ export const App = () => {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      {isLoading && <Loader />}
-      {error && error !== errorMessage.user_unauthorized_token && (
-        <NotificationBox type="error" message={error} />
-      )}
-
+      <Notification />
       {isAppLoaded && (
         <Routes>
           <Route
@@ -56,6 +55,7 @@ export const App = () => {
               <Route path={routes.PROPOSALS} element={<Proposals />} />
               <Route path={routes.PENDING} element={<Pending />} />
             </Route>
+
             <Route path={routes.PROPOSAL} element={<Proposal />} />
             <Route path={routes.PROFILE} element={<Profile />} />
           </Route>

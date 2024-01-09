@@ -1,5 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { IProposalDelete, IProposal, ISliceData } from 'interfaces';
+import { ProposalStatusBack } from 'interfaces/data/proposal/IProposal';
 
 export const handleFulfilledGetAllProposal = (
   state: ISliceData,
@@ -92,6 +93,26 @@ export const handleFulfilledRemoveOfferCustomer = (
     proposal => proposal._id !== updProposal._id
   );
   state.proposals = [...state.proposals, updProposal];
+  state.isLoading = false;
+  state.errorData = null;
+};
+
+export const handleFulfilledUpdateProposalStatus = (
+  state: ISliceData,
+  action: PayloadAction<IProposal>
+) => {
+  const updProposal = action.payload;
+
+  state.proposalsPending = state.proposalsPending.filter(
+    proposal => proposal._id !== updProposal._id
+  );
+
+  if (updProposal.statusProposal === ProposalStatusBack.accepted) {
+    state.proposalsAccepted = [...state.proposalsAccepted, updProposal];
+  } else {
+    state.proposals = [...state.proposals, updProposal];
+  }
+
   state.isLoading = false;
   state.errorData = null;
 };

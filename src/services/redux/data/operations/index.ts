@@ -7,3 +7,4 @@ export * from './proposal/updateProposal';
 export * from './proposal/updateProposalByCustomer';
 export * from './proposal/getAllProposalAccepted';
 export * from './proposal/removeOfferCustomer';
+export * from './proposal/updateProposalStatus';
