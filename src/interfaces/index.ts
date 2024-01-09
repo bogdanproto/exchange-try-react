@@ -4,6 +4,7 @@ export type {
 } from './component/compInterfaces';
 export type { IProposalForm } from './component/form/IProposalForm';
 export type { IOfferForm } from './component/form/IOfferForm';
+export type { ICancelForm } from './component/form/ICancelForm';
 export type {
   ISelect,
   HFAutocompleateProps,
@@ -22,6 +23,8 @@ export type {
   IProposalUpdbyCustomer,
   ICardPendingUser,
   ICardControlPending,
+  ProposalStatusFront,
+  IProposalUpdStatus,
 } from './data/proposal/IProposal';
 export type { ISpot, ISpotView } from './data/spot/ISpot';
 export type { IErrorsList, IErorr } from './error/errorInterface';

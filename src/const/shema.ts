@@ -49,6 +49,10 @@ export const schemaOfferForm = yup.object().shape({
   message: yup.mixed().required(),
 });
 
+export const schemaCancelForm = yup.object().shape({
+  message: yup.string().required('Reason for cancellation is required'),
+});
+
 export const schemaEqptForm = yup.object().shape({
   title: yup.string().required('Equipment is required'),
   size: yup.string().required('Size is required'),

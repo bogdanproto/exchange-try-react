@@ -2,6 +2,7 @@ import { CardContent, Box, Typography } from '@mui/material';
 import { ICardInfoProposalPending } from 'interfaces';
 import { CardPendingUserContent } from '../CardPendingUserContent/CardPendingUserContent';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
+import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 import dayjs from 'dayjs';
 
 export const CardInfoPending = ({
@@ -11,6 +12,8 @@ export const CardInfoPending = ({
   ownerTime,
   customerId,
   customerEqpts,
+  customerTime,
+  statusProposal,
   spot: { spot },
 }: ICardInfoProposalPending) => {
   return (
@@ -34,13 +37,24 @@ export const CardInfoPending = ({
         >
           {`${dayjs(ownerDate, { format: 'YYYY-MM-DD' }).format(
             'DD.MM.YYYY'
-          )} ${ownerTime}`}
+          )} ${statusProposal === 'accepted' ? customerTime : ownerTime}`}
         </Typography>
       </Box>
 
-      <Box display="flex" justifyContent="space-between" alignItems="center">
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="stretch"
+        gap="4px"
+      >
         <CardPendingUserContent user={customerId} userEqpts={customerEqpts} />
-        <KeyboardDoubleArrowRightIcon color="disabled" />
+        <Box display="flex" alignItems="center">
+          {statusProposal === 'accepted' ? (
+            <PublishedWithChangesIcon color="disabled" />
+          ) : (
+            <KeyboardDoubleArrowRightIcon color="disabled" />
+          )}
+        </Box>
         <CardPendingUserContent user={ownerId} userEqpts={ownerEqpts} />
       </Box>
     </CardContent>

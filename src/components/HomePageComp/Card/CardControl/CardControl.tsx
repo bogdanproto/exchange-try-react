@@ -8,7 +8,7 @@ import {
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useState } from 'react';
-import { OfferForm } from '../OfferForm/OfferForm';
+import { OfferForm } from '../../Form/OfferForm/OfferForm';
 import { CardAdditionalInfo } from '../CardAdditionalInfo/CardAdditionalInfo';
 import { ICardControlProposal, IEqptItem } from 'interfaces';
 import { useTypeSelector } from 'services/redux/customHook/typeHooks';

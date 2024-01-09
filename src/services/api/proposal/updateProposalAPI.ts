@@ -7,7 +7,7 @@ export const updateProposalAPI = async (objProposal: IProposalCreate) => {
   delete objProposal._id;
 
   const { data } = await exchangeAPI.patch(
-    `${routeProposalAPI.UPDATE_BY_OWNER}/${id}`,
+    `${routeProposalAPI.UPDATE}/${id}/owner`,
     objProposal
   );
 

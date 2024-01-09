@@ -3,10 +3,11 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { ToggleButtonGroup, ToggleButton, Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { routes } from 'const';
+import { TypeProposalFilter } from 'components/HomePageComp';
 
 export const Home = () => {
   const theme = useTheme();
-  const [alignment, setAlignment] = useState(routes.PROPOSALS);
+  const [alignment, setAlignment] = useState(routes.GORIDE);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -69,6 +70,7 @@ export const Home = () => {
             PENDING
           </ToggleButton>
         </ToggleButtonGroup>
+        <TypeProposalFilter />
       </Box>
       <Box
         style={{

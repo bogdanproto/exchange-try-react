@@ -8,7 +8,7 @@ export const updateProposalByCustomerAPI = async (
   const id = obj._id;
   delete obj._id;
   const { data } = await exchangeAPI.patch(
-    `${routeProposalAPI.BASE}/${id}`,
+    `${routeProposalAPI.UPDATE}/${id}/customer`,
     obj
   );
 

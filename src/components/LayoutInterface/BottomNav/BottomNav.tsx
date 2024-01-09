@@ -21,6 +21,8 @@ export const BottomNav = () => {
   const navigate = useNavigate();
   const { name, avatarCloudURL } = useTypeSelector(selectUser);
 
+  console.log('inBottom');
+
   const handleClick = (_: any, newValue: number) => {
     setValue(newValue);
     switch (newValue) {
@@ -34,7 +36,7 @@ export const BottomNav = () => {
         navigate(routes.PROFILE);
         break;
       default:
-        navigate(routes.HOME);
+        navigate(routes.BASE);
     }
   };
 

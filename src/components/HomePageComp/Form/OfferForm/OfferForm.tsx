@@ -56,11 +56,6 @@ export const OfferForm: React.FC<IOfferFormProps> = ({
   const onSubmit: SubmitHandler<IOfferForm> = data => {
     const prepareData = toFormatProposalObjByCustomer(data);
 
-    if (_id && customerEqpts) {
-      console.log(data);
-      handleExpandClose();
-      return;
-    }
     dispatch(updateProposalByCustomer({ ...prepareData, _id }));
     handleExpandClose();
   };

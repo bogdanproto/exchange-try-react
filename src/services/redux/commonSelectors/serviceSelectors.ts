@@ -1,12 +1,14 @@
 import { RootState } from '../store';
 
-export const selectService = (state: RootState) => {
+export const selectNotification = (state: RootState) => {
   const { errorData, isLoading } = state.data;
-  const { errorAuth, isRefreshing, isAppLoaded } = state.authUser;
+  const { errorAuth, isRefreshing } = state.authUser;
 
   return {
     error: errorAuth || errorData,
     isLoading: isRefreshing || isLoading,
-    isAppLoaded,
   };
 };
+
+export const selectIsAppLoaded = (state: RootState) =>
+  state.authUser.isAppLoaded;

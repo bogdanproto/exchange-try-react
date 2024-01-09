@@ -1,22 +1,27 @@
-import { CardContent, CardActions, Collapse, Typography } from '@mui/material';
+import {
+  CardContent,
+  CardActions,
+  Collapse,
+  Typography,
+  Button,
+} from '@mui/material';
 
 import { useState } from 'react';
-import { OfferForm } from '../OfferForm/OfferForm';
-import { ICardControlPending, IEqptItem } from 'interfaces';
-import { CardUserControl } from '../CardUserControl/CardUserControl';
 import { useTheme } from '@mui/material/styles';
 import { useTypeSelector } from 'services/redux/customHook/typeHooks';
 import { selectUser } from 'services/redux/auth/selectors';
-import { CardOwnerControl } from '../CardOwnerControl/CardOwnerControl';
+import { CancelForm } from '../../Form/CancelForm/CancelForm';
+import { getRestOfDays } from 'services/helpers';
 
-export const CardControlPending = ({
+interface ICardControlAcceptedProps {
+  _id: string;
+  ownerDate: any;
+}
+
+export const CardControlAccepted = ({
   _id,
-  ownerId,
-  customerId,
-  customerEqpts,
-  customerTime,
-  customerMsg,
-}: ICardControlPending) => {
+  ownerDate,
+}: ICardControlAcceptedProps) => {
   const theme = useTheme();
   const [expanded, setExpanded] = useState(false);
   const { _id: userId } = useTypeSelector(selectUser);
@@ -25,13 +30,15 @@ export const CardControlPending = ({
     setExpanded(!expanded);
   };
 
+  const restDays = getRestOfDays(ownerDate);
+
   return (
     <>
       <CardActions
         disableSpacing
         style={{
           height: '34px',
-          padding: '6px',
+          padding: '6px 8px 6px 8px',
           justifyContent: 'space-between',
           backgroundColor: theme.palette.info.main,
         }}
@@ -40,18 +47,19 @@ export const CardControlPending = ({
           variant="overline"
           style={{ lineHeight: '1.2', fontSize: '14px' }}
         >
-          {userId === ownerId?._id ? 'your dicision' : 'awaiting dicision'}
+          {restDays}
         </Typography>
 
-        {userId === ownerId?._id ? (
-          <CardOwnerControl />
-        ) : (
-          <CardUserControl
-            _id={_id}
-            user={'customer'}
-            handleExpandMore={handleExpandMore}
-          />
-        )}
+        <Button
+          onClick={handleExpandMore}
+          style={{ height: '22px' }}
+          size="small"
+          type="button"
+          variant="contained"
+          color="secondary"
+        >
+          CANCEL
+        </Button>
       </CardActions>
 
       <Collapse in={expanded} timeout="auto" unmountOnExit>
@@ -61,12 +69,10 @@ export const CardControlPending = ({
           }}
         >
           {expanded && (
-            <OfferForm
+            <CancelForm
               handleExpandClose={handleExpandMore}
               _id={_id}
-              customerEqpts={customerEqpts.map(({ _id }: IEqptItem) => _id)}
-              customerTime={customerTime}
-              customerMsg={customerMsg}
+              userId={userId}
             />
           )}
         </CardContent>

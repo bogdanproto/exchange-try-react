@@ -3,10 +3,13 @@ import {
   handleFulfilledCreateProposal,
   handleFulfilledDeleteProposal,
   handleFulfilledGetAllProposal,
+  handleFulfilledGetAllProposalAccepted,
   handleFulfilledGetAllProposalPending,
   handleFulfilledGetAllSpots,
+  handleFulfilledRemoveOfferCustomer,
   handleFulfilledUpdateProposal,
   handleFulfilledUpdateProposalByCustomer,
+  handleFulfilledUpdateProposalStatus,
   handlePendingData,
   handleRejectedData,
 } from '../handlesStatus';
@@ -14,16 +17,20 @@ import {
   createProposal,
   deleteProposal,
   getAllProposal,
+  getAllProposalAccepted,
   getAllProposalPending,
   getAllSpots,
+  removeOfferCustomer,
   updateProposal,
   updateProposalByCustomer,
+  updateProposalStatus,
 } from '../operations';
 import { ISliceData } from 'interfaces';
 
 const initialState: ISliceData = {
   proposals: [],
   proposalsPending: [],
+  proposalsAccepted: [],
   spots: [],
   errorData: null,
   isLoading: false,
@@ -49,6 +56,12 @@ const dataSlice = createSlice({
         getAllProposalPending.fulfilled,
         handleFulfilledGetAllProposalPending
       )
+      .addCase(getAllProposalAccepted.pending, handlePendingData)
+      .addCase(getAllProposalAccepted.rejected, handleRejectedData)
+      .addCase(
+        getAllProposalAccepted.fulfilled,
+        handleFulfilledGetAllProposalAccepted
+      )
       .addCase(createProposal.pending, handlePendingData)
       .addCase(createProposal.rejected, handleRejectedData)
       .addCase(createProposal.fulfilled, handleFulfilledCreateProposal)
@@ -63,6 +76,18 @@ const dataSlice = createSlice({
       .addCase(
         updateProposalByCustomer.fulfilled,
         handleFulfilledUpdateProposalByCustomer
+      )
+      .addCase(removeOfferCustomer.pending, handlePendingData)
+      .addCase(removeOfferCustomer.rejected, handleRejectedData)
+      .addCase(
+        removeOfferCustomer.fulfilled,
+        handleFulfilledRemoveOfferCustomer
+      )
+      .addCase(updateProposalStatus.pending, handlePendingData)
+      .addCase(updateProposalStatus.rejected, handleRejectedData)
+      .addCase(
+        updateProposalStatus.fulfilled,
+        handleFulfilledUpdateProposalStatus
       );
   },
 });

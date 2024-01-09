@@ -1,6 +1,12 @@
 import { IEqptItem, IUserView } from 'interfaces/user/userInterface';
 import { ISpotView } from '../spot/ISpot';
 
+export enum ProposalStatusBack {
+  pending = 'pending',
+  reservation = 'reservation',
+  accepted = 'accepted',
+}
+
 export interface IProposal {
   _id: string;
   ownerId: IUserView;
@@ -11,12 +17,18 @@ export interface IProposal {
   ownerMsg: string | null;
   isShowPhone: boolean;
   isAutoAccept: boolean;
+  statusProposal: ProposalStatusBack;
   customerId: IUserView;
   customerEqpts: IEqptItem[] | [];
   customerTime: string | null;
   customerMsg: string | null;
   createdAt: string;
   updatedAt: string;
+}
+
+export enum ProposalStatusFront {
+  reject = 'reject',
+  accept = 'accept',
 }
 
 export interface IProposalCreate {
@@ -41,6 +53,11 @@ export interface IProposalUpdbyCustomer {
   customerMsg: string;
 }
 
+export interface IProposalUpdStatus {
+  _id: string;
+  statusProposal: ProposalStatusFront;
+}
+
 export interface ICardInfoProposal
   extends Pick<
     IProposal,
@@ -57,7 +74,10 @@ export interface ICardInfoProposalPending
     | 'ownerTime'
     | 'customerId'
     | 'customerEqpts'
-  > {}
+  > {
+  customerTime?: string | null;
+  statusProposal?: ProposalStatusBack;
+}
 
 export interface ICardPendingUser {
   user: IUserView;
