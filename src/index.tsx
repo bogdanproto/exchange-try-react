@@ -10,23 +10,24 @@ import { Provider } from 'react-redux';
 import { persistor, store } from './services/redux/store';
 import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
+import React from 'react';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  // <React.StrictMode>
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <ThemeProvider theme={theme}>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <BrowserRouter basename="/exchange-try-react">
-            <App />
-            <MainStyles />
-          </BrowserRouter>
-        </LocalizationProvider>
-      </ThemeProvider>
-    </PersistGate>
-  </Provider>
-  // </React.StrictMode>
+  <React.StrictMode>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <ThemeProvider theme={theme}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <BrowserRouter basename="/exchange-try-react/">
+              <App />
+              <MainStyles />
+            </BrowserRouter>
+          </LocalizationProvider>
+        </ThemeProvider>
+      </PersistGate>
+    </Provider>
+  </React.StrictMode>
 );

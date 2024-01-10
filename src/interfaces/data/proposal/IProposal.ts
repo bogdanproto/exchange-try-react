@@ -5,6 +5,8 @@ export enum ProposalStatusBack {
   pending = 'pending',
   reservation = 'reservation',
   accepted = 'accepted',
+  cancelled = 'cancelled',
+  past = 'past',
 }
 
 export interface IProposal {

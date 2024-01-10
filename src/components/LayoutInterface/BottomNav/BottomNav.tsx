@@ -9,22 +9,23 @@ import HomeIcon from '@mui/icons-material/ScreenRotationAltOutlined';
 import AddIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import UserIcon from '@mui/icons-material/AccountCircleOutlined';
 import { btn } from '../../../const/components';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+
 import { routes } from '../../../const/routes';
+
+import { formatName } from 'services/helpers';
 import { useTypeSelector } from 'services/redux/customHook/typeHooks';
 import { selectUser } from 'services/redux/auth/selectors';
-import { formatName } from 'services/helpers';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 export const BottomNav = () => {
   const [value, setValue] = useState(0);
   const navigate = useNavigate();
   const { name, avatarCloudURL } = useTypeSelector(selectUser);
 
-  console.log('inBottom');
-
   const handleClick = (_: any, newValue: number) => {
     setValue(newValue);
+
     switch (newValue) {
       case 0:
         navigate(routes.BASE);

@@ -4,7 +4,6 @@ import { Outlet } from 'react-router-dom';
 import { Container } from '@mui/material';
 
 export const LayoutInterface = () => {
-  console.log('layout');
   return (
     <>
       <Header />

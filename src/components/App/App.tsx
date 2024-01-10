@@ -28,8 +28,6 @@ import { Notification } from 'components/Notification/Notification';
 export const App = () => {
   const isAppLoaded = useTypeSelector(selectIsAppLoaded);
 
-  console.log('in App');
-
   const dispatch = useTypeDispatch();
 
   useEffect(() => {
@@ -52,6 +50,8 @@ export const App = () => {
           >
             <Route path={routes.BASE} element={<Home />}>
               <Route path={routes.GORIDE} element={<Goride />} />
+              <Route path={routes.PAST} element={<p>Past</p>} />
+              <Route path={routes.CANCELLED} element={<p>Cancelled</p>} />
               <Route path={routes.PROPOSALS} element={<Proposals />} />
               <Route path={routes.PENDING} element={<Pending />} />
             </Route>

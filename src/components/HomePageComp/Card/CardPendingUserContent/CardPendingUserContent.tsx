@@ -44,14 +44,14 @@ export const CardPendingUserContent = ({
           >
             <Typography
               variant="overline"
-              style={{ lineHeight: '1.5', fontSize: '10px' }}
+              style={{ lineHeight: '1.1', fontSize: '10px' }}
             >
               {name ? name : 'noname'}
             </Typography>
             <Typography
               variant="caption"
               color="text.secondary"
-              style={{ lineHeight: '1.2', fontSize: '8px' }}
+              style={{ lineHeight: '1.6', fontSize: '8px' }}
             >
               {experience
                 ? `${experience} year expirience`

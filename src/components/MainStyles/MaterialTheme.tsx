@@ -20,7 +20,7 @@ export const darkTheme = createTheme({
       main: '#000000',
     },
     success: {
-      main: grey[400],
+      main: grey[200],
     },
     info: {
       main: cyan[900],

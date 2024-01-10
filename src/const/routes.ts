@@ -8,11 +8,13 @@ interface RoutesApp {
   GORIDE: string;
   PROPOSALS: string;
   PENDING: string;
+  PAST: string;
+  CANCELLED: string;
 }
 
 export const routes: RoutesApp = {
   BASE: '/',
-  HOME: 'home/',
+  HOME: 'home',
   LOGIN: '/login',
   SIGNUP: '/signup',
   PROPOSAL: 'proposal',
@@ -20,4 +22,6 @@ export const routes: RoutesApp = {
   GORIDE: 'goride',
   PROPOSALS: 'proposals',
   PENDING: 'pending',
+  PAST: 'past',
+  CANCELLED: 'cancelled',
 };
