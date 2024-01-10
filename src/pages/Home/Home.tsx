@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Navigate, Outlet, useNavigate } from 'react-router-dom';
 import { ToggleButtonGroup, ToggleButton, Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { routes } from 'const';
@@ -34,6 +34,7 @@ export const Home = () => {
 
   return (
     <>
+      {alignment === 'goride' && <Navigate to={routes.GORIDE} />}
       <Box
         style={{
           position: 'fixed',

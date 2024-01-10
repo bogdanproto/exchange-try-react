@@ -25,7 +25,6 @@ export const CardControl = ({
   ownerDate,
   ownerTime,
   isShowPhone,
-  isAutoAccept,
   spot,
   _id,
 }: ICardControlProposal) => {
@@ -90,7 +89,6 @@ export const CardControl = ({
               ownerDate={ownerDate}
               ownerTime={ownerTime}
               ownerisShowPhone={isShowPhone}
-              ownerisAutoAccept={isAutoAccept}
               handleExpandClose={handleExpandClose}
             />
           ) : (

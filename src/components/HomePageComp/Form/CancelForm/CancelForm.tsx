@@ -5,17 +5,18 @@ import { ButtonForm, ErrorInputForm } from 'components/Common';
 import { ICancelForm } from 'interfaces';
 import { schemaCancelForm } from 'const';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useTypeDispatch } from 'services/redux/customHook/typeHooks';
+import { cancelProposal } from 'services/redux/data/operations';
+import { ProposalStatusBack } from 'interfaces/data/proposal/IProposal';
 
 interface ICancelFormProps {
   handleExpandClose: () => void;
   _id: string;
-  userId: string;
 }
 
 export const CancelForm: React.FC<ICancelFormProps> = ({
   handleExpandClose,
   _id,
-  userId,
 }) => {
   const {
     handleSubmit,
@@ -29,14 +30,23 @@ export const CancelForm: React.FC<ICancelFormProps> = ({
     resolver: yupResolver(schemaCancelForm),
   });
 
+  const dispatch = useTypeDispatch();
+
   useEffect(() => {
     if (isSubmitSuccessful) {
       reset();
     }
   }, [isSubmitSuccessful, reset]);
 
-  const onSubmit: SubmitHandler<ICancelForm> = data => {
-    console.log(data);
+  const onSubmit: SubmitHandler<ICancelForm> = ({ message }) => {
+    dispatch(
+      cancelProposal({
+        _id,
+        cancelMsg: message,
+        statusProposal: ProposalStatusBack.cancelled,
+      })
+    );
+
     handleExpandClose();
   };
 

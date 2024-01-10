@@ -32,7 +32,7 @@ export const Drawer = () => {
         PaperProps={{
           style: {
             backgroundColor: theme.palette.secondary.main,
-            height: 'calc(100vh - 56px)',
+            height: 'calc(100vh - 54px)',
             overflowY: 'hidden',
           },
         }}

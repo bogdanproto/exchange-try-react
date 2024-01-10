@@ -16,18 +16,18 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <ThemeProvider theme={theme}>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <BrowserRouter basename="/exchange-try-react/">
-              <App />
-              <MainStyles />
-            </BrowserRouter>
-          </LocalizationProvider>
-        </ThemeProvider>
-      </PersistGate>
-    </Provider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <ThemeProvider theme={theme}>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <BrowserRouter basename="/exchange-try-react/">
+            <App />
+            <MainStyles />
+          </BrowserRouter>
+        </LocalizationProvider>
+      </ThemeProvider>
+    </PersistGate>
+  </Provider>
+  // </React.StrictMode>
 );

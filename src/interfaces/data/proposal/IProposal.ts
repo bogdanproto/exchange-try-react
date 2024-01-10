@@ -18,7 +18,6 @@ export interface IProposal {
   ownerTime: string;
   ownerMsg: string | null;
   isShowPhone: boolean;
-  isAutoAccept: boolean;
   statusProposal: ProposalStatusBack;
   customerId: IUserView;
   customerEqpts: IEqptItem[] | [];
@@ -26,6 +25,10 @@ export interface IProposal {
   customerMsg: string | null;
   createdAt: string;
   updatedAt: string;
+}
+export interface IProposalHistory extends IProposal {
+  cancelUser: IUserView;
+  cancelMsg: string;
 }
 
 export enum ProposalStatusFront {
@@ -41,7 +44,6 @@ export interface IProposalCreate {
   ownerTime: string;
   ownerMsg: string;
   isShowPhone: boolean;
-  isAutoAccept: boolean;
 }
 
 export interface IProposalDelete {
@@ -53,6 +55,12 @@ export interface IProposalUpdbyCustomer {
   customerEqpts: string[];
   customerTime: string;
   customerMsg: string;
+}
+
+export interface IProposalCancel {
+  _id?: string;
+  cancelMsg: string;
+  statusProposal: ProposalStatusBack;
 }
 
 export interface IProposalUpdStatus {
@@ -97,7 +105,6 @@ export interface ICardControlProposal
     | 'ownerTime'
     | 'spot'
     | 'isShowPhone'
-    | 'isAutoAccept'
   > {}
 export interface ICardControlPending
   extends Pick<
@@ -119,7 +126,10 @@ export interface ICardControlHistory
     | 'customerId'
     | 'customerMsg'
     | 'customerTime'
-  > {}
+  > {
+  cancelUser?: IUserView;
+  cancelMsg?: string;
+}
 
 export interface ICardAdditionalProposal
   extends Pick<IProposal, 'ownerId' | 'ownerMsg'> {}

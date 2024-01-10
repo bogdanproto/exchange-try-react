@@ -15,6 +15,7 @@ export type { IEqpt } from './data/eqpt/IEqpt';
 export type {
   IProposal,
   IProposalDelete,
+  IProposalCancel,
   ICardInfoProposal,
   ICardInfoProposalPending,
   ICardControlProposal,

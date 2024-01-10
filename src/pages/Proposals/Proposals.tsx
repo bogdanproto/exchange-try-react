@@ -37,7 +37,6 @@ export const Proposals = () => {
             ownerMsg,
             spot,
             isShowPhone,
-            isAutoAccept,
           }: IProposal) => (
             <Paper
               key={_id}
@@ -64,7 +63,6 @@ export const Proposals = () => {
                   ownerTime={ownerTime}
                   spot={spot}
                   isShowPhone={isShowPhone}
-                  isAutoAccept={isAutoAccept}
                 />
               </Card>
             </Paper>

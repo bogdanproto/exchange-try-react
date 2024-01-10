@@ -7,3 +7,5 @@ export * from './proposal/updateProposalAPI';
 export * from './proposal/updateProposalByCustomerAPI';
 export * from './proposal/removeOfferCustomerAPI';
 export * from './proposal/updateProposalStatusAPI';
+export * from './proposal/cancelProposalAPI';
+export * from './proposal/getAllHistoryProposalsAPI';

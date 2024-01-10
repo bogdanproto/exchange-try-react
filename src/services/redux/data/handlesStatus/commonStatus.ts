@@ -13,3 +13,13 @@ export const handleRejectedData = (
   state.isLoading = false;
   state.errorData = action.payload;
 };
+
+export const handleDefaultData = (state: ISliceData) => {
+  state.proposals = [];
+  state.proposalsPending = [];
+  state.proposalsAccepted = [];
+  state.proposalsHistory = [];
+  state.spots = [];
+  state.errorData = null;
+  state.isLoading = false;
+};
