@@ -8,23 +8,23 @@ import {
 
 import { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
-import { useTypeSelector } from 'services/redux/customHook/typeHooks';
-import { selectUser } from 'services/redux/auth/selectors';
 import { CancelForm } from '../../Form/CancelForm/CancelForm';
 import { getRestOfDays } from 'services/helpers';
+import { ProposalStatusBack } from 'interfaces/data/proposal/IProposal';
 
 interface ICardControlAcceptedProps {
   _id: string;
   ownerDate: any;
+  statusProposal?: ProposalStatusBack;
 }
 
 export const CardControlAccepted = ({
   _id,
   ownerDate,
+  statusProposal,
 }: ICardControlAcceptedProps) => {
   const theme = useTheme();
   const [expanded, setExpanded] = useState(false);
-  const { _id: userId } = useTypeSelector(selectUser);
 
   const handleExpandMore = () => {
     setExpanded(!expanded);
@@ -39,7 +39,7 @@ export const CardControlAccepted = ({
         style={{
           height: '34px',
           padding: '6px 8px 6px 8px',
-          justifyContent: 'space-between',
+          justifyContent: statusProposal ? 'flex-end' : 'space-between',
           backgroundColor: theme.palette.info.main,
         }}
       >
@@ -47,19 +47,25 @@ export const CardControlAccepted = ({
           variant="overline"
           style={{ lineHeight: '1.2', fontSize: '14px' }}
         >
-          {restDays}
+          {statusProposal === ProposalStatusBack.cancelled
+            ? statusProposal
+            : statusProposal === ProposalStatusBack.accepted
+            ? ownerDate
+            : restDays}
         </Typography>
 
-        <Button
-          onClick={handleExpandMore}
-          style={{ height: '22px' }}
-          size="small"
-          type="button"
-          variant="contained"
-          color="secondary"
-        >
-          CANCEL
-        </Button>
+        {!statusProposal && (
+          <Button
+            onClick={handleExpandMore}
+            style={{ height: '22px' }}
+            size="small"
+            type="button"
+            variant="contained"
+            color="secondary"
+          >
+            CANCEL
+          </Button>
+        )}
       </CardActions>
 
       <Collapse in={expanded} timeout="auto" unmountOnExit>
@@ -69,11 +75,7 @@ export const CardControlAccepted = ({
           }}
         >
           {expanded && (
-            <CancelForm
-              handleExpandClose={handleExpandMore}
-              _id={_id}
-              userId={userId}
-            />
+            <CancelForm handleExpandClose={handleExpandMore} _id={_id} />
           )}
         </CardContent>
       </Collapse>

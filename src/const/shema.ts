@@ -38,7 +38,6 @@ export const schemaProposalForm = yup.object().shape({
     .required('Equipment is required'),
   message: yup.mixed().required(),
   is_phone: yup.boolean().required(),
-  auto_accept: yup.boolean().required(),
 });
 
 export const schemaOfferForm = yup.object().shape({

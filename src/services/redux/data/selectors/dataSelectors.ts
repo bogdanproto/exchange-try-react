@@ -6,3 +6,5 @@ export const selectProposalsPending = (state: RootState) =>
   state.data.proposalsPending;
 export const selectProposalAccepted = (state: RootState) =>
   state.data.proposalsAccepted;
+export const selectProposalHistory = (state: RootState) =>
+  state.data.proposalsHistory;

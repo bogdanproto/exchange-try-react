@@ -7,8 +7,11 @@ export const selectNotification = (state: RootState) => {
   return {
     error: errorAuth || errorData,
     isLoading: isRefreshing || isLoading,
+    errorAuth,
   };
 };
 
 export const selectIsAppLoaded = (state: RootState) =>
   state.authUser.isAppLoaded;
+
+export const selectErrorData = (state: RootState) => state.data.errorData;

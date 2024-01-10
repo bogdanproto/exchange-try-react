@@ -32,7 +32,6 @@ interface IProposalFormProps {
   ownerEqpts?: string[];
   ownerMsg?: any;
   ownerisShowPhone?: boolean;
-  ownerisAutoAccept?: boolean;
   handleExpandClose?: () => void;
 }
 
@@ -44,7 +43,6 @@ export const ProposalForm: React.FC<IProposalFormProps> = ({
   ownerEqpts,
   ownerMsg,
   ownerisShowPhone,
-  ownerisAutoAccept,
   handleExpandClose,
 }) => {
   const dispatch = useTypeDispatch();
@@ -65,7 +63,6 @@ export const ProposalForm: React.FC<IProposalFormProps> = ({
           ? dayjs(ownerTime, 'HH:mm')
           : dayjs(),
       date: ownerDate ? dayjs(ownerDate) : dayjs(),
-      auto_accept: ownerisAutoAccept ?? false,
       message: ownerMsg ?? '',
       is_phone: ownerisShowPhone ?? false,
     },
@@ -238,18 +235,6 @@ export const ProposalForm: React.FC<IProposalFormProps> = ({
                 <FormControlLabel
                   control={<Switch checked={field.value} {...field} />}
                   label="Show my phone number"
-                />
-              )}
-            />
-
-            <Controller
-              name="auto_accept"
-              control={control}
-              render={({ field }) => (
-                <FormControlLabel
-                  control={<Switch {...field} checked={field.value} />}
-                  label="Auto accept"
-                  color="primary"
                 />
               )}
             />

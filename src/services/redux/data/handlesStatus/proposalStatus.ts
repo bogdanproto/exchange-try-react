@@ -1,12 +1,24 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { IProposalDelete, IProposal, ISliceData } from 'interfaces';
-import { ProposalStatusBack } from 'interfaces/data/proposal/IProposal';
+import {
+  IProposalHistory,
+  ProposalStatusBack,
+} from 'interfaces/data/proposal/IProposal';
 
 export const handleFulfilledGetAllProposal = (
   state: ISliceData,
   action: PayloadAction<IProposal[]>
 ) => {
   state.proposals = action.payload;
+  state.isLoading = false;
+  state.errorData = null;
+};
+
+export const handleFulfilledGetAllHistoryProposal = (
+  state: ISliceData,
+  action: PayloadAction<IProposalHistory[]>
+) => {
+  state.proposalsHistory = action.payload;
   state.isLoading = false;
   state.errorData = null;
 };
@@ -112,6 +124,22 @@ export const handleFulfilledUpdateProposalStatus = (
   } else {
     state.proposals = [...state.proposals, updProposal];
   }
+
+  state.isLoading = false;
+  state.errorData = null;
+};
+
+export const handleFulfilledCancelProposal = (
+  state: ISliceData,
+  action: PayloadAction<IProposalHistory>
+) => {
+  const updProposal = action.payload;
+
+  state.proposalsAccepted = state.proposalsAccepted.filter(
+    proposal => proposal._id !== updProposal._id
+  );
+
+  state.proposalsHistory = [...state.proposalsHistory, updProposal];
 
   state.isLoading = false;
   state.errorData = null;

@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
+  handleDefaultData,
+  handleFulfilledCancelProposal,
   handleFulfilledCreateProposal,
   handleFulfilledDeleteProposal,
+  handleFulfilledGetAllHistoryProposal,
   handleFulfilledGetAllProposal,
   handleFulfilledGetAllProposalAccepted,
   handleFulfilledGetAllProposalPending,
@@ -14,8 +17,10 @@ import {
   handleRejectedData,
 } from '../handlesStatus';
 import {
+  cancelProposal,
   createProposal,
   deleteProposal,
+  getAllHistoryProposal,
   getAllProposal,
   getAllProposalAccepted,
   getAllProposalPending,
@@ -26,11 +31,13 @@ import {
   updateProposalStatus,
 } from '../operations';
 import { ISliceData } from 'interfaces';
+import { logOutUser } from 'services/redux/auth/operationsAuth';
 
 const initialState: ISliceData = {
   proposals: [],
   proposalsPending: [],
   proposalsAccepted: [],
+  proposalsHistory: [],
   spots: [],
   errorData: null,
   isLoading: false,
@@ -44,12 +51,19 @@ const dataSlice = createSlice({
   },
   extraReducers: builder => {
     builder
+      .addCase(logOutUser.fulfilled, handleDefaultData)
       .addCase(getAllSpots.pending, handlePendingData)
       .addCase(getAllSpots.rejected, handleRejectedData)
       .addCase(getAllSpots.fulfilled, handleFulfilledGetAllSpots)
       .addCase(getAllProposal.pending, handlePendingData)
       .addCase(getAllProposal.rejected, handleRejectedData)
       .addCase(getAllProposal.fulfilled, handleFulfilledGetAllProposal)
+      .addCase(getAllHistoryProposal.pending, handlePendingData)
+      .addCase(getAllHistoryProposal.rejected, handleRejectedData)
+      .addCase(
+        getAllHistoryProposal.fulfilled,
+        handleFulfilledGetAllHistoryProposal
+      )
       .addCase(getAllProposalPending.pending, handlePendingData)
       .addCase(getAllProposalPending.rejected, handleRejectedData)
       .addCase(
@@ -88,7 +102,10 @@ const dataSlice = createSlice({
       .addCase(
         updateProposalStatus.fulfilled,
         handleFulfilledUpdateProposalStatus
-      );
+      )
+      .addCase(cancelProposal.pending, handlePendingData)
+      .addCase(cancelProposal.rejected, handleRejectedData)
+      .addCase(cancelProposal.fulfilled, handleFulfilledCancelProposal);
   },
 });
 

@@ -10,6 +10,8 @@ export const CardControlHistory = ({
   customerId,
   customerMsg,
   customerTime,
+  cancelUser,
+  cancelMsg,
 }: ICardControlHistory) => {
   const [expanded, setExpanded] = useState(false);
 
@@ -32,6 +34,8 @@ export const CardControlHistory = ({
             customerId={customerId}
             customerMsg={customerMsg}
             customerTime={customerTime}
+            cancelUser={cancelUser}
+            cancelMsg={cancelMsg}
           />
         </CardContent>
       </Collapse>

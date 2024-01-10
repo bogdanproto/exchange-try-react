@@ -10,7 +10,6 @@ export const toFormatProposalObj = ({
   eqpts,
   message,
   is_phone,
-  auto_accept,
 }: IProposalForm): IProposalCreate => ({
   ownerEqpts: eqpts,
   spot,
@@ -18,5 +17,4 @@ export const toFormatProposalObj = ({
   ownerTime: !allday ? dayjs(time).format('HH:mm') : 'allday',
   ownerMsg: message,
   isShowPhone: is_phone,
-  isAutoAccept: auto_accept,
 });
