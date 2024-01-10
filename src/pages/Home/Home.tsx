@@ -1,30 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { ToggleButtonGroup, ToggleButton, Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { routes } from 'const';
-import { TypeProposalFilter } from 'components/HomePageComp';
 
 export const Home = () => {
   const theme = useTheme();
   const [alignment, setAlignment] = useState(routes.GORIDE);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    switch (alignment) {
-      case 'goride':
-        navigate(routes.GORIDE);
-        break;
-      case 'proposals':
-        navigate(routes.PROPOSALS);
-        break;
-      case 'pending':
-        navigate(routes.PENDING);
-        break;
-      default:
-        navigate(routes.PROPOSALS);
-    }
-  }, [navigate, alignment]);
 
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,
@@ -32,6 +15,20 @@ export const Home = () => {
   ) => {
     if (newAlignment !== null) {
       setAlignment(newAlignment);
+
+      switch (newAlignment) {
+        case 'goride':
+          navigate(routes.GORIDE);
+          break;
+        case 'proposals':
+          navigate(routes.PROPOSALS);
+          break;
+        case 'pending':
+          navigate(routes.PENDING);
+          break;
+        default:
+          navigate(routes.PROPOSALS);
+      }
     }
   };
 
@@ -70,8 +67,15 @@ export const Home = () => {
             PENDING
           </ToggleButton>
         </ToggleButtonGroup>
-        <TypeProposalFilter />
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'right',
+            marginTop: '4px',
+          }}
+        ></Box>
       </Box>
+
       <Box
         style={{
           paddingTop: '28px',
