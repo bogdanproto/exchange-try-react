@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import {
   handleDefaultData,
   handleFulfilledCancelProposal,
@@ -32,12 +32,17 @@ import {
 } from '../operations';
 import { ISliceData } from 'interfaces';
 import { logOutUser } from 'services/redux/auth/operationsAuth';
+import { setFilterHistoryProposals } from '../reducers';
+import { ProposalStatusBack } from 'interfaces/data/proposal/IProposal';
 
 const initialState: ISliceData = {
   proposals: [],
   proposalsPending: [],
   proposalsAccepted: [],
   proposalsHistory: [],
+  filter: {
+    filterProposalsHistory: ProposalStatusBack.accepted,
+  },
   spots: [],
   errorData: null,
   isLoading: false,
@@ -47,66 +52,77 @@ const dataSlice = createSlice({
   name: 'data',
   initialState,
   reducers: {
-    // fill in primary logic here
+    toFilterHistoryProposals: setFilterHistoryProposals,
   },
   extraReducers: builder => {
     builder
       .addCase(logOutUser.fulfilled, handleDefaultData)
-      .addCase(getAllSpots.pending, handlePendingData)
-      .addCase(getAllSpots.rejected, handleRejectedData)
       .addCase(getAllSpots.fulfilled, handleFulfilledGetAllSpots)
-      .addCase(getAllProposal.pending, handlePendingData)
-      .addCase(getAllProposal.rejected, handleRejectedData)
       .addCase(getAllProposal.fulfilled, handleFulfilledGetAllProposal)
-      .addCase(getAllHistoryProposal.pending, handlePendingData)
-      .addCase(getAllHistoryProposal.rejected, handleRejectedData)
       .addCase(
         getAllHistoryProposal.fulfilled,
         handleFulfilledGetAllHistoryProposal
       )
-      .addCase(getAllProposalPending.pending, handlePendingData)
-      .addCase(getAllProposalPending.rejected, handleRejectedData)
       .addCase(
         getAllProposalPending.fulfilled,
         handleFulfilledGetAllProposalPending
       )
-      .addCase(getAllProposalAccepted.pending, handlePendingData)
-      .addCase(getAllProposalAccepted.rejected, handleRejectedData)
       .addCase(
         getAllProposalAccepted.fulfilled,
         handleFulfilledGetAllProposalAccepted
       )
-      .addCase(createProposal.pending, handlePendingData)
-      .addCase(createProposal.rejected, handleRejectedData)
       .addCase(createProposal.fulfilled, handleFulfilledCreateProposal)
-      .addCase(deleteProposal.pending, handlePendingData)
-      .addCase(deleteProposal.rejected, handleRejectedData)
       .addCase(deleteProposal.fulfilled, handleFulfilledDeleteProposal)
-      .addCase(updateProposal.pending, handlePendingData)
-      .addCase(updateProposal.rejected, handleRejectedData)
       .addCase(updateProposal.fulfilled, handleFulfilledUpdateProposal)
-      .addCase(updateProposalByCustomer.pending, handlePendingData)
-      .addCase(updateProposalByCustomer.rejected, handleRejectedData)
       .addCase(
         updateProposalByCustomer.fulfilled,
         handleFulfilledUpdateProposalByCustomer
       )
-      .addCase(removeOfferCustomer.pending, handlePendingData)
-      .addCase(removeOfferCustomer.rejected, handleRejectedData)
       .addCase(
         removeOfferCustomer.fulfilled,
         handleFulfilledRemoveOfferCustomer
       )
-      .addCase(updateProposalStatus.pending, handlePendingData)
-      .addCase(updateProposalStatus.rejected, handleRejectedData)
       .addCase(
         updateProposalStatus.fulfilled,
         handleFulfilledUpdateProposalStatus
       )
-      .addCase(cancelProposal.pending, handlePendingData)
-      .addCase(cancelProposal.rejected, handleRejectedData)
-      .addCase(cancelProposal.fulfilled, handleFulfilledCancelProposal);
+      .addCase(cancelProposal.fulfilled, handleFulfilledCancelProposal)
+      .addMatcher(
+        isAnyOf(
+          getAllSpots.pending,
+          getAllProposal.pending,
+          getAllHistoryProposal.pending,
+          getAllProposalPending.pending,
+          getAllProposalAccepted.pending,
+          createProposal.pending,
+          deleteProposal.pending,
+          updateProposal.pending,
+          updateProposalByCustomer.pending,
+          removeOfferCustomer.pending,
+          updateProposalStatus.pending,
+          cancelProposal.pending
+        ),
+        handlePendingData
+      )
+      .addMatcher(
+        isAnyOf(
+          getAllSpots.rejected,
+          getAllProposal.rejected,
+          getAllHistoryProposal.rejected,
+          getAllProposalPending.rejected,
+          getAllProposalAccepted.rejected,
+          createProposal.rejected,
+          deleteProposal.rejected,
+          updateProposal.rejected,
+          updateProposalByCustomer.rejected,
+          removeOfferCustomer.rejected,
+          updateProposalStatus.rejected,
+          cancelProposal.rejected
+        ),
+        handleRejectedData
+      );
   },
 });
 
 export const dataSliceReducer = dataSlice.reducer;
+export const { toFilterHistoryProposals } = dataSlice.actions;

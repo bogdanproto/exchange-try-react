@@ -10,3 +10,4 @@ export * from './List/ListItemDelete/ListItemDelete';
 export * from './Loader/Loader';
 export * from './Logo/Logo';
 export * from './Notification/Notification';
+export * from './Filter/FilterHistoryProposals/FilterHistoryProposals';
