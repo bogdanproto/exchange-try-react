@@ -11,4 +11,4 @@ export * from './Card/CardHistoryInfo/CardHistoryInfo';
 export * from './Card/CardOwnerControl/CardOwnerControl';
 export * from './Card/CardControlAccepted/CardControlAccepted';
 export * from './Form/CancelForm/CancelForm';
-export * from './Filter/TypeProposalFilter';
+export * from '../Common/Filter/TypeProposalFilter/TypeProposalFilter';

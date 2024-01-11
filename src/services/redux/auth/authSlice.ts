@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import {
   signUpUser,
   logInUser,
@@ -55,30 +55,45 @@ const authUserSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(signUpUser.pending, handlePendingAuth)
       .addCase(signUpUser.fulfilled, handleFulfilledSignUp)
-      .addCase(signUpUser.rejected, handleRejectedAuth)
-      .addCase(logInUser.pending, handlePendingAuth)
       .addCase(logInUser.fulfilled, handleFulfilledLogIn)
-      .addCase(logInUser.rejected, handleRejectedAuth)
-      .addCase(logOutUser.pending, handlePendingAuth)
       .addCase(logOutUser.fulfilled, handleFulfilledLogOut)
-      .addCase(logOutUser.rejected, handleRejectedAuth)
-      .addCase(refreshUser.pending, handlePendingAuth)
       .addCase(refreshUser.fulfilled, handleFulfilledRefresh)
-      .addCase(refreshUser.rejected, handleRejectedAuth)
-      .addCase(updUserAvatar.pending, handlePendingAuth)
       .addCase(updUserAvatar.fulfilled, handleFulfilledAvatar)
-      .addCase(updUserAvatar.rejected, handleRejected)
-      .addCase(updUserProfile.pending, handlePendingAuth)
       .addCase(updUserProfile.fulfilled, handleFulfilledProfile)
-      .addCase(updUserProfile.rejected, handleRejected)
-      .addCase(updUserEqpts.pending, handlePendingAuth)
       .addCase(updUserEqpts.fulfilled, handleFulfilledUpdEqpts)
-      .addCase(updUserEqpts.rejected, handleRejected)
-      .addCase(delUserEqpt.pending, handlePendingAuth)
       .addCase(delUserEqpt.fulfilled, handleFulfilledDeleteEqpt)
-      .addCase(delUserEqpt.rejected, handleRejected);
+      .addMatcher(
+        isAnyOf(
+          signUpUser.pending,
+          logInUser.pending,
+          logOutUser.pending,
+          refreshUser.pending,
+          updUserAvatar.pending,
+          updUserProfile.pending,
+          updUserEqpts.pending,
+          delUserEqpt.pending
+        ),
+        handlePendingAuth
+      )
+      .addMatcher(
+        isAnyOf(
+          updUserAvatar.rejected,
+          updUserProfile.rejected,
+          updUserEqpts.rejected,
+          delUserEqpt.rejected
+        ),
+        handleRejected
+      )
+      .addMatcher(
+        isAnyOf(
+          signUpUser.rejected,
+          logInUser.rejected,
+          logOutUser.rejected,
+          refreshUser.rejected
+        ),
+        handleRejectedAuth
+      );
   },
 });
 

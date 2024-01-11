@@ -109,7 +109,7 @@ export const CardHistoryInfo = ({
           <Typography
             variant="h6"
             color="text.secondary"
-            style={{ lineHeight: '1.0', fontSize: '16px' }}
+            style={{ lineHeight: '1.0', fontSize: '12px' }}
           >
             {`Cancelled by  ${cancelUser?.name}`}
           </Typography>
