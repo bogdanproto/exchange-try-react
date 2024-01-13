@@ -2,21 +2,33 @@ import { Card, Box, Paper } from '@mui/material';
 import { CardControl, CardInfo } from 'components/HomePageComp';
 import { IProposal } from 'interfaces';
 import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 import {
   useTypeDispatch,
   useTypeSelector,
 } from 'services/redux/customHook/typeHooks';
 import { getAllProposal } from 'services/redux/data/operations';
-import { selectProposals } from 'services/redux/data/selectors';
+import {
+  selectFilterProposal,
+  selectProposals,
+} from 'services/redux/data/selectors';
 
 export const Proposals = () => {
+  const { ref, inView } = useInView({
+    threshold: 0,
+  });
   const proposals = useTypeSelector(selectProposals);
-
+  const filter = useTypeSelector(selectFilterProposal);
   const dispatch = useTypeDispatch();
 
+  console.log(inView);
+
   useEffect(() => {
-    dispatch(getAllProposal());
-  }, [dispatch]);
+    if (inView) {
+      const params = { ...filter, page: 1, limit: 10 };
+      dispatch(getAllProposal(params));
+    }
+  }, [dispatch, filter, inView]);
 
   return (
     <Box
@@ -68,6 +80,7 @@ export const Proposals = () => {
             </Paper>
           )
         )}
+      <Box ref={ref} />
     </Box>
   );
 };

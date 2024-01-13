@@ -9,6 +9,19 @@ import {
 export const selectFilterHistoryProposals = (state: RootState) =>
   state.data.filter.filterProposalsHistory;
 
+export const selectFilterProposalSpot = (state: RootState) =>
+  state.data.filter.filterProposals.spot;
+
+export const selectFilterProposalDate = (state: RootState) =>
+  state.data.filter.filterProposals.date;
+
+export const selectFilterProposal = createSelector(
+  [selectFilterProposalSpot, selectFilterProposalDate],
+  (spot, date) => {
+    return { spot, date };
+  }
+);
+
 export const selectFilteredHistoryProposals = createSelector(
   [selectProposalHistory, selectFilterHistoryProposals],
   (proposals, statusFilter) => {

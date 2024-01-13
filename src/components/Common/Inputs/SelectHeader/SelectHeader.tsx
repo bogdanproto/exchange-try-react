@@ -1,6 +1,5 @@
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { MenuItem, FormControl, Select } from '@mui/material';
+import { SelectChangeEvent } from '@mui/material/Select';
 import { useState } from 'react';
 import { useTypeSelector } from 'services/redux/customHook/typeHooks';
 import { selectUser } from 'services/redux/auth/selectors';
