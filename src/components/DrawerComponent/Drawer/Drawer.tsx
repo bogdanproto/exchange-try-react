@@ -3,7 +3,7 @@ import HistoryIcon from '@mui/icons-material/History';
 import { useState } from 'react';
 import { Notifications } from '@mui/icons-material';
 import { DrawerBox } from '../DrawerBox/DrawerBox';
-import { PastProposalsInterFace } from '../PastProposalsInterFace/PastProposalsInterFace';
+import { PastProposalsInterFace } from '../../PastProposalsInterFace/PastProposalsInterFace';
 import { useTheme } from '@mui/material/styles';
 
 export const Drawer = () => {

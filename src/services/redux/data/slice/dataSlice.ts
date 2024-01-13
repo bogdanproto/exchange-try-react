@@ -32,7 +32,7 @@ import {
 } from '../operations';
 import { ISliceData } from 'interfaces';
 import { logOutUser } from 'services/redux/auth/operationsAuth';
-import { setFilterHistoryProposals } from '../reducers';
+import { setFilterHistoryProposals, setFilterProposals } from '../reducers';
 import { ProposalStatusBack } from 'interfaces/data/proposal/IProposal';
 
 const initialState: ISliceData = {
@@ -42,6 +42,10 @@ const initialState: ISliceData = {
   proposalsHistory: [],
   filter: {
     filterProposalsHistory: ProposalStatusBack.accepted,
+    filterProposals: {
+      spot: null,
+      date: null,
+    },
   },
   spots: [],
   errorData: null,
@@ -53,6 +57,7 @@ const dataSlice = createSlice({
   initialState,
   reducers: {
     toFilterHistoryProposals: setFilterHistoryProposals,
+    toFilterProposals: setFilterProposals,
   },
   extraReducers: builder => {
     builder
@@ -125,4 +130,5 @@ const dataSlice = createSlice({
 });
 
 export const dataSliceReducer = dataSlice.reducer;
-export const { toFilterHistoryProposals } = dataSlice.actions;
+export const { toFilterHistoryProposals, toFilterProposals } =
+  dataSlice.actions;

@@ -1,3 +1,4 @@
+import { IFilterProposals } from './filter/filter';
 import {
   IProposal,
   IProposalHistory,
@@ -12,6 +13,7 @@ export interface ISliceData {
   proposalsHistory: IProposalHistory[] | [];
   filter: {
     filterProposalsHistory: ProposalStatusBack;
+    filterProposals: IFilterProposals;
   };
   spots: ISpot[] | [];
   errorData: string | null;

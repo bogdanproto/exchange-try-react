@@ -47,3 +47,5 @@ export type {
   IEqptId,
   ISportItem,
 } from './user/userInterface';
+
+export type { IFilterProposals, IParamsProposals } from './data/filter/filter';

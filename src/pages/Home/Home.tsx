@@ -3,6 +3,7 @@ import { Navigate, Outlet, useNavigate } from 'react-router-dom';
 import { ToggleButtonGroup, ToggleButton, Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { routes } from 'const';
+import { FilterProposals } from 'components/Common/Filter';
 
 export const Home = () => {
   const theme = useTheme();
@@ -56,7 +57,7 @@ export const Home = () => {
           aria-label="Platform proposals"
           fullWidth
           size="small"
-          style={{ height: '28px' }}
+          style={{ height: '36px' }}
         >
           <ToggleButton value="goride" sx={{ fontWeight: 'bold' }}>
             GO RIDE
@@ -75,11 +76,12 @@ export const Home = () => {
             marginTop: '4px',
           }}
         ></Box>
+        {alignment === 'proposals' && <FilterProposals />}
       </Box>
 
       <Box
         style={{
-          paddingTop: '28px',
+          paddingTop: '88px',
         }}
       >
         <Outlet />
