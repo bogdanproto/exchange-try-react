@@ -11,3 +11,4 @@ export * from './Loader/Loader';
 export * from './Logo/Logo';
 export * from './Notification/Notification';
 export * from './Filter/FilterHistoryProposals/FilterHistoryProposals';
+export * from './Observer/Obsever';

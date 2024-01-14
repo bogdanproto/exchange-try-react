@@ -36,7 +36,12 @@ import { setFilterHistoryProposals, setFilterProposals } from '../reducers';
 import { ProposalStatusBack } from 'interfaces/data/proposal/IProposal';
 
 const initialState: ISliceData = {
-  proposals: [],
+  proposals: {
+    items: [],
+    page: null,
+    limit: null,
+    total: null,
+  },
   proposalsPending: [],
   proposalsAccepted: [],
   proposalsHistory: [],

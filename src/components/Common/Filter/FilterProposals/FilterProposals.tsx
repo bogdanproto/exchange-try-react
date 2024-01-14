@@ -8,15 +8,23 @@ import {
   useTypeSelector,
 } from 'services/redux/customHook/typeHooks';
 import { getAllSpots } from 'services/redux/data/operations';
-import { selectSpots } from 'services/redux/data/selectors';
+import {
+  selectFilterProposal,
+  selectSpots,
+} from 'services/redux/data/selectors';
 import { toFilterProposals } from 'services/redux/data/slice/dataSlice';
 
 export const FilterProposals = () => {
   const dispatch = useTypeDispatch();
   const spots = useTypeSelector(selectSpots);
-  const [filter, setFilter] = useState<boolean>(false);
-  const [spot, setSpot] = useState<ISpot | null>(null);
-  const [date, setData] = React.useState<Dayjs | null>(null);
+  const currentFilter = useTypeSelector(selectFilterProposal);
+  const [filter, setFilter] = useState<boolean>(
+    currentFilter.spot === null && currentFilter.date === null ? false : true
+  );
+  const [spot, setSpot] = useState<ISpot | null>(currentFilter.spot);
+  const [date, setDate] = React.useState<Dayjs | null>(
+    currentFilter.date ? dayjs(currentFilter.date, 'YYYY-MM-DD') : null
+  );
 
   useEffect(() => {
     if (!spots.length) {
@@ -25,18 +33,25 @@ export const FilterProposals = () => {
   }, [dispatch, spots.length]);
 
   useEffect(() => {
+    if ((!filter && !spot && !date) || (filter && !spot && !date)) {
+      return;
+    }
+
+    if (!filter) {
+      setSpot(_ => null);
+      setDate(_ => null);
+    }
+
     dispatch(
       toFilterProposals({
-        spot,
-        date: date ? dayjs(date).format('YYYY-MM-DD') : null,
+        spot: filter ? spot : null,
+        date: filter && date ? dayjs(date).format('YYYY-MM-DD') : null,
       })
     );
-  }, [date, dispatch, spot]);
+  }, [date, dispatch, filter, spot]);
 
   const handleChangeSwitch = () => {
     setFilter(!filter);
-    setSpot(null);
-    setData(null);
   };
 
   return (
@@ -56,7 +71,7 @@ export const FilterProposals = () => {
 
       <Autocomplete
         disabled={!filter}
-        value={spot}
+        value={filter ? spot : null}
         onChange={(event: any, newValue: ISpot | null) => setSpot(newValue)}
         id="spot"
         options={spots}
@@ -77,9 +92,10 @@ export const FilterProposals = () => {
 
       <MobileDatePicker
         disabled={!filter}
-        value={date}
+        value={filter ? date : null}
+        minDate={dayjs()}
         format="DD-MM-YYYY"
-        onAccept={newValue => setData(newValue)}
+        onAccept={newValue => setDate(newValue)}
         sx={{
           width: '120px',
           '.MuiInputBase-root': {

@@ -15,7 +15,12 @@ export const handleRejectedData = (
 };
 
 export const handleDefaultData = (state: ISliceData) => {
-  state.proposals = [];
+  state.proposals = {
+    items: [],
+    page: null,
+    limit: null,
+    total: null,
+  };
   state.proposalsPending = [];
   state.proposalsAccepted = [];
   state.proposalsHistory = [];

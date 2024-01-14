@@ -26,6 +26,14 @@ export interface IProposal {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface IProposals {
+  items: IProposal[] | [];
+  page: number | null;
+  limit: number | null;
+  total: number | null;
+}
+
 export interface IProposalHistory extends IProposal {
   cancelUser: IUserView;
   cancelMsg: string;
