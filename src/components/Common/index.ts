@@ -9,6 +9,7 @@ export * from './Inputs/SingleInputForm/SingleInputForm';
 export * from './List/ListItemDelete/ListItemDelete';
 export * from './Loader/Loader';
 export * from './Logo/Logo';
-export * from './Notification/Notification';
+export * from './NotificationBox/NotificationBox';
 export * from './Filter/FilterHistoryProposals/FilterHistoryProposals';
 export * from './Observer/Obsever';
+export * from './NoData/NoData';

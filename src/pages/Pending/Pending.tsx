@@ -1,4 +1,5 @@
 import { Card, Box, Paper } from '@mui/material';
+import { NoData } from 'components/Common';
 import {
   CardControlHistory,
   CardControlPending,
@@ -29,7 +30,7 @@ export const Pending = () => {
         gap: '16px',
       }}
     >
-      {proposals.length > 0 &&
+      {proposals.length > 0 ? (
         proposals?.map(
           ({
             _id,
@@ -48,7 +49,7 @@ export const Pending = () => {
               key={_id}
               elevation={2}
               style={{
-                padding: '8px',
+                padding: '4px',
                 borderRadius: '10px',
               }}
             >
@@ -81,7 +82,10 @@ export const Pending = () => {
               </Card>
             </Paper>
           )
-        )}
+        )
+      ) : (
+        <NoData />
+      )}
     </Box>
   );
 };

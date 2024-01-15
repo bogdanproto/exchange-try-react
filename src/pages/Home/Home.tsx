@@ -4,7 +4,6 @@ import { ToggleButtonGroup, ToggleButton, Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { routes } from 'const';
 import { FilterProposals } from 'components/Common/Filter';
-import { ProposalsGetData } from 'components/ProposalsPageCpmponent/ProposalsGetData/ProposalsGetData';
 
 export const Home = () => {
   const theme = useTheme();
@@ -77,12 +76,7 @@ export const Home = () => {
             marginTop: '4px',
           }}
         ></Box>
-        {alignment === 'proposals' && (
-          <>
-            <ProposalsGetData />
-            <FilterProposals />
-          </>
-        )}
+        {alignment === 'proposals' && <FilterProposals />}
       </Box>
 
       <Box

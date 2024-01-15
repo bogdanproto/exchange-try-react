@@ -18,5 +18,6 @@ export interface ISliceData {
   };
   spots: ISpot[] | [];
   errorData: string | null;
+  succesMsg: string | null;
   isLoading: boolean;
 }

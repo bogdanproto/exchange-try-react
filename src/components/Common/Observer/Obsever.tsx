@@ -1,6 +1,4 @@
-import { useState } from 'react';
 import { InView } from 'react-intersection-observer';
-import { selectIsDataLoading } from 'services/redux/commonSelectors';
 import {
   useTypeDispatch,
   useTypeSelector,
@@ -8,27 +6,19 @@ import {
 import { getAllProposal } from 'services/redux/data/operations';
 import {
   selectFilterProposal,
-  selectProposals,
-  selectProposalsPage,
-  selectProposalsTotal,
+  selectProposalsInfo,
 } from 'services/redux/data/selectors';
 
 export const Observer = () => {
-  const currentFilter = useTypeSelector(selectFilterProposal);
-  const proposals = useTypeSelector(selectProposals);
-  const page = useTypeSelector(selectProposalsPage);
-  const total = useTypeSelector(selectProposalsTotal);
+  const filter = useTypeSelector(selectFilterProposal);
+  const { page, total, currentTotal } = useTypeSelector(selectProposalsInfo);
   const dispatch = useTypeDispatch();
-  // const [inView, setInView] = useState(false);
-
-  // console.log(inView);
 
   const handleChange = (inView: boolean) => {
-    console.log(inView);
-    if (inView && proposals.length < total) {
+    if (inView && currentTotal < total) {
       dispatch(
         getAllProposal({
-          ...currentFilter,
+          ...filter,
           page: page + 1,
           limit: 10,
         })
@@ -37,10 +27,6 @@ export const Observer = () => {
   };
 
   return (
-    <InView onChange={handleChange}>
-      {({ inView, ref, entry }) => {
-        return <div ref={ref} />;
-      }}
-    </InView>
+    <InView onChange={handleChange}>{({ ref }) => <div ref={ref} />}</InView>
   );
 };

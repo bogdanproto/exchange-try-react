@@ -2,21 +2,21 @@ import {
   CardContent,
   CardActions,
   Collapse,
-  IconButton,
   Button,
+  Typography,
 } from '@mui/material';
 
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useState } from 'react';
 import { OfferForm } from '../../Form/OfferForm/OfferForm';
-import { CardAdditionalInfo } from '../CardAdditionalInfo/CardAdditionalInfo';
 import { ICardControlProposal, IEqptItem } from 'interfaces';
 import { useTypeSelector } from 'services/redux/customHook/typeHooks';
 import { selectUser } from 'services/redux/auth/selectors';
 import { CardUserControl } from '../CardUserControl/CardUserControl';
 import { ProposalForm } from 'components/ProposalPageComp/ProposalForm/ProposalForm';
+import { useTheme } from '@mui/material/styles';
+import { getRestOfDays } from 'services/helpers';
 
-export type SwitcherType = 'offer' | 'edit' | 'more' | '';
+export type SwitcherType = 'offer' | 'edit' | '';
 
 export const CardControl = ({
   ownerId,
@@ -28,6 +28,7 @@ export const CardControl = ({
   spot,
   _id,
 }: ICardControlProposal) => {
+  const theme = useTheme();
   const [expanded, setExpanded] = useState(false);
   const [switchCollaps, setswitchCollaps] = useState<SwitcherType>('');
   const { _id: userId } = useTypeSelector(selectUser);
@@ -44,18 +45,25 @@ export const CardControl = ({
     setExpanded(!expanded);
   };
 
+  const restDays = getRestOfDays(ownerDate);
+
   return (
     <>
       <CardActions
         disableSpacing
-        style={{ padding: '4px', justifyContent: 'space-between' }}
+        style={{
+          height: '34px',
+          padding: '6px 8px 6px 8px',
+          justifyContent: 'space-between',
+          backgroundColor: theme.palette.info.main,
+        }}
       >
-        <IconButton
-          style={{ padding: '0' }}
-          onClick={() => handleExpandMore('more')}
+        <Typography
+          variant="overline"
+          style={{ lineHeight: '1.2', fontSize: '14px' }}
         >
-          <ExpandMoreIcon />
-        </IconButton>
+          {restDays}
+        </Typography>
 
         {userId === ownerId._id ? (
           <CardUserControl
@@ -65,8 +73,12 @@ export const CardControl = ({
           />
         ) : (
           <Button
-            style={{ padding: '0', fontWeight: 'bold' }}
             onClick={() => handleExpandMore('offer')}
+            style={{ height: '22px' }}
+            size="small"
+            type="button"
+            variant="contained"
+            color="secondary"
           >
             OFFER
           </Button>
@@ -75,12 +87,12 @@ export const CardControl = ({
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent
           style={{
-            padding: '0 14px 14px 14px',
+            padding: '14px',
           }}
         >
           {switchCollaps === 'offer' ? (
             <OfferForm handleExpandClose={handleExpandClose} _id={_id} />
-          ) : switchCollaps === 'edit' ? (
+          ) : (
             <ProposalForm
               _id={_id}
               ownerMsg={ownerMsg}
@@ -91,8 +103,6 @@ export const CardControl = ({
               ownerisShowPhone={isShowPhone}
               handleExpandClose={handleExpandClose}
             />
-          ) : (
-            <CardAdditionalInfo ownerId={ownerId} ownerMsg={ownerMsg} />
           )}
         </CardContent>
       </Collapse>

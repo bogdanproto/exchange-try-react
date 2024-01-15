@@ -1,18 +1,34 @@
 import { Card, Box, Paper } from '@mui/material';
-import { CardControl, CardInfo } from 'components/HomePageComp';
-import { Observer } from 'components/Common/Observer/Obsever';
+import {
+  CardControl,
+  CardControlHistory,
+  CardInfo,
+} from 'components/HomePageComp';
 import { IProposal } from 'interfaces';
-import { selectIsDataLoading } from 'services/redux/commonSelectors';
-import { useTypeSelector } from 'services/redux/customHook/typeHooks';
-
-import { selectProposals } from 'services/redux/data/selectors';
+import {
+  useTypeDispatch,
+  useTypeSelector,
+} from 'services/redux/customHook/typeHooks';
+import {
+  selectFilterProposal,
+  selectProposals,
+} from 'services/redux/data/selectors';
+import { useEffect } from 'react';
+import { getAllProposal } from 'services/redux/data/operations';
+import { NoData, Observer } from 'components/Common';
 
 export const Proposals = () => {
   const proposals = useTypeSelector(selectProposals);
+  const filter = useTypeSelector(selectFilterProposal);
+  const dispatch = useTypeDispatch();
+
+  useEffect(() => {
+    dispatch(getAllProposal({ ...filter, page: 1, limit: 10 }));
+  }, [dispatch, filter]);
 
   return (
     <Box>
-      {proposals.length > 0 && (
+      {proposals.length > 0 ? (
         <Box
           sx={{
             display: 'flex',
@@ -35,18 +51,11 @@ export const Proposals = () => {
                 key={_id}
                 elevation={2}
                 style={{
-                  padding: '8px',
+                  padding: '4px',
                   borderRadius: '10px',
                 }}
               >
                 <Card sx={{ borderRadius: '10px' }}>
-                  <CardInfo
-                    ownerId={ownerId}
-                    ownerEqpts={ownerEqpts}
-                    ownerDate={ownerDate}
-                    ownerTime={ownerTime}
-                    spot={spot}
-                  />
                   <CardControl
                     _id={_id}
                     ownerId={ownerId}
@@ -57,12 +66,22 @@ export const Proposals = () => {
                     spot={spot}
                     isShowPhone={isShowPhone}
                   />
+                  <CardInfo
+                    ownerId={ownerId}
+                    ownerEqpts={ownerEqpts}
+                    ownerDate={ownerDate}
+                    ownerTime={ownerTime}
+                    spot={spot}
+                  />
+                  <CardControlHistory ownerId={ownerId} ownerMsg={ownerMsg} />
                 </Card>
               </Paper>
             )
           )}
           <Observer />
         </Box>
+      ) : (
+        <NoData />
       )}
     </Box>
   );

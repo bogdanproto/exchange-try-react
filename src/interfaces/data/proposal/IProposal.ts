@@ -126,15 +126,11 @@ export interface ICardControlPending
   > {}
 
 export interface ICardControlHistory
-  extends Pick<
-    IProposal,
-    | 'ownerId'
-    | 'ownerMsg'
-    | 'ownerTime'
-    | 'customerId'
-    | 'customerMsg'
-    | 'customerTime'
-  > {
+  extends Pick<IProposal, 'ownerId' | 'ownerMsg'> {
+  ownerTime?: string | null;
+  customerId?: IUserView;
+  customerMsg?: string | null;
+  customerTime?: string | null;
   cancelUser?: IUserView;
   cancelMsg?: string;
 }

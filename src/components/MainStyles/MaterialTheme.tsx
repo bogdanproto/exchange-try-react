@@ -18,12 +18,16 @@ export const darkTheme = createTheme({
 
     secondary: {
       main: '#000000',
+      light: grey[900],
     },
-    success: {
-      main: grey[200],
-    },
+    // success: {
+    //   main: grey[200],
+    // },
     info: {
       main: cyan[900],
+    },
+    warning: {
+      main: grey[400],
     },
   },
 

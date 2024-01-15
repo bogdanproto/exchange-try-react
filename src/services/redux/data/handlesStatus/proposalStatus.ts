@@ -1,4 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
+import { successMessage } from 'const';
 import { IProposalDelete, IProposal, ISliceData } from 'interfaces';
 import {
   IProposalHistory,
@@ -14,13 +15,12 @@ export const handleFulfilledGetAllProposal = (
   if (page && page > 1) {
     state.proposals.items = [...state.proposals.items, ...items];
     state.proposals.page = page;
-    state.isLoading = false;
-    state.errorData = null;
   } else {
     state.proposals = action.payload;
-    state.isLoading = false;
-    state.errorData = null;
   }
+
+  state.isLoading = false;
+  state.errorData = null;
 };
 
 export const handleFulfilledGetAllHistoryProposal = (
@@ -57,6 +57,7 @@ export const handleFulfilledCreateProposal = (
   state.proposals.items = [...state.proposals.items, action.payload];
   state.isLoading = false;
   state.errorData = null;
+  state.succesMsg = successMessage.PROPOSAL_CREATED;
 };
 
 export const handleFulfilledDeleteProposal = (

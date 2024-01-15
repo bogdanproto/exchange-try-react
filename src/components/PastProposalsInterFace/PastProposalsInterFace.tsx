@@ -12,7 +12,7 @@ import {
   CardControlHistory,
   CardInfoPending,
 } from 'components/HomePageComp';
-import { FilterHistoryProposals } from 'components/Common';
+import { FilterHistoryProposals, NoData } from 'components/Common';
 
 export const PastProposalsInterFace = () => {
   const dispatch = useTypeDispatch();
@@ -31,7 +31,7 @@ export const PastProposalsInterFace = () => {
           overflowY: 'scroll',
         }}
       >
-        {proposals?.length > 0 &&
+        {proposals?.length > 0 ? (
           proposals?.map(
             ({
               _id,
@@ -53,7 +53,7 @@ export const PastProposalsInterFace = () => {
                 key={_id}
                 elevation={2}
                 style={{
-                  padding: '8px',
+                  padding: '4px',
                   borderRadius: '10px',
                 }}
               >
@@ -87,7 +87,10 @@ export const PastProposalsInterFace = () => {
                 </Card>
               </Paper>
             )
-          )}
+          )
+        ) : (
+          <NoData />
+        )}
       </Box>
     </>
   );

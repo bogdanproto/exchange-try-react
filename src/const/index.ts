@@ -7,3 +7,4 @@ export * from './errorNotification';
 export * from './routes';
 export * from './shema';
 export * from './theme';
+export * from './successNotification';
