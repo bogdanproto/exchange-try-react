@@ -14,6 +14,7 @@ export type { ISliceData } from './data/IDataSlice';
 export type { IEqpt } from './data/eqpt/IEqpt';
 export type {
   IProposal,
+  IProposals,
   IProposalDelete,
   IProposalCancel,
   ICardInfoProposal,

@@ -26,6 +26,14 @@ export interface IProposal {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface IProposals {
+  items: IProposal[] | [];
+  page: number | null;
+  limit: number | null;
+  total: number | null;
+}
+
 export interface IProposalHistory extends IProposal {
   cancelUser: IUserView;
   cancelMsg: string;
@@ -118,15 +126,11 @@ export interface ICardControlPending
   > {}
 
 export interface ICardControlHistory
-  extends Pick<
-    IProposal,
-    | 'ownerId'
-    | 'ownerMsg'
-    | 'ownerTime'
-    | 'customerId'
-    | 'customerMsg'
-    | 'customerTime'
-  > {
+  extends Pick<IProposal, 'ownerId' | 'ownerMsg'> {
+  ownerTime?: string | null;
+  customerId?: IUserView;
+  customerMsg?: string | null;
+  customerTime?: string | null;
   cancelUser?: IUserView;
   cancelMsg?: string;
 }

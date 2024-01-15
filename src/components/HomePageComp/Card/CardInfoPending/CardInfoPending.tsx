@@ -1,4 +1,4 @@
-import { CardContent, Box, Typography } from '@mui/material';
+import { Box, Typography, Paper } from '@mui/material';
 import { ICardInfoProposalPending } from 'interfaces';
 import { CardPendingUserContent } from '../CardPendingUserContent/CardPendingUserContent';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
@@ -17,7 +17,7 @@ export const CardInfoPending = ({
   spot: { spot },
 }: ICardInfoProposalPending) => {
   return (
-    <CardContent sx={{ padding: '6px' }}>
+    <Paper sx={{ padding: '8px' }}>
       <Box
         display="flex"
         justifyContent="right"
@@ -57,6 +57,6 @@ export const CardInfoPending = ({
         </Box>
         <CardPendingUserContent user={ownerId} userEqpts={ownerEqpts} />
       </Box>
-    </CardContent>
+    </Paper>
   );
 };

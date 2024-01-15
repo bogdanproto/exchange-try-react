@@ -1,5 +1,4 @@
-import { CardContent, Box, Avatar, Typography } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import { CardContent, Box, Avatar, Typography, Paper } from '@mui/material';
 import dayjs from 'dayjs';
 import { ICardInfoProposal, IEqpt } from 'interfaces';
 
@@ -10,7 +9,6 @@ export const CardInfo = ({
   ownerTime,
   spot: { spot },
 }: ICardInfoProposal) => {
-  const theme = useTheme();
   return (
     <>
       <CardContent style={{ padding: '8px' }}>
@@ -69,20 +67,20 @@ export const CardInfo = ({
         </Box>
       </CardContent>
 
-      <CardContent
+      <Paper
+        elevation={2}
         style={{
-          padding: '16px',
-          backgroundColor: theme.palette.info.main,
+          padding: '8px',
           borderRadius: '0 0 6px 6px',
         }}
       >
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="caption" color="text.secondary">
           {ownerEqpts.length > 0 &&
             ownerEqpts
               ?.map(({ title, size }: IEqpt) => `${title} ${size}`)
               .join(', ')}
         </Typography>
-      </CardContent>
+      </Paper>
     </>
   );
 };

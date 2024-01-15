@@ -22,7 +22,7 @@ export const CardHistoryInfo = ({
         <Typography
           variant="overline"
           color="text.secondary"
-          style={{ lineHeight: '2', fontSize: '12px' }}
+          style={{ lineHeight: '1.5', fontSize: '12px' }}
         >
           proposal from:
         </Typography>
@@ -45,64 +45,68 @@ export const CardHistoryInfo = ({
             {`Phone: ${ownerId.phone}`}
           </Typography>
         )}
-        <Typography
-          variant="caption"
-          color="text.secondary"
-          style={{ lineHeight: '1.0', fontSize: '12px' }}
-        >
-          {`Time: ${ownerTime}`}
-        </Typography>
+        {ownerTime && (
+          <Typography
+            variant="caption"
+            color="text.secondary"
+            style={{ lineHeight: '1.0', fontSize: '12px' }}
+          >
+            {`Time: ${ownerTime}`}
+          </Typography>
+        )}
 
         <Typography
           variant="caption"
           color="text.secondary"
-          style={{ fontSize: '12px' }}
+          style={{ fontSize: '12px', lineHeight: '1.0' }}
         >
           {`Message: ${ownerMsg ? ownerMsg : 'no massage'}`}
         </Typography>
 
-        <Typography
-          variant="overline"
-          color="text.secondary"
-          style={{ lineHeight: '2', fontSize: '12px' }}
-        >
-          offer from:
-        </Typography>
-
-        {customerId?.name && (
-          <Typography
-            variant="caption"
-            color="text.secondary"
-            style={{ lineHeight: '1.0', fontSize: '12px' }}
-          >
-            {customerId.name}
-          </Typography>
+        {customerId && (
+          <>
+            <Box sx={{ marginTop: '12px' }}></Box>
+            <Typography
+              variant="overline"
+              color="text.secondary"
+              style={{ lineHeight: '1.5', fontSize: '12px' }}
+            >
+              offer from:
+            </Typography>
+            {customerId?.name && (
+              <Typography
+                variant="caption"
+                color="text.secondary"
+                style={{ lineHeight: '1.0', fontSize: '12px' }}
+              >
+                {customerId.name}
+              </Typography>
+            )}
+            {customerId?.phone && (
+              <Typography
+                variant="caption"
+                color="text.secondary"
+                style={{ lineHeight: '1.0', fontSize: '12px' }}
+              >
+                {`Phone: ${customerId.phone}`}
+              </Typography>
+            )}
+            <Typography
+              variant="caption"
+              color="text.secondary"
+              style={{ lineHeight: '1.0', fontSize: '12px' }}
+            >
+              {`Time: ${customerTime}`}
+            </Typography>
+            <Typography
+              variant="caption"
+              color="text.secondary"
+              style={{ lineHeight: '1.0', fontSize: '12px' }}
+            >
+              {`Message: ${customerMsg ? customerMsg : 'no massage'}`}
+            </Typography>
+          </>
         )}
-        {customerId?.phone && (
-          <Typography
-            variant="caption"
-            color="text.secondary"
-            style={{ lineHeight: '1.0', fontSize: '12px' }}
-          >
-            {`Phone: ${customerId.phone}`}
-          </Typography>
-        )}
-
-        <Typography
-          variant="caption"
-          color="text.secondary"
-          style={{ lineHeight: '1.0', fontSize: '12px' }}
-        >
-          {`Time: ${customerTime}`}
-        </Typography>
-
-        <Typography
-          variant="caption"
-          color="text.secondary"
-          style={{ fontSize: '12px' }}
-        >
-          {`Message: ${customerMsg ? customerMsg : 'no massage'}`}
-        </Typography>
       </Box>
       {cancelUser && (
         <Paper style={{ marginTop: '8px', padding: '4px' }} elevation={0}>

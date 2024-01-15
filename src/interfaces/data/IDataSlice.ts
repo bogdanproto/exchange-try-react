@@ -2,12 +2,13 @@ import { IFilterProposals } from './filter/filter';
 import {
   IProposal,
   IProposalHistory,
+  IProposals,
   ProposalStatusBack,
 } from './proposal/IProposal';
 import { ISpot } from './spot/ISpot';
 
 export interface ISliceData {
-  proposals: IProposal[] | [];
+  proposals: IProposals;
   proposalsPending: IProposal[] | [];
   proposalsAccepted: IProposal[] | [];
   proposalsHistory: IProposalHistory[] | [];
@@ -17,5 +18,6 @@ export interface ISliceData {
   };
   spots: ISpot[] | [];
   errorData: string | null;
+  succesMsg: string | null;
   isLoading: boolean;
 }

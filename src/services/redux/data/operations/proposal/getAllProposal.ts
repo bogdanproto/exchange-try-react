@@ -7,8 +7,15 @@ export const getAllProposal = createAsyncThunk(
   'data/getAllProposals',
   async (filter: IParamsProposals, thunkAPI) => {
     try {
-      const { data } = await getAllProposalsAPI(filter);
-      return data;
+      const {
+        data: { proposals, page, limit, total },
+      } = await getAllProposalsAPI(filter);
+      return {
+        items: proposals,
+        page: parseInt(page, 10),
+        limit: parseInt(limit, 10),
+        total,
+      };
     } catch (error: any) {
       return thunkAPI.rejectWithValue(handleErrors(error.response?.data));
     }

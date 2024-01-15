@@ -24,7 +24,7 @@ export const CardControlHistory = ({
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent
           style={{
-            padding: '0 14px 14px 14px',
+            padding: '14px',
           }}
         >
           <CardHistoryInfo
@@ -49,8 +49,11 @@ export const CardControlHistory = ({
       >
         <Button
           variant="contained"
-          color="success"
-          style={{ width: '8px', padding: '2px' }}
+          style={{
+            width: '8px',
+            padding: '2px',
+          }}
+          color="warning"
           onClick={handleExpandMore}
         />
       </CardActions>

@@ -1,7 +1,7 @@
-import { SwipeableDrawer, IconButton, Badge } from '@mui/material';
+import { SwipeableDrawer, IconButton } from '@mui/material';
 import HistoryIcon from '@mui/icons-material/History';
 import { useState } from 'react';
-import { Notifications } from '@mui/icons-material';
+// import { Notifications } from '@mui/icons-material';
 import { DrawerBox } from '../DrawerBox/DrawerBox';
 import { PastProposalsInterFace } from '../../PastProposalsInterFace/PastProposalsInterFace';
 import { useTheme } from '@mui/material/styles';
@@ -17,12 +17,12 @@ export const Drawer = () => {
   return (
     <>
       <IconButton style={{ padding: '0' }} onClick={toggleDrawer}>
-        <HistoryIcon sx={{ fontSize: 24 }} color="success" />
+        <HistoryIcon sx={{ fontSize: 24 }} color="warning" />
       </IconButton>
 
-      <Badge badgeContent={1} color="primary">
+      {/* <Badge badgeContent={1} color="primary">
         <Notifications sx={{ fontSize: 24 }} color="success" />
-      </Badge>
+      </Badge> */}
 
       <SwipeableDrawer
         anchor={'bottom'}

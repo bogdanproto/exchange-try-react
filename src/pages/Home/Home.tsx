@@ -81,7 +81,7 @@ export const Home = () => {
 
       <Box
         style={{
-          paddingTop: '88px',
+          paddingTop: `${alignment === 'proposals' ? '88px' : '36px'}`,
         }}
       >
         <Outlet />
