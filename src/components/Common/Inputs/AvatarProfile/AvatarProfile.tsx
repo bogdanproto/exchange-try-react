@@ -18,7 +18,7 @@ import { selectAuthUser } from 'services/redux/auth/selectors';
 
 export const AvatarProfile = () => {
   const {
-    user: { name, phone, experience, avatarCloudURL },
+    user: { name, avatarCloudURL },
   } = useTypeSelector(selectAuthUser);
   const [file, setFile] = useState(null);
   const dispatch = useTypeDispatch();
@@ -79,7 +79,7 @@ export const AvatarProfile = () => {
           {name}
         </Typography>
       )}
-      {experience && (
+      {/* {experience && (
         <Typography
           variant="caption"
           style={{ lineHeight: '1.0', fontSize: '12px' }}
@@ -95,7 +95,7 @@ export const AvatarProfile = () => {
         >
           phone: {phone}
         </Typography>
-      )}
+      )} */}
     </Box>
   );
 };

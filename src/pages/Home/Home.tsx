@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Navigate, Outlet, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { ToggleButtonGroup, ToggleButton, Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { routes } from 'const';
@@ -7,7 +7,7 @@ import { FilterProposals } from 'components/Common/Filter';
 
 export const Home = () => {
   const theme = useTheme();
-  const [alignment, setAlignment] = useState(routes.GORIDE);
+  const [alignment, setAlignment] = useState(routes.PROPOSALS);
   const navigate = useNavigate();
 
   const handleChange = (
@@ -16,8 +16,14 @@ export const Home = () => {
   ) => {
     if (newAlignment !== null) {
       setAlignment(newAlignment);
+    }
+  };
 
-      switch (newAlignment) {
+  useEffect(() => {
+    if (alignment !== null) {
+      setAlignment(alignment);
+
+      switch (alignment) {
         case 'goride':
           navigate(routes.GORIDE);
           break;
@@ -31,11 +37,10 @@ export const Home = () => {
           navigate(routes.PROPOSALS);
       }
     }
-  };
+  }, [alignment, navigate]);
 
   return (
     <>
-      {alignment === 'goride' && <Navigate to={routes.GORIDE} />}
       <Box
         style={{
           position: 'fixed',

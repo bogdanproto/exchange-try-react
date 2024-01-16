@@ -96,34 +96,40 @@ export const ProfileEqptForm = () => {
           </IconButton>
         </Box>
       </form>
-      <List
+      <Box
         sx={{
-          maxHeight: 110,
-          overflow: 'auto',
-          padding: '12px',
+          height: 'calc(100vh - 382px)',
         }}
       >
-        {Boolean(eqpts.length) ? (
-          eqpts.map(({ _id, title, size }: IEqptItem) => (
-            <ListItemDelete
-              key={_id}
-              id={_id}
-              item={`${title} ${size}`.trim()}
-            />
-          ))
-        ) : (
-          <Typography
-            variant="overline"
-            display="block"
-            sx={{
-              height: '18px',
-              color: theme => theme.palette.text.secondary,
-            }}
-          >
-            Add Your Equipments...
-          </Typography>
-        )}
-      </List>
+        <List
+          sx={{
+            maxHeight: '100%',
+            overflow: 'auto',
+            padding: '12px',
+          }}
+        >
+          {Boolean(eqpts.length) ? (
+            eqpts.map(({ _id, title, size }: IEqptItem) => (
+              <ListItemDelete
+                key={_id}
+                id={_id}
+                item={`${title} ${size}`.trim()}
+              />
+            ))
+          ) : (
+            <Typography
+              variant="overline"
+              display="block"
+              sx={{
+                height: '18px',
+                color: theme => theme.palette.text.secondary,
+              }}
+            >
+              Add Your Equipments...
+            </Typography>
+          )}
+        </List>
+      </Box>
     </Box>
   );
 };

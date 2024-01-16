@@ -5,6 +5,7 @@ export type {
 export type { IProposalForm } from './component/form/IProposalForm';
 export type { IOfferForm } from './component/form/IOfferForm';
 export type { ICancelForm } from './component/form/ICancelForm';
+export type { IProfileForm } from './component/form/IProfileForm';
 export type {
   ISelect,
   HFAutocompleateProps,

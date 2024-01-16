@@ -26,6 +26,24 @@ export const schemaSignupForm = yup.object({
 export const schemaProfileForm = yup.object().shape({
   name: yup.string().trim().min(2, 'Name must be 2 symbol at least'),
   phone: yup.string().trim().min(3, 'Phone must be 3 symbol at least'),
+  expirience: yup.number().typeError('Expirience must be a number'),
+});
+
+export const schemaProfileFormFull = yup.object().shape({
+  name: yup
+    .string()
+    .trim()
+    .required('Name is required')
+    .min(2, 'Name must be 2 symbol at least'),
+  phone: yup
+    .string()
+    .trim()
+    .test(
+      'is-valid-phone',
+      'Phone must be 7 symbol at least',
+      value => !value || (typeof value === 'string' && value.length > 6)
+    ),
+  experience: yup.mixed(),
 });
 
 export const schemaProposalForm = yup.object().shape({

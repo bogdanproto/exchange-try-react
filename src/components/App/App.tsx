@@ -34,6 +34,29 @@ export const App = () => {
     dispatch(refreshUser());
   }, [dispatch]);
 
+  useEffect(() => {
+    const handleTouchStart = (e: TouchEvent) => {
+      if (
+        e.touches[0].clientX > 20 &&
+        e.touches[0].clientX < window.innerWidth - 20
+      )
+        return;
+
+      e.preventDefault();
+    };
+
+    window.addEventListener('touchstart', handleTouchStart as EventListener, {
+      passive: false,
+    });
+
+    return () => {
+      window.removeEventListener(
+        'touchstart',
+        handleTouchStart as EventListener
+      );
+    };
+  }, []);
+
   return (
     <ThemeProvider theme={darkTheme}>
       <Notification />

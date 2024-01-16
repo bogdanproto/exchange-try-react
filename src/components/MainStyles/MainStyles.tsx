@@ -3,9 +3,11 @@ import 'modern-normalize';
 
 export const MainStyles = createGlobalStyle`
 
+
 html {
   margin: 0;
   overscroll-behavior: none;
+  
 }
 
  body {
@@ -16,6 +18,7 @@ html {
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+ 
 }
 
 code {

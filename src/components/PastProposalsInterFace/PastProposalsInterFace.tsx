@@ -1,17 +1,13 @@
 import { IProposalHistory } from 'interfaces/data/proposal/IProposal';
 import { useEffect } from 'react';
-import { Box, Paper, Card } from '@mui/material';
+import { Box } from '@mui/material';
 import {
   useTypeDispatch,
   useTypeSelector,
 } from 'services/redux/customHook/typeHooks';
 import { getAllHistoryProposal } from 'services/redux/data/operations';
 import { selectFilteredHistoryProposals } from 'services/redux/data/selectors';
-import {
-  CardControlAccepted,
-  CardControlHistory,
-  CardInfoPending,
-} from 'components/HomePageComp';
+import { CardPast } from 'components/HomePageComp';
 import { FilterHistoryProposals, NoData } from 'components/Common';
 
 export const PastProposalsInterFace = () => {
@@ -49,43 +45,23 @@ export const PastProposalsInterFace = () => {
               cancelUser,
               cancelMsg,
             }: IProposalHistory) => (
-              <Paper
+              <CardPast
                 key={_id}
-                elevation={2}
-                style={{
-                  padding: '4px',
-                  borderRadius: '10px',
-                }}
-              >
-                <Card sx={{ borderRadius: '10px' }}>
-                  <CardControlAccepted
-                    _id={_id}
-                    ownerDate={ownerDate}
-                    statusProposal={statusProposal}
-                  />
-                  <CardInfoPending
-                    ownerId={ownerId}
-                    ownerEqpts={ownerEqpts}
-                    ownerDate={ownerDate}
-                    ownerTime={ownerTime}
-                    spot={spot}
-                    customerId={customerId}
-                    customerEqpts={customerEqpts}
-                    customerTime={customerTime}
-                    statusProposal={statusProposal}
-                  />
-                  <CardControlHistory
-                    ownerId={ownerId}
-                    ownerMsg={ownerMsg}
-                    ownerTime={ownerTime}
-                    customerId={customerId}
-                    customerMsg={customerMsg}
-                    customerTime={customerTime}
-                    cancelUser={cancelUser}
-                    cancelMsg={cancelMsg}
-                  />
-                </Card>
-              </Paper>
+                _id={_id}
+                ownerId={ownerId}
+                ownerEqpts={ownerEqpts}
+                ownerDate={ownerDate}
+                ownerTime={ownerTime}
+                ownerMsg={ownerMsg}
+                spot={spot}
+                customerId={customerId}
+                customerEqpts={customerEqpts}
+                customerTime={customerTime}
+                customerMsg={customerMsg}
+                statusProposal={statusProposal}
+                cancelUser={cancelUser}
+                cancelMsg={cancelMsg}
+              />
             )
           )
         ) : (

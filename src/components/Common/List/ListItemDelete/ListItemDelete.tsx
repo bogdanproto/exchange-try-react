@@ -34,7 +34,7 @@ export const ListItemDelete = ({ id, item }: IItemList) => {
             disabled={isRefreshing && ref.current === id}
             edge="end"
             aria-label="delete"
-            color="success"
+            color="warning"
           >
             <HighlightOffIcon fontSize="small" />
           </IconButton>

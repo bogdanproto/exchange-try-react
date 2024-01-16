@@ -1,5 +1,4 @@
-import { CardContent, CardActions, Collapse, Button } from '@mui/material';
-import { useState } from 'react';
+import { CardContent, CardActions, Collapse, Button, Box } from '@mui/material';
 import { ICardControlHistory } from 'interfaces';
 import { CardHistoryInfo } from '../CardHistoryInfo/CardHistoryInfo';
 
@@ -12,15 +11,10 @@ export const CardControlHistory = ({
   customerTime,
   cancelUser,
   cancelMsg,
+  expanded,
 }: ICardControlHistory) => {
-  const [expanded, setExpanded] = useState(false);
-
-  const handleExpandMore = () => {
-    setExpanded(!expanded);
-  };
-
   return (
-    <>
+    <Box>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent
           style={{
@@ -54,9 +48,8 @@ export const CardControlHistory = ({
             padding: '2px',
           }}
           color="warning"
-          onClick={handleExpandMore}
         />
       </CardActions>
-    </>
+    </Box>
   );
 };
