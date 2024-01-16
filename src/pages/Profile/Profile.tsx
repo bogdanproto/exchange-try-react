@@ -5,8 +5,6 @@ import { AvatarProfile } from 'components/Common/Inputs/AvatarProfile/AvatarProf
 import { LogOut } from 'components/Auth/LogOut/LogOut';
 import { ToggleButtonGroup, ToggleButton, Box } from '@mui/material';
 import { useState } from 'react';
-import { useTypeSelector } from 'services/redux/customHook/typeHooks';
-import { selectUser } from 'services/redux/auth/selectors';
 
 enum MenuProfile {
   general = 'GENERAL',
@@ -14,8 +12,6 @@ enum MenuProfile {
 }
 
 export const Profile = () => {
-  const { name, phone, experience } = useTypeSelector(selectUser);
-
   const [alignment, setAlignment] = useState<MenuProfile>(MenuProfile.general);
 
   const handleChange = (
