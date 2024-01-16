@@ -12,3 +12,7 @@ export * from './Card/CardOwnerControl/CardOwnerControl';
 export * from './Card/CardControlAccepted/CardControlAccepted';
 export * from './Form/CancelForm/CancelForm';
 export * from '../Common/Filter/TypeProposalFilter/TypeProposalFilter';
+export * from './Card/CardProposal/CardProposal';
+export * from './Card/CardPending/CardPending';
+export * from './Card/CardGoride/CardGoride';
+export * from './Card/CardPast/CardPast';

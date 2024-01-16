@@ -1,10 +1,6 @@
-import { Card, Box, Paper } from '@mui/material';
+import { Box } from '@mui/material';
 import { NoData } from 'components/Common';
-import {
-  CardControlHistory,
-  CardControlPending,
-  CardInfoPending,
-} from 'components/HomePageComp';
+import { CardPending } from 'components/HomePageComp';
 import { IProposal } from 'interfaces';
 import { useEffect } from 'react';
 import {
@@ -45,42 +41,20 @@ export const Pending = () => {
             customerTime,
             customerMsg,
           }: IProposal) => (
-            <Paper
+            <CardPending
               key={_id}
-              elevation={2}
-              style={{
-                padding: '4px',
-                borderRadius: '10px',
-              }}
-            >
-              <Card sx={{ borderRadius: '10px' }}>
-                <CardControlPending
-                  _id={_id}
-                  ownerId={ownerId}
-                  customerId={customerId}
-                  customerEqpts={customerEqpts}
-                  customerTime={customerTime}
-                  customerMsg={customerMsg}
-                />
-                <CardInfoPending
-                  ownerId={ownerId}
-                  ownerEqpts={ownerEqpts}
-                  ownerDate={ownerDate}
-                  ownerTime={ownerTime}
-                  spot={spot}
-                  customerId={customerId}
-                  customerEqpts={customerEqpts}
-                />
-                <CardControlHistory
-                  ownerId={ownerId}
-                  ownerMsg={ownerMsg}
-                  ownerTime={ownerTime}
-                  customerId={customerId}
-                  customerMsg={customerMsg}
-                  customerTime={customerTime}
-                />
-              </Card>
-            </Paper>
+              _id={_id}
+              ownerId={ownerId}
+              ownerEqpts={ownerEqpts}
+              ownerDate={ownerDate}
+              ownerTime={ownerTime}
+              ownerMsg={ownerMsg}
+              spot={spot}
+              customerId={customerId}
+              customerEqpts={customerEqpts}
+              customerTime={customerTime}
+              customerMsg={customerMsg}
+            />
           )
         )
       ) : (

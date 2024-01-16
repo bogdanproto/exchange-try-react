@@ -44,10 +44,20 @@ export const BottomNav = () => {
   return (
     <Box sx={{ width: '100%' }}>
       <Paper
-        sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
+        sx={{
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          right: 0,
+        }}
         elevation={3}
       >
-        <BottomNavigation showLabels value={value} onChange={handleClick}>
+        <BottomNavigation
+          sx={{ height: '72px', padding: '4px 0 12px 0' }}
+          showLabels
+          value={value}
+          onChange={handleClick}
+        >
           <BottomNavigationAction
             sx={{ fontWeight: '700' }}
             disableRipple

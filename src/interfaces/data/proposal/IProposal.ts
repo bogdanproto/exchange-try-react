@@ -133,6 +133,7 @@ export interface ICardControlHistory
   customerTime?: string | null;
   cancelUser?: IUserView;
   cancelMsg?: string;
+  expanded?: boolean;
 }
 
 export interface ICardAdditionalProposal
