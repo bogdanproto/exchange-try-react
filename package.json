@@ -2,7 +2,6 @@
   "name": "exchange-try-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://bogdanproto.github.io/exchange-try-react/",
   "dependencies": {
     "@fontsource/roboto": "^5.0.8",
     "@hookform/resolvers": "^3.3.2",

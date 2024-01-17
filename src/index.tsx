@@ -21,7 +21,7 @@ root.render(
     <PersistGate loading={null} persistor={persistor}>
       <ThemeProvider theme={theme}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <BrowserRouter basename="/exchange-try-react">
+          <BrowserRouter>
             <App />
             <MainStyles />
           </BrowserRouter>
