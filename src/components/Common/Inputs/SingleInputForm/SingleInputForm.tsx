@@ -2,9 +2,6 @@ import { TextField, Box, IconButton } from '@mui/material';
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTypeDispatch } from 'services/redux/customHook/typeHooks';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { schemaProfileForm } from 'const/shema';
-import { ErrorInputForm } from 'components/Common/Error/ErrorInputForm.styled';
 import { IUserProfile } from 'interfaces/user/userInterface';
 import { updUserProfile } from 'services/redux/auth/operationsUserProfile';
 
@@ -15,14 +12,8 @@ interface IAddInput {
 export const SingleInputForm = ({ name }: IAddInput) => {
   const dispatch = useTypeDispatch();
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    reset,
-    formState: { errors },
-  } = useForm<IUserProfile>({
-    resolver: yupResolver(schemaProfileForm),
+  const { register, handleSubmit, watch, reset } = useForm<IUserProfile>({
+    // resolver: yupResolver(schemaProfileForm),
   });
 
   const onSubmit: SubmitHandler<IUserProfile> = data => {
@@ -56,7 +47,7 @@ export const SingleInputForm = ({ name }: IAddInput) => {
             variant="outlined"
             size="small"
           />
-          <ErrorInputForm>{errors[name]?.message}</ErrorInputForm>
+          {/* <ErrorInputForm>{errors[name]?.message}</ErrorInputForm> */}
         </Box>
 
         <IconButton

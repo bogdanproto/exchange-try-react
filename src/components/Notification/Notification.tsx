@@ -4,12 +4,11 @@ import { selectNotification } from 'services/redux/commonSelectors';
 import { useTypeSelector } from 'services/redux/customHook/typeHooks';
 
 export const Notification = () => {
-  const { isLoading, error, errorAuth, succesMsg } =
-    useTypeSelector(selectNotification);
+  const { isLoading, error, succesMsg } = useTypeSelector(selectNotification);
   return (
     <>
       {isLoading && <Loader />}
-      {error && errorAuth !== errorMessage.user_unauthorized_token && (
+      {error && error !== errorMessage.user_unauthorized_token && (
         <NotificationBox type="error" message={error} />
       )}
       {succesMsg && <NotificationBox type="success" message={succesMsg} />}

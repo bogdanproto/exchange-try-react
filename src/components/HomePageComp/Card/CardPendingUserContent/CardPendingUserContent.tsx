@@ -1,5 +1,6 @@
 import { Box, Avatar, Typography, Paper } from '@mui/material';
 import { ICardPendingUser, IEqpt } from 'interfaces';
+import { getDifferenceYears } from 'services/helpers';
 
 export const CardPendingUserContent = ({
   user: { name, avatarCloudURL, experience },
@@ -44,17 +45,17 @@ export const CardPendingUserContent = ({
           >
             <Typography
               variant="overline"
-              style={{ lineHeight: '1.1', fontSize: '10px' }}
+              style={{ lineHeight: '1.2', fontSize: '10px' }}
             >
               {name ? name : 'noname'}
             </Typography>
             <Typography
               variant="caption"
               color="text.secondary"
-              style={{ lineHeight: '1.6', fontSize: '8px' }}
+              style={{ lineHeight: '1.0', fontSize: '8px' }}
             >
               {experience
-                ? `${experience} year expirience`
+                ? `${getDifferenceYears(experience)} expirience`
                 : 'without expirience'}
             </Typography>
           </Box>

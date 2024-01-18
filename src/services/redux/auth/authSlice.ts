@@ -27,6 +27,7 @@ import {
   handleFulfilledUpdEqpts,
   handleRejected,
 } from './handlesUserProfileStatus';
+import { setErrorAuth } from './reducers';
 
 const initialState: ISliceAuthUser = {
   user: {
@@ -51,7 +52,7 @@ const authUserSlice = createSlice({
   name: 'authUser',
   initialState,
   reducers: {
-    // fill in primary logic here
+    toSetErrorAuth: setErrorAuth,
   },
   extraReducers: builder => {
     builder
@@ -98,3 +99,4 @@ const authUserSlice = createSlice({
 });
 
 export const userAuthReducer = authUserSlice.reducer;
+export const { toSetErrorAuth } = authUserSlice.actions;

@@ -2,32 +2,38 @@ import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { MobileDatePicker } from '@mui/x-date-pickers';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, TextField } from '@mui/material';
-import { useTypeSelector } from 'services/redux/customHook/typeHooks';
+import {
+  useTypeDispatch,
+  useTypeSelector,
+} from 'services/redux/customHook/typeHooks';
 import { IProfileForm } from 'interfaces';
 import { schemaProfileFormFull } from 'const';
 import { ButtonForm, ErrorInputForm } from 'components/Common';
 import { selectUser } from 'services/redux/auth/selectors';
 import dayjs from 'dayjs';
+import { toFormatProfilelObj } from 'services/helpers';
+import { updUserProfile } from 'services/redux/auth/operationsUserProfile';
 
 export const ProfileForm = () => {
-  // const dispatch = useTypeDispatch();
-  const { name, phone } = useTypeSelector(selectUser);
+  const dispatch = useTypeDispatch();
+  const { name, phone, experience } = useTypeSelector(selectUser);
 
   const {
     handleSubmit,
     control,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<IProfileForm>({
     defaultValues: {
       name,
-      phone,
-      experience: dayjs(),
+      phone: phone ?? '',
+      experience: experience ? dayjs(experience) : null,
     },
     resolver: yupResolver(schemaProfileFormFull),
   });
 
   const onSubmit: SubmitHandler<IProfileForm> = data => {
-    console.log(data);
+    const prepareData = toFormatProfilelObj(data);
+    dispatch(updUserProfile(prepareData));
   };
 
   return (
@@ -111,6 +117,7 @@ export const ProfileForm = () => {
               render={({ field }) => (
                 <MobileDatePicker
                   {...field}
+                  maxDate={dayjs()}
                   openTo="year"
                   label="EXPERIENCE START DATE"
                   sx={{ width: '100%' }}
@@ -120,7 +127,7 @@ export const ProfileForm = () => {
             />
           </Box>
 
-          <ButtonForm mainBtn={'UPDATE'} />
+          <ButtonForm mainBtn={'UPDATE'} disabled={!isDirty} />
         </Box>
       </form>
     </Box>

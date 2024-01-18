@@ -20,8 +20,8 @@ export const CardInfoPending = ({
     <Paper sx={{ padding: '8px' }}>
       <Box
         display="flex"
-        justifyContent="right"
-        alignItems="center"
+        justifyContent="space-between"
+        alignItems="flex-start"
         gap="6px"
         marginBottom="10px"
       >
@@ -33,7 +33,7 @@ export const CardInfoPending = ({
         </Typography>
         <Typography
           variant="overline"
-          style={{ lineHeight: '1.2', fontSize: '16px' }}
+          style={{ minWidth: '40%', lineHeight: '1.2', fontSize: '16px' }}
         >
           {`${dayjs(ownerDate, { format: 'YYYY-MM-DD' }).format(
             'DD.MM.YYYY'

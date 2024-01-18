@@ -3,6 +3,7 @@ export * from './Error/ErrorInputForm.styled';
 export * from './Inputs/AvatarProfile/AvatarProfile';
 export * from './Inputs/Custom/VisuallyHiddenInput';
 export * from './Inputs/HookFormInputs/HFAutocompleate';
+export * from './Inputs/HookFormInputs/HFAutocompleateSearch';
 export * from './Inputs/HookFormInputs/HFSelect';
 export * from './Inputs/SelectHeader/SelectHeader';
 export * from './Inputs/SingleInputForm/SingleInputForm';

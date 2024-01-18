@@ -3,12 +3,18 @@ export interface ISelect {
   label: string;
 }
 
+export interface IAutocomplete {
+  _id: string;
+  spot: string;
+}
+
 export interface HFAutocompleateProps {
   control: any;
-  multiple: boolean;
+  multiple?: boolean;
   name: string;
   label: string;
-  options: ISelect[];
+  options: IAutocomplete[];
+  defaultValue?: IAutocomplete;
 }
 
 export interface HFSelectProps {

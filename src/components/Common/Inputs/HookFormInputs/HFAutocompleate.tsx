@@ -11,11 +11,13 @@ export const HFAutocompleate = ({
   name,
   label,
   options,
+  defaultValue,
 }: HFAutocompleateProps) => {
   return (
     <Controller
       name={name}
       control={control}
+      defaultValue={defaultValue}
       render={({ field, fieldState: { error } }) => {
         return (
           <>
@@ -46,7 +48,7 @@ export const HFAutocompleate = ({
                     style={{ marginRight: 8 }}
                     checked={selected}
                   />
-                  {option.label}
+                  {option.spot}
                 </li>
               )}
             />
