@@ -26,7 +26,7 @@ export const schemaSignupForm = yup.object({
 export const schemaProfileForm = yup.object().shape({
   name: yup.string().trim().min(2, 'Name must be 2 symbol at least'),
   phone: yup.string().trim().min(3, 'Phone must be 3 symbol at least'),
-  expirience: yup.number().typeError('Expirience must be a number'),
+  expirience: yup.mixed().nullable(),
 });
 
 export const schemaProfileFormFull = yup.object().shape({
@@ -43,14 +43,19 @@ export const schemaProfileFormFull = yup.object().shape({
       'Phone must be 7 symbol at least',
       value => !value || (typeof value === 'string' && value.length > 6)
     ),
-  experience: yup.mixed(),
+  experience: yup.mixed().nullable(),
 });
 
 export const schemaProposalForm = yup.object().shape({
   allday: yup.boolean().required(),
   date: yup.mixed().required(),
   time: yup.mixed().required(),
-  spot: yup.string().required('Spot is required'),
+  spot: yup
+    .object({
+      _id: yup.string().required(),
+      spot: yup.string().required('Spot is required'),
+    })
+    .required('Spot is required'),
   eqpts: yup
     .array(yup.string().required('Equipment is required'))
     .required('Equipment is required'),

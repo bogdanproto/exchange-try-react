@@ -4,11 +4,7 @@ import { MobileDatePicker, MobileTimePicker } from '@mui/x-date-pickers';
 import { Paper, Box, FormControlLabel, Switch, TextField } from '@mui/material';
 import dayjs from 'dayjs';
 import { useEffect } from 'react';
-import {
-  formatEqptsSelector,
-  formatSpotSelector,
-  toFormatProposalObj,
-} from 'services/helpers';
+import { formatEqptsSelector, toFormatProposalObj } from 'services/helpers';
 import {
   useTypeDispatch,
   useTypeSelector,
@@ -20,15 +16,20 @@ import {
   updateProposal,
 } from 'services/redux/data/operations';
 import { selectSpots } from 'services/redux/data/selectors';
-import { IProposalForm } from 'interfaces';
+import { IProposalForm, ISpot } from 'interfaces';
 import { schemaProposalForm } from 'const';
-import { ButtonForm, ErrorInputForm, HFSelect } from 'components/Common';
+import {
+  ButtonForm,
+  ErrorInputForm,
+  HFAutocompleateSearch,
+  HFSelect,
+} from 'components/Common';
 
 interface IProposalFormProps {
   _id?: string;
   ownerTime?: any;
   ownerDate?: any;
-  ownerSpot?: string;
+  ownerSpot?: ISpot;
   ownerEqpts?: string[];
   ownerMsg?: any;
   ownerisShowPhone?: boolean;
@@ -48,7 +49,6 @@ export const ProposalForm: React.FC<IProposalFormProps> = ({
   const dispatch = useTypeDispatch();
   const { eqpts } = useTypeSelector(selectUser);
   const spots = useTypeSelector(selectSpots);
-
   const {
     handleSubmit,
     watch,
@@ -65,6 +65,7 @@ export const ProposalForm: React.FC<IProposalFormProps> = ({
       date: ownerDate ? dayjs(ownerDate) : dayjs(),
       message: ownerMsg ?? '',
       is_phone: ownerisShowPhone ?? false,
+      spot: ownerSpot ?? undefined,
     },
     resolver: yupResolver(schemaProposalForm),
   });
@@ -178,21 +179,19 @@ export const ProposalForm: React.FC<IProposalFormProps> = ({
               )}
             />
           </Box>
+
           <Box
             style={{
               marginBottom: '4px',
             }}
           >
-            <HFSelect
-              multiple={false}
-              defaultValue={ownerSpot}
+            <HFAutocompleateSearch
               control={control}
               name="spot"
               label="Spot"
-              placeholder="Spots wasn't loaded"
-              options={formatSpotSelector(spots)}
+              options={spots}
             />
-            <ErrorInputForm>{errors.spot?.message}</ErrorInputForm>
+            <ErrorInputForm>{errors.spot?.spot?.message}</ErrorInputForm>
           </Box>
 
           <Box
@@ -234,7 +233,7 @@ export const ProposalForm: React.FC<IProposalFormProps> = ({
               render={({ field }) => (
                 <FormControlLabel
                   control={<Switch checked={field.value} {...field} />}
-                  label="Show my phone number"
+                  label="Add my phone number"
                 />
               )}
             />

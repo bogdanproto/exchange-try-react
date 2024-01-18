@@ -1,5 +1,5 @@
 export interface IProfileForm {
   name: string;
-  phone?: string | undefined;
+  phone?: string | '';
   experience?: any;
 }

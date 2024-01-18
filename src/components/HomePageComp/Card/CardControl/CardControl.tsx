@@ -14,7 +14,7 @@ import { selectUser } from 'services/redux/auth/selectors';
 import { CardUserControl } from '../CardUserControl/CardUserControl';
 import { ProposalForm } from 'components/ProposalPageComp/ProposalForm/ProposalForm';
 import { useTheme } from '@mui/material/styles';
-import { getRestOfDays } from 'services/helpers';
+import dayjs from 'dayjs';
 
 export type SwitcherType = 'offer' | 'edit' | '';
 
@@ -45,8 +45,6 @@ export const CardControl = ({
     setExpanded(!expanded);
   };
 
-  const restDays = getRestOfDays(ownerDate);
-
   return (
     <>
       <CardActions
@@ -62,7 +60,7 @@ export const CardControl = ({
           variant="overline"
           style={{ lineHeight: '1.2', fontSize: '14px' }}
         >
-          {restDays}
+          {`${dayjs(ownerDate).format('DD-MM-YYYY')} ${ownerTime}`}
         </Typography>
 
         {userId === ownerId._id ? (
@@ -97,7 +95,7 @@ export const CardControl = ({
               _id={_id}
               ownerMsg={ownerMsg}
               ownerEqpts={ownerEqpts.map(({ _id }: IEqptItem) => _id)}
-              ownerSpot={spot._id}
+              ownerSpot={spot}
               ownerDate={ownerDate}
               ownerTime={ownerTime}
               ownerisShowPhone={isShowPhone}

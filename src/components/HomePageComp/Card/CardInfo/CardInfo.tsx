@@ -1,12 +1,10 @@
 import { CardContent, Box, Avatar, Typography, Paper } from '@mui/material';
-import dayjs from 'dayjs';
 import { ICardInfoProposal, IEqpt } from 'interfaces';
+import { getDifferenceYears } from 'services/helpers';
 
 export const CardInfo = ({
   ownerId: { name, avatarCloudURL, experience },
   ownerEqpts,
-  ownerDate,
-  ownerTime,
   spot: { spot },
 }: ICardInfoProposal) => {
   return (
@@ -18,6 +16,7 @@ export const CardInfo = ({
             gap="6px"
             justifyContent="left"
             alignItems="center"
+            sx={{ minWidth: '50%' }}
           >
             <Avatar alt={name} src={avatarCloudURL} />
             <Box
@@ -28,38 +27,34 @@ export const CardInfo = ({
             >
               <Typography
                 variant="overline"
-                style={{ lineHeight: '1.0', fontSize: '12px' }}
+                style={{ lineHeight: '1.1', fontSize: '12px' }}
               >
                 {name ? name : 'noname'}
               </Typography>
               <Typography
                 variant="caption"
                 color="text.secondary"
-                style={{ fontSize: '10px' }}
+                style={{ fontSize: '10px', lineHeight: '1.0' }}
               >
                 {experience
-                  ? `${experience} year expirience`
+                  ? `${getDifferenceYears(experience)} expirience`
                   : 'without expirience'}
               </Typography>
             </Box>
           </Box>
           <Box
             display="flex"
-            flexDirection="column"
-            justifyContent="left"
-            alignItems="left"
+            justifyContent="flex-end"
+            alignItems="flex-start"
+            sx={{ minWidth: '50%' }}
           >
             <Typography
               variant="overline"
-              style={{ lineHeight: '1.2', fontSize: '14px' }}
-            >
-              {`${dayjs(ownerDate, { format: 'YYYY-MM-DD' }).format(
-                'DD.MM.YYYY'
-              )} ${ownerTime}`}
-            </Typography>
-            <Typography
-              variant="overline"
-              style={{ lineHeight: '1.1', fontSize: '14px' }}
+              style={{
+                lineHeight: '1.1',
+                fontSize: '14px',
+                textAlign: 'right',
+              }}
             >
               {spot ? spot : 'nospot'}
             </Typography>

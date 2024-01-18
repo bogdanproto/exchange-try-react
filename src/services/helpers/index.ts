@@ -4,3 +4,6 @@ export * from './selector/formatEqptsSelector';
 export * from './error/handleErrors';
 export * from './form/toFormatProposalObj';
 export * from './time/getRestOfDays';
+export * from './form/toFormatProfileObj';
+export * from './time/getDifferenceYears';
+export * from './redux/asyncThunkDecoratorData';

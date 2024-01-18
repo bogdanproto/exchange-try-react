@@ -15,11 +15,24 @@ import { routes } from '../../../const/routes';
 import { formatName } from 'services/helpers';
 import { useTypeSelector } from 'services/redux/customHook/typeHooks';
 import { selectUser } from 'services/redux/auth/selectors';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
+enum MenuBottom {
+  BASE = '/',
+  PROPOSAL = '/proposal',
+  PROFILE = '/profile',
+}
+
 export const BottomNav = () => {
-  const [value, setValue] = useState(0);
+  const { pathname } = useLocation();
+  const [value, setValue] = useState(
+    pathname === MenuBottom.PROPOSAL
+      ? 1
+      : pathname === MenuBottom.PROFILE
+      ? 2
+      : 0
+  );
   const navigate = useNavigate();
   const { name, avatarCloudURL } = useTypeSelector(selectUser);
 
@@ -53,7 +66,7 @@ export const BottomNav = () => {
         elevation={3}
       >
         <BottomNavigation
-          sx={{ height: '72px', padding: '4px 0 12px 0' }}
+          sx={{ height: '84px', padding: '4px 0 12px 0' }}
           showLabels
           value={value}
           onChange={handleClick}
@@ -62,7 +75,7 @@ export const BottomNav = () => {
             sx={{ fontWeight: '700' }}
             disableRipple
             label={btn.HOME}
-            icon={<HomeIcon sx={{ fontSize: 28 }} />}
+            icon={<HomeIcon sx={{ fontSize: 28, marginBottom: '2px' }} />}
           />
           <BottomNavigationAction
             sx={{ fontWeight: '700' }}
@@ -79,10 +92,10 @@ export const BottomNav = () => {
                 <Avatar
                   alt={name ?? 'PROFILE'}
                   src={avatarCloudURL}
-                  sx={{ width: 28, height: 28 }}
+                  sx={{ width: 28, height: 28, marginBottom: '2px' }}
                 />
               ) : (
-                <UserIcon sx={{ fontSize: 28 }} />
+                <UserIcon sx={{ fontSize: 28, marginBottom: '2px' }} />
               )
             }
           />
