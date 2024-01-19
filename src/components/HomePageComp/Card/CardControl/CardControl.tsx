@@ -10,7 +10,7 @@ import { useState } from 'react';
 import { OfferForm } from '../../Form/OfferForm/OfferForm';
 import { ICardControlProposal, IEqptItem } from 'interfaces';
 import { useTypeSelector } from 'services/redux/customHook/typeHooks';
-import { selectUser } from 'services/redux/auth/selectors';
+import { selectUser } from 'services/redux/auth/selectors/selectors';
 import { CardUserControl } from '../CardUserControl/CardUserControl';
 import { ProposalForm } from 'components/ProposalPageComp/ProposalForm/ProposalForm';
 import { useTheme } from '@mui/material/styles';

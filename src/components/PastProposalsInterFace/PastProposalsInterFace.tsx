@@ -15,7 +15,13 @@ export const PastProposalsInterFace = () => {
   const proposals = useTypeSelector(selectFilteredHistoryProposals);
 
   useEffect(() => {
-    dispatch(getAllHistoryProposal());
+    const ctrl = new AbortController();
+
+    dispatch(getAllHistoryProposal(ctrl.signal));
+
+    return () => {
+      ctrl.abort();
+    };
   }, [dispatch]);
 
   return (

@@ -1,7 +1,7 @@
 import Stack from '@mui/material/Stack';
 import LinearProgress from '@mui/material/LinearProgress';
 import { LoaderContainer } from './Loader.styled';
-import { theme } from '../../../const/theme';
+import { theme } from '../../../const/theme/theme';
 
 export const Loader = () => {
   return (

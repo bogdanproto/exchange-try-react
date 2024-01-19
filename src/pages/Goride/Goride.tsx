@@ -15,7 +15,12 @@ export const Goride = () => {
   const dispatch = useTypeDispatch();
 
   useEffect(() => {
-    dispatch(getAllProposalAccepted());
+    const ctrl = new AbortController();
+    dispatch(getAllProposalAccepted(ctrl.signal));
+
+    return () => {
+      ctrl.abort();
+    };
   }, [dispatch]);
 
   return (

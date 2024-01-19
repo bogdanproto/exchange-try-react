@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom/client';
 import { App } from './components/App/App';
 import { MainStyles } from './components/MainStyles/MainStyles';
 import { ThemeProvider } from 'styled-components';
-import { theme } from './const/theme';
+import { theme } from './const/theme/theme';
 import { Provider } from 'react-redux';
 import { persistor, store } from './services/redux/store';
 import { BrowserRouter } from 'react-router-dom';

@@ -19,7 +19,14 @@ export const Proposals = () => {
   const dispatch = useTypeDispatch();
 
   useEffect(() => {
-    dispatch(getAllProposal({ ...filter, page: 1, limit: 10 }));
+    const ctrl = new AbortController();
+    dispatch(
+      getAllProposal({ ...filter, page: 1, limit: 10, signal: ctrl.signal })
+    );
+
+    return () => {
+      ctrl.abort();
+    };
   }, [dispatch, filter]);
 
   return (

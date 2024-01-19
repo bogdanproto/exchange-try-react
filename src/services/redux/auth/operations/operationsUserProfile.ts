@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { handleErrors } from '../../helpers/error/handleErrors';
 import {
   deleteUserEqpt,
   updateUserAvatar,
@@ -11,6 +10,7 @@ import {
   IEqptItemForm,
   IUserProfile,
 } from 'interfaces/user/userInterface';
+import { handleErrors } from 'services/helpers';
 
 //--------------updateUserAvatar-----------------
 export const updUserAvatar = createAsyncThunk(
@@ -64,7 +64,6 @@ export const delUserEqpt = createAsyncThunk(
       } = await deleteUserEqpt(id);
       return deletedEqpt;
     } catch (error: any) {
-      console.log(error.response?.data);
       return thunkAPI.rejectWithValue(handleErrors(error.response?.data));
     }
   }

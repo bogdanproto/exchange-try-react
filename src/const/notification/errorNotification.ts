@@ -1,4 +1,4 @@
-import { IErrorsList } from '../interfaces/error/errorInterface';
+import { IErrorsList } from '../../interfaces/error/errorInterface';
 
 export const errorMessage: IErrorsList = {
   user_already_exist: 'User already exists',

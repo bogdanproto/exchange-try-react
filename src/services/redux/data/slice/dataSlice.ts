@@ -31,7 +31,7 @@ import {
   updateProposalStatus,
 } from '../operations';
 import { ISliceData } from 'interfaces';
-import { logOutUser } from 'services/redux/auth/operationsAuth';
+import { logOutUser } from 'services/redux/auth/operations/operationsAuth';
 import {
   setFilterHistoryProposals,
   setFilterProposals,

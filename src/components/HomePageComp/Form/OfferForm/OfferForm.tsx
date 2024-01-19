@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { useEffect } from 'react';
-import { selectUser } from 'services/redux/auth/selectors';
+import { selectUser } from 'services/redux/auth/selectors/selectors';
 import {
   useTypeDispatch,
   useTypeSelector,

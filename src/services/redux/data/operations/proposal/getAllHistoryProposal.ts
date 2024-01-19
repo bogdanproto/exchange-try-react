@@ -1,15 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getAllHistoryProposalsAPI } from 'services/api';
-import { handleErrors } from 'services/helpers';
+import { asyncThunkDecoratorData } from 'services/helpers';
 
 export const getAllHistoryProposal = createAsyncThunk(
   'data/getAllHistoryProposal',
-  async (_, thunkAPI) => {
-    try {
-      const { data } = await getAllHistoryProposalsAPI();
-      return data;
-    } catch (error: any) {
-      return thunkAPI.rejectWithValue(handleErrors(error.response?.data));
-    }
-  }
+  asyncThunkDecoratorData(async (signal: any) => {
+    const { data } = await getAllHistoryProposalsAPI(signal);
+    return data;
+  })
 );

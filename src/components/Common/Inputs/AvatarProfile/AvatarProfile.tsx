@@ -12,9 +12,9 @@ import {
   useTypeDispatch,
   useTypeSelector,
 } from 'services/redux/customHook/typeHooks';
-import { updUserAvatar } from 'services/redux/auth/operationsUserProfile';
+import { updUserAvatar } from 'services/redux/auth/operations/operationsUserProfile';
 import { useEffect, useState } from 'react';
-import { selectAuthUser } from 'services/redux/auth/selectors';
+import { selectAuthUser } from 'services/redux/auth/selectors/selectors';
 
 export const AvatarProfile = () => {
   const {

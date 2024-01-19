@@ -5,6 +5,7 @@ import { useTypeSelector } from 'services/redux/customHook/typeHooks';
 
 export const Notification = () => {
   const { isLoading, error, succesMsg } = useTypeSelector(selectNotification);
+
   return (
     <>
       {isLoading && <Loader />}

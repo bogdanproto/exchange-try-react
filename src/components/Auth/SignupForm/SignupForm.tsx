@@ -1,12 +1,12 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { schemaSignupForm } from '../../../const/shema';
+import { schemaSignupForm } from '../../../const/shema/shema';
 import { TextField } from '@mui/material';
 import { AuthForm } from '../Common/AuthForm.styled';
 import { ButtonFormStyled } from '../Common/ButtonForm.styled';
-import { routes } from '../../../const/routes';
+import { routes } from '../../../const/routesApp/routes';
 import { IUserSignUp } from '../../../interfaces/user/userInterface';
-import { signUpUser } from '../../../services/redux/auth/operationsAuth';
+import { signUpUser } from '../../../services/redux/auth/operations/operationsAuth';
 import { useTypeDispatch } from '../../../services/redux/customHook/typeHooks';
 import {
   AuthLinkContainer,

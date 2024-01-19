@@ -15,6 +15,7 @@ export interface ISliceAuthUser {
   token: string | null;
   isLoggedIn: boolean;
   errorAuth: string | null;
+  successMsg: string | null;
   isRefreshing: boolean;
   isAppLoaded: boolean;
 }

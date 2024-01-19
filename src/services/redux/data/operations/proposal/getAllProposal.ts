@@ -17,25 +17,3 @@ export const getAllProposal = createAsyncThunk(
     };
   })
 );
-
-// export const getAllProposal = createAsyncThunk(
-//   'data/getAllProposals',
-//   async (filter: IParamsProposals, thunkAPI) => {
-//     try {
-//       const {
-//         data: { proposals, page, limit, total },
-//       } = await getAllProposalsAPI(filter);
-//       return {
-//         items: proposals,
-//         page: parseInt(page, 10),
-//         limit: parseInt(limit, 10),
-//         total,
-//       };
-//     } catch (error: any) {
-//       if (error.response?.data.code === 'user_unauthorized_token') {
-//         thunkAPI.dispatch(toSetErrorAuth());
-//       }
-//       return thunkAPI.rejectWithValue(handleErrors(error.response?.data));
-//     }
-//   }
-// );

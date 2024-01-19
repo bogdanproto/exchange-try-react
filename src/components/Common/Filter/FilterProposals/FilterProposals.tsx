@@ -2,6 +2,7 @@ import { Switch, Box, Autocomplete, TextField } from '@mui/material';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import dayjs, { Dayjs } from 'dayjs';
 import { ISpot } from 'interfaces';
+import { argument } from 'interfaces/common/argument';
 import React, { useEffect, useState } from 'react';
 import {
   useTypeDispatch,
@@ -28,7 +29,7 @@ export const FilterProposals = () => {
 
   useEffect(() => {
     if (!spots.length) {
-      dispatch(getAllSpots());
+      dispatch(getAllSpots(argument.empty));
     }
   }, [dispatch, spots.length]);
 

@@ -1,13 +1,14 @@
-import { logOutUser } from 'services/redux/auth/operationsAuth';
+import { logOutUser } from 'services/redux/auth/operations/operationsAuth';
 import { useTypeDispatch } from 'services/redux/customHook/typeHooks';
 import { IconButton } from '@mui/material';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import { argument } from 'interfaces/common/argument';
 
 export const LogOut = () => {
   const dispatch = useTypeDispatch();
 
   const LogOutUser = () => {
-    dispatch(logOutUser());
+    dispatch(logOutUser(argument.empty));
   };
   return (
     <IconButton

@@ -2,7 +2,7 @@ import { MenuItem, FormControl, Select } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select';
 import { useState } from 'react';
 import { useTypeSelector } from 'services/redux/customHook/typeHooks';
-import { selectUser } from 'services/redux/auth/selectors';
+import { selectUser } from 'services/redux/auth/selectors/selectors';
 import { ISportItem } from 'interfaces/user/userInterface';
 
 export const SelectHeader = () => {

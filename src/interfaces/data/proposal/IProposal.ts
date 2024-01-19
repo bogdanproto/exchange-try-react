@@ -138,3 +138,8 @@ export interface ICardControlHistory
 
 export interface ICardAdditionalProposal
   extends Pick<IProposal, 'ownerId' | 'ownerMsg'> {}
+
+export interface IProposalGetByStatus {
+  status: ProposalStatusBack;
+  signal: any;
+}

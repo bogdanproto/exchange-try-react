@@ -5,8 +5,8 @@ import {
   useTypeSelector,
 } from 'services/redux/customHook/typeHooks';
 import { useRef } from 'react';
-import { selectAuthUser } from 'services/redux/auth/selectors';
-import { delUserEqpt } from 'services/redux/auth/operationsUserProfile';
+import { selectAuthUser } from 'services/redux/auth/selectors/selectors';
+import { delUserEqpt } from 'services/redux/auth/operations/operationsUserProfile';
 
 interface IItemList {
   id: string;

@@ -1,11 +1,9 @@
 List of tasks Backend:
 
 1. Fix bug width proposals in goride with minus date
+2. Fix Response to spot
 
 List of tasks frontEnd:
-
-1. Optimaze Components - reject http query if component unmounted
-2. Notifications in app
 
 Global tasks:
 
