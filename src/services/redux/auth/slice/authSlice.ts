@@ -4,7 +4,7 @@ import {
   logInUser,
   logOutUser,
   refreshUser,
-} from './operationsAuth';
+} from '../operations/operationsAuth';
 import { ISliceAuthUser } from 'interfaces/user/userInterface';
 import {
   handleFulfilledLogIn,
@@ -13,21 +13,21 @@ import {
   handleFulfilledSignUp,
   handlePendingAuth,
   handleRejectedAuth,
-} from './handlesAuthStatus';
+} from '../handlesStatus';
 import {
   delUserEqpt,
   updUserAvatar,
   updUserEqpts,
   updUserProfile,
-} from './operationsUserProfile';
+} from '../operations/operationsUserProfile';
+import { setErrorAuth, setSuccesMsgUserDefault } from '../reducers';
 import {
   handleFulfilledAvatar,
   handleFulfilledDeleteEqpt,
   handleFulfilledProfile,
   handleFulfilledUpdEqpts,
   handleRejected,
-} from './handlesUserProfileStatus';
-import { setErrorAuth } from './reducers';
+} from '../handlesStatus';
 
 const initialState: ISliceAuthUser = {
   user: {
@@ -44,6 +44,7 @@ const initialState: ISliceAuthUser = {
   token: null,
   isLoggedIn: false,
   errorAuth: null,
+  successMsg: null,
   isRefreshing: false,
   isAppLoaded: false,
 };
@@ -53,6 +54,7 @@ const authUserSlice = createSlice({
   initialState,
   reducers: {
     toSetErrorAuth: setErrorAuth,
+    toSetSuccesMsgUserDefault: setSuccesMsgUserDefault,
   },
   extraReducers: builder => {
     builder
@@ -99,4 +101,5 @@ const authUserSlice = createSlice({
 });
 
 export const userAuthReducer = authUserSlice.reducer;
-export const { toSetErrorAuth } = authUserSlice.actions;
+export const { toSetErrorAuth, toSetSuccesMsgUserDefault } =
+  authUserSlice.actions;

@@ -8,13 +8,13 @@ import {
 import HomeIcon from '@mui/icons-material/ScreenRotationAltOutlined';
 import AddIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import UserIcon from '@mui/icons-material/AccountCircleOutlined';
-import { btn } from '../../../const/components';
+import { btn } from '../../../const/routesApp/components';
 
-import { routes } from '../../../const/routes';
+import { routes } from '../../../const/routesApp/routes';
 
 import { formatName } from 'services/helpers';
 import { useTypeSelector } from 'services/redux/customHook/typeHooks';
-import { selectUser } from 'services/redux/auth/selectors';
+import { selectUser } from 'services/redux/auth/selectors/selectors';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 

@@ -3,12 +3,16 @@ import { exchangeAPI } from '../axiosConf/axiosConf';
 import { IParamsProposals } from 'interfaces';
 
 export const getAllProposalsAPI = async ({
+  signal,
   spot,
   date,
   page,
   limit = 10,
 }: IParamsProposals) => {
   const params = { spot: spot?._id, date, page, limit };
-  const { data } = await exchangeAPI.get(routeProposalAPI.BASE, { params });
+  const { data } = await exchangeAPI.get(routeProposalAPI.BASE, {
+    params,
+    signal,
+  });
   return data;
 };

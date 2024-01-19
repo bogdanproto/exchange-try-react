@@ -15,7 +15,12 @@ export const Pending = () => {
   const dispatch = useTypeDispatch();
 
   useEffect(() => {
-    dispatch(getAllProposalPending());
+    const ctrl = new AbortController();
+    dispatch(getAllProposalPending(ctrl.signal));
+
+    return () => {
+      ctrl.abort();
+    };
   }, [dispatch]);
 
   return (

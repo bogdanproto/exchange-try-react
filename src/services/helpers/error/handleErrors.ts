@@ -1,4 +1,4 @@
-import { errorMessage } from 'const/errorNotification';
+import { errorMessage } from 'const/notification/errorNotification';
 import { IErorr } from 'interfaces/error/errorInterface';
 
 export const handleErrors = (error: IErorr): string =>

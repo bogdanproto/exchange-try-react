@@ -6,6 +6,7 @@ export interface IFilterProposals {
 }
 
 export interface IParamsProposals {
+  signal: any;
   page: number;
   limit?: number;
   spot: ISpot | null;

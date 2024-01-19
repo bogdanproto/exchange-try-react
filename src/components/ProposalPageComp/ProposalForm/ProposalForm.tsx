@@ -9,7 +9,7 @@ import {
   useTypeDispatch,
   useTypeSelector,
 } from 'services/redux/customHook/typeHooks';
-import { selectUser } from 'services/redux/auth/selectors';
+import { selectUser } from 'services/redux/auth/selectors/selectors';
 import {
   createProposal,
   getAllSpots,
@@ -24,6 +24,7 @@ import {
   HFAutocompleateSearch,
   HFSelect,
 } from 'components/Common';
+import { argument } from 'interfaces/common/argument';
 
 interface IProposalFormProps {
   _id?: string;
@@ -72,7 +73,7 @@ export const ProposalForm: React.FC<IProposalFormProps> = ({
 
   useEffect(() => {
     if (!spots.length) {
-      dispatch(getAllSpots());
+      dispatch(getAllSpots(argument.empty));
     }
   }, [dispatch, spots.length]);
 

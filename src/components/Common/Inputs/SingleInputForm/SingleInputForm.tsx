@@ -3,7 +3,7 @@ import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTypeDispatch } from 'services/redux/customHook/typeHooks';
 import { IUserProfile } from 'interfaces/user/userInterface';
-import { updUserProfile } from 'services/redux/auth/operationsUserProfile';
+import { updUserProfile } from 'services/redux/auth/operations/operationsUserProfile';
 
 interface IAddInput {
   name: 'name' | 'phone' | 'experience';

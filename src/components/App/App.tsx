@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 
 import { useEffect } from 'react';
-import { refreshUser } from 'services/redux/auth/operationsAuth';
+import { refreshUser } from 'services/redux/auth/operations/operationsAuth';
 import { ThemeProvider } from '@mui/material/styles';
 import {
   useTypeDispatch,

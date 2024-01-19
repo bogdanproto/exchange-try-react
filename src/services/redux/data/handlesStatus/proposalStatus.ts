@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { successMessage } from 'const';
+import { successDataMsg } from 'const';
 import { IProposalDelete, IProposal, ISliceData } from 'interfaces';
 import {
   IProposalHistory,
@@ -55,9 +55,10 @@ export const handleFulfilledCreateProposal = (
   action: PayloadAction<IProposal>
 ) => {
   state.proposals.items = [...state.proposals.items, action.payload];
+
   state.isLoading = false;
   state.errorData = null;
-  state.succesMsg = successMessage.PROPOSAL_CREATED;
+  state.succesMsg = successDataMsg.PROPOSAL_CREATED;
 };
 
 export const handleFulfilledDeleteProposal = (
@@ -68,6 +69,8 @@ export const handleFulfilledDeleteProposal = (
   state.proposals.items = [...state.proposals.items].filter(
     item => item._id !== _id
   );
+
+  state.succesMsg = successDataMsg.PROPOSAL_DELETED;
   state.isLoading = false;
   state.errorData = null;
 };
@@ -77,10 +80,13 @@ export const handleFulfilledUpdateProposal = (
   action: PayloadAction<IProposal>
 ) => {
   const updProposal = action.payload;
+
   state.proposals.items = [...state.proposals.items].filter(
     proposal => proposal._id !== updProposal._id
   );
   state.proposals.items = [updProposal, ...state.proposals.items];
+
+  state.succesMsg = successDataMsg.PROPOSAL_UPDATED;
   state.isLoading = false;
   state.errorData = null;
 };
@@ -98,11 +104,13 @@ export const handleFulfilledUpdateProposalByCustomer = (
     state.proposalsPending = state.proposalsPending.map(proposal =>
       proposal._id === updProposal._id ? updProposal : proposal
     );
+    state.succesMsg = successDataMsg.OFFER_UPDATED;
   } else {
     state.proposals.items = state.proposals.items.filter(
       proposal => proposal._id !== updProposal._id
     );
     state.proposalsPending = [...state.proposalsPending, updProposal];
+    state.succesMsg = successDataMsg.OFFER_CREATED;
   }
 
   state.isLoading = false;
@@ -118,6 +126,8 @@ export const handleFulfilledRemoveOfferCustomer = (
     proposal => proposal._id !== updProposal._id
   );
   state.proposals.items = [...state.proposals.items, updProposal];
+
+  state.succesMsg = successDataMsg.OFFER_DELETED;
   state.isLoading = false;
   state.errorData = null;
 };
@@ -134,8 +144,10 @@ export const handleFulfilledUpdateProposalStatus = (
 
   if (updProposal.statusProposal === ProposalStatusBack.accepted) {
     state.proposalsAccepted = [...state.proposalsAccepted, updProposal];
+    state.succesMsg = successDataMsg.PROPOSAL_ACCEPTED;
   } else {
     state.proposals.items = [...state.proposals.items, updProposal];
+    state.succesMsg = successDataMsg.PROPOSAL_REJECT;
   }
 
   state.isLoading = false;

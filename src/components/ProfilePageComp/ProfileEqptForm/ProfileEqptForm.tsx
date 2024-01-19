@@ -1,7 +1,7 @@
 import { TextField, Box, IconButton, Typography, List } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { ListItemDelete } from 'components/Common/List/ListItemDelete/ListItemDelete';
-import { schemaEqptForm } from 'const/shema';
+import { schemaEqptForm } from 'const/shema/shema';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ErrorInputForm } from 'components/Common/Error/ErrorInputForm.styled';
@@ -10,8 +10,8 @@ import {
   useTypeDispatch,
   useTypeSelector,
 } from 'services/redux/customHook/typeHooks';
-import { updUserEqpts } from 'services/redux/auth/operationsUserProfile';
-import { selectUser } from 'services/redux/auth/selectors';
+import { updUserEqpts } from 'services/redux/auth/operations/operationsUserProfile';
+import { selectUser } from 'services/redux/auth/selectors/selectors';
 
 export const ProfileEqptForm = () => {
   const dispatch = useTypeDispatch();

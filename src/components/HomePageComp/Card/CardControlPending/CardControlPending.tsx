@@ -6,7 +6,7 @@ import { ICardControlPending, IEqptItem } from 'interfaces';
 import { CardUserControl } from '../CardUserControl/CardUserControl';
 import { useTheme } from '@mui/material/styles';
 import { useTypeSelector } from 'services/redux/customHook/typeHooks';
-import { selectUser } from 'services/redux/auth/selectors';
+import { selectUser } from 'services/redux/auth/selectors/selectors';
 import { CardOwnerControl } from '../CardOwnerControl/CardOwnerControl';
 
 export const CardControlPending = ({

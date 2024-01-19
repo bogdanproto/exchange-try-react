@@ -4,6 +4,7 @@ import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import { IPropsNotification } from '../../../interfaces/component/compInterfaces';
 import { useTypeDispatch } from 'services/redux/customHook/typeHooks';
 import { toSetSuccesMsgDefault } from 'services/redux/data/slice/dataSlice';
+import { toSetSuccesMsgUserDefault } from 'services/redux/auth/slice/authSlice';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -22,6 +23,7 @@ export const NotificationBox = ({ type, message }: IPropsNotification) => {
   ) => {
     setOpen(false);
     dispatch(toSetSuccesMsgDefault(null));
+    dispatch(toSetSuccesMsgUserDefault(null));
   };
 
   return (
