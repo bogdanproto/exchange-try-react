@@ -13,17 +13,15 @@ import { selectUser } from 'services/redux/auth/selectors/selectors';
 import dayjs from 'dayjs';
 import { toFormatProfilelObj } from 'services/helpers';
 import { updUserProfile } from 'services/redux/auth/operations/operationsUserProfile';
-import { useEffect } from 'react';
 
 export const ProfileForm = () => {
   const dispatch = useTypeDispatch();
   const { name, phone, experience } = useTypeSelector(selectUser);
-
   const {
     handleSubmit,
     control,
     reset,
-    formState: { isSubmitSuccessful, errors, isDirty },
+    formState: { errors, isDirty },
   } = useForm<IProfileForm>({
     defaultValues: {
       name,
@@ -33,15 +31,10 @@ export const ProfileForm = () => {
     resolver: yupResolver(schemaProfileFormFull),
   });
 
-  useEffect(() => {
-    if (isSubmitSuccessful) {
-      reset();
-    }
-  }, [isSubmitSuccessful, reset]);
-
-  const onSubmit: SubmitHandler<IProfileForm> = data => {
+  const onSubmit: SubmitHandler<IProfileForm> = async data => {
     const prepareData = toFormatProfilelObj(data);
-    dispatch(updUserProfile(prepareData));
+    await dispatch(updUserProfile(prepareData));
+    reset(data);
   };
 
   return (
