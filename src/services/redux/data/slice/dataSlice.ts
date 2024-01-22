@@ -5,26 +5,33 @@ import {
   handleFulfilledCreateProposal,
   handleFulfilledDeleteProposal,
   handleFulfilledGetAllHistoryProposal,
+  handleFulfilledGetAllNotify,
   handleFulfilledGetAllProposal,
   handleFulfilledGetAllProposalAccepted,
   handleFulfilledGetAllProposalPending,
   handleFulfilledGetAllSpots,
+  handleFulfilledGetQntUnviewedNotify,
   handleFulfilledRemoveOfferCustomer,
+  handleFulfilledUpdStatusAllNotify,
   handleFulfilledUpdateProposal,
   handleFulfilledUpdateProposalByCustomer,
   handleFulfilledUpdateProposalStatus,
   handlePendingData,
+  handlePendingNotify,
   handleRejectedData,
+  handleRejectedNotify,
 } from '../handlesStatus';
 import {
   cancelProposal,
   createProposal,
   deleteProposal,
   getAllHistoryProposal,
+  getAllNotify,
   getAllProposal,
   getAllProposalAccepted,
   getAllProposalPending,
   getAllSpots,
+  getQntUnviewedNotify,
   removeOfferCustomer,
   updateProposal,
   updateProposalByCustomer,
@@ -38,6 +45,7 @@ import {
   setSuccesMsgDefault,
 } from '../reducers';
 import { ProposalStatusBack } from 'interfaces/data/proposal/IProposal';
+import { updateStatusNotifyToViewed } from '../operations/notify/updateStatusNotifyToViewed';
 
 const initialState: ISliceData = {
   proposals: {
@@ -49,8 +57,15 @@ const initialState: ISliceData = {
   proposalsPending: [],
   proposalsAccepted: [],
   proposalsHistory: [],
+  notifications: {
+    items: [],
+    page: null,
+    limit: null,
+    total: null,
+    totalNotViewed: null,
+  },
   filter: {
-    filterProposalsHistory: ProposalStatusBack.accepted,
+    filterProposalsHistory: ProposalStatusBack.past,
     filterProposals: {
       spot: null,
       date: null,
@@ -103,6 +118,15 @@ const dataSlice = createSlice({
         handleFulfilledUpdateProposalStatus
       )
       .addCase(cancelProposal.fulfilled, handleFulfilledCancelProposal)
+      .addCase(getAllNotify.fulfilled, handleFulfilledGetAllNotify)
+      .addCase(
+        updateStatusNotifyToViewed.fulfilled,
+        handleFulfilledUpdStatusAllNotify
+      )
+      .addCase(
+        getQntUnviewedNotify.fulfilled,
+        handleFulfilledGetQntUnviewedNotify
+      )
       .addMatcher(
         isAnyOf(
           getAllSpots.pending,
@@ -136,6 +160,22 @@ const dataSlice = createSlice({
           cancelProposal.rejected
         ),
         handleRejectedData
+      )
+      .addMatcher(
+        isAnyOf(
+          getAllNotify.pending,
+          updateStatusNotifyToViewed.pending,
+          getQntUnviewedNotify.pending
+        ),
+        handlePendingNotify
+      )
+      .addMatcher(
+        isAnyOf(
+          getAllNotify.rejected,
+          updateStatusNotifyToViewed.rejected,
+          getQntUnviewedNotify.rejected
+        ),
+        handleRejectedNotify
       );
   },
 });

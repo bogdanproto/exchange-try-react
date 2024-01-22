@@ -53,7 +53,7 @@ export const FilterHistoryProposals = () => {
         }}
       >
         <ToggleButton
-          value={ProposalStatusBack.accepted}
+          value={ProposalStatusBack.past}
           sx={{ fontWeight: 'bold' }}
         >
           {ProposalStatusBack.past}

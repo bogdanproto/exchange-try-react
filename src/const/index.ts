@@ -8,3 +8,4 @@ export * from './routesApp/routes';
 export * from './shema/shema';
 export * from './theme/theme';
 export * from './notification/successNotification';
+export * from './routeAPI/notify';

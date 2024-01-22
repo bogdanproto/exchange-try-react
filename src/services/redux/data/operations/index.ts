@@ -10,3 +10,5 @@ export * from './proposal/removeOfferCustomer';
 export * from './proposal/updateProposalStatus';
 export * from './proposal/cancelProposal';
 export * from './proposal/getAllHistoryProposal';
+export * from './notify/getAllNotify';
+export * from './notify/getQntUnviewedNotify';

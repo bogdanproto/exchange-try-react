@@ -13,4 +13,5 @@ export * from './Logo/Logo';
 export * from './NotificationBox/NotificationBox';
 export * from './Filter/FilterHistoryProposals/FilterHistoryProposals';
 export * from './Observer/Obsever';
+export * from './Observer/ObseverNotify';
 export * from './NoData/NoData';
