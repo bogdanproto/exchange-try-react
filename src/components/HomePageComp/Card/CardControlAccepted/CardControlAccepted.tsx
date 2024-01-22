@@ -50,7 +50,11 @@ export const CardControlAccepted = ({
           {statusProposal === ProposalStatusBack.cancelled
             ? statusProposal
             : statusProposal === ProposalStatusBack.accepted
-            ? ownerDate
+            ? `past accepted | ${ownerDate}`
+            : statusProposal === ProposalStatusBack.pending
+            ? `without offer | ${ownerDate}`
+            : statusProposal === ProposalStatusBack.reservation
+            ? `without your decision | ${ownerDate}`
             : restDays}
         </Typography>
 

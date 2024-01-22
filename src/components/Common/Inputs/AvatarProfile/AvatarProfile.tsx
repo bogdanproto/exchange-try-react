@@ -79,23 +79,6 @@ export const AvatarProfile = () => {
           {name}
         </Typography>
       )}
-      {/* {experience && (
-        <Typography
-          variant="caption"
-          style={{ lineHeight: '1.0', fontSize: '12px' }}
-        >
-          {experience} years experience
-        </Typography>
-      )}
-
-      {phone && (
-        <Typography
-          variant="caption"
-          style={{ lineHeight: '1.0', fontSize: '12px' }}
-        >
-          phone: {phone}
-        </Typography>
-      )} */}
     </Box>
   );
 };

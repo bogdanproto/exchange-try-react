@@ -1,28 +1,48 @@
-import { SwipeableDrawer, IconButton } from '@mui/material';
+import { SwipeableDrawer, IconButton, Badge } from '@mui/material';
 import HistoryIcon from '@mui/icons-material/History';
 import { useState } from 'react';
-// import { Notifications } from '@mui/icons-material';
+import { Notifications } from '@mui/icons-material';
 import { DrawerBox } from '../DrawerBox/DrawerBox';
 import { PastProposalsInterFace } from '../../PastProposalsInterFace/PastProposalsInterFace';
 import { useTheme } from '@mui/material/styles';
+import { useTypeSelector } from 'services/redux/customHook/typeHooks';
+import { selectTotalNotViewedNotify } from 'services/redux/data/selectors';
+import { NotifyInterface } from 'components/NotifyComponents';
+
+enum MenuOptions {
+  history = 'history',
+  notify = 'notify',
+}
 
 export const Drawer = () => {
   const theme = useTheme();
-  const [open, setOpen] = useState(false);
+  const notifyUnViewed = useTypeSelector(selectTotalNotViewedNotify);
 
-  const toggleDrawer = () => {
+  const [open, setOpen] = useState(false);
+  const [option, setOption] = useState<MenuOptions | null>(null);
+
+  const toggleDrawer = (option: MenuOptions | any) => {
     setOpen(!open);
+    setOption(option);
   };
 
   return (
     <>
-      <IconButton style={{ padding: '0' }} onClick={toggleDrawer}>
+      <IconButton
+        style={{ padding: '0' }}
+        onClick={() => toggleDrawer(MenuOptions.history)}
+      >
         <HistoryIcon sx={{ fontSize: 24 }} color="warning" />
       </IconButton>
 
-      {/* <Badge badgeContent={1} color="primary">
-        <Notifications sx={{ fontSize: 24 }} color="success" />
-      </Badge> */}
+      <IconButton
+        style={{ padding: '0' }}
+        onClick={() => toggleDrawer(MenuOptions.notify)}
+      >
+        <Badge badgeContent={notifyUnViewed} color="primary">
+          <Notifications sx={{ fontSize: 24 }} color="warning" />
+        </Badge>
+      </IconButton>
 
       <SwipeableDrawer
         anchor={'bottom'}
@@ -39,7 +59,11 @@ export const Drawer = () => {
       >
         {open && (
           <DrawerBox>
-            <PastProposalsInterFace />
+            {option === MenuOptions.history ? (
+              <PastProposalsInterFace />
+            ) : (
+              <NotifyInterface />
+            )}
           </DrawerBox>
         )}
       </SwipeableDrawer>

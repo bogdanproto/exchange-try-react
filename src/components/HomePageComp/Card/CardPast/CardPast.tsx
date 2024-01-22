@@ -2,6 +2,7 @@ import { Card, Box, Paper } from '@mui/material';
 import {
   CardControlAccepted,
   CardControlHistory,
+  CardInfo,
   CardInfoPending,
 } from 'components/HomePageComp';
 import { IEqptItem, ISpotView, IUserView } from 'interfaces';
@@ -64,17 +65,28 @@ export const CardPast = ({
             statusProposal={statusProposal}
           />
 
-          <CardInfoPending
-            ownerId={ownerId}
-            ownerEqpts={ownerEqpts}
-            ownerDate={ownerDate}
-            ownerTime={ownerTime}
-            spot={spot}
-            customerId={customerId}
-            customerEqpts={customerEqpts}
-            customerTime={customerTime}
-            statusProposal={statusProposal}
-          />
+          {statusProposal === ProposalStatusBack.pending ? (
+            <CardInfo
+              ownerId={ownerId}
+              ownerEqpts={ownerEqpts}
+              ownerDate={ownerDate}
+              ownerTime={ownerTime}
+              spot={spot}
+            />
+          ) : (
+            <CardInfoPending
+              ownerId={ownerId}
+              ownerEqpts={ownerEqpts}
+              ownerDate={ownerDate}
+              ownerTime={ownerTime}
+              spot={spot}
+              customerId={customerId}
+              customerEqpts={customerEqpts}
+              customerTime={customerTime}
+              statusProposal={statusProposal}
+            />
+          )}
+
           <CardControlHistory
             ownerId={ownerId}
             ownerMsg={ownerMsg}

@@ -5,6 +5,7 @@ import {
   handleFulfilledCreateProposal,
   handleFulfilledDeleteProposal,
   handleFulfilledGetAllHistoryProposal,
+  handleFulfilledGetAllNotify,
   handleFulfilledGetAllProposal,
   handleFulfilledGetAllProposalAccepted,
   handleFulfilledGetAllProposalPending,
@@ -14,13 +15,16 @@ import {
   handleFulfilledUpdateProposalByCustomer,
   handleFulfilledUpdateProposalStatus,
   handlePendingData,
+  handlePendingNotify,
   handleRejectedData,
+  handleRejectedNotify,
 } from '../handlesStatus';
 import {
   cancelProposal,
   createProposal,
   deleteProposal,
   getAllHistoryProposal,
+  getAllNotify,
   getAllProposal,
   getAllProposalAccepted,
   getAllProposalPending,
@@ -49,8 +53,15 @@ const initialState: ISliceData = {
   proposalsPending: [],
   proposalsAccepted: [],
   proposalsHistory: [],
+  notifications: {
+    items: [],
+    page: null,
+    limit: null,
+    total: null,
+    totalNotViewed: null,
+  },
   filter: {
-    filterProposalsHistory: ProposalStatusBack.accepted,
+    filterProposalsHistory: ProposalStatusBack.past,
     filterProposals: {
       spot: null,
       date: null,
@@ -103,6 +114,9 @@ const dataSlice = createSlice({
         handleFulfilledUpdateProposalStatus
       )
       .addCase(cancelProposal.fulfilled, handleFulfilledCancelProposal)
+      .addCase(getAllNotify.pending, handlePendingNotify)
+      .addCase(getAllNotify.fulfilled, handleFulfilledGetAllNotify)
+      .addCase(getAllNotify.rejected, handleRejectedNotify)
       .addMatcher(
         isAnyOf(
           getAllSpots.pending,

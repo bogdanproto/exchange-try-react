@@ -1,11 +1,10 @@
 List of tasks Backend:
 
-1. Fix bug width proposals in goride with minus date
-2. Fix Response to spot
-
 List of tasks frontEnd:
+
+1. Notify designe
+2. Notify update status viewed
 
 Global tasks:
 
-1. Logic of notifications
-2. Forecast whether
+1. Forecast whether

@@ -49,7 +49,7 @@ export const CardInfoPending = ({
       >
         <CardPendingUserContent user={customerId} userEqpts={customerEqpts} />
         <Box display="flex" alignItems="center">
-          {statusProposal === 'accepted' ? (
+          {statusProposal === 'accepted' || statusProposal === 'cancelled' ? (
             <PublishedWithChangesIcon color="disabled" />
           ) : (
             <KeyboardDoubleArrowRightIcon color="disabled" />

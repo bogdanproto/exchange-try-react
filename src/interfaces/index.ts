@@ -50,4 +50,10 @@ export type {
   ISportItem,
 } from './user/userInterface';
 
-export type { IFilterProposals, IParamsProposals } from './data/filter/filter';
+export type {
+  IFilterProposals,
+  IParamsProposals,
+  IParams,
+} from './data/filter/filter';
+
+export type { INotify, NotifyStatus, INotifys } from './data/notify/INotify';

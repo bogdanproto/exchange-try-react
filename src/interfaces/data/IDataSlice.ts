@@ -1,4 +1,5 @@
 import { IFilterProposals } from './filter/filter';
+import { INotifys } from './notify/INotify';
 import {
   IProposal,
   IProposalHistory,
@@ -12,6 +13,7 @@ export interface ISliceData {
   proposalsPending: IProposal[] | [];
   proposalsAccepted: IProposal[] | [];
   proposalsHistory: IProposalHistory[] | [];
+  notifications: INotifys;
   filter: {
     filterProposalsHistory: ProposalStatusBack;
     filterProposals: IFilterProposals;

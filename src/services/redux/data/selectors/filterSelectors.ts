@@ -26,10 +26,10 @@ export const selectFilteredHistoryProposals = createSelector(
   [selectProposalHistory, selectFilterHistoryProposals],
   (proposals, statusFilter) => {
     switch (statusFilter) {
-      case ProposalStatusBack.accepted:
+      case ProposalStatusBack.past:
         return proposals.filter(
           (proposal: IProposalHistory) =>
-            proposal.statusProposal === ProposalStatusBack.accepted
+            proposal.statusProposal !== ProposalStatusBack.cancelled
         );
       case ProposalStatusBack.cancelled:
         return proposals.filter(
