@@ -8,3 +8,4 @@ export * from './form/toFormatProfileObj';
 export * from './time/getDifferenceYears';
 export * from './redux/asyncThunkDecoratorData';
 export * from './redux/asyncThunkDecoratorUser';
+export * from './time/getDifferenceTime';

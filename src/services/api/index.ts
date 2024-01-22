@@ -12,3 +12,4 @@ export * from './proposal/getAllHistoryProposalsAPI';
 export * from './auth/authAPI';
 export * from './auth/userProfileAPI';
 export * from './notify/getAllNotifyAPI';
+export * from './notify/updateStatusNotifyToViewedAPI';

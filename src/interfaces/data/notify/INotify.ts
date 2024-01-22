@@ -1,10 +1,12 @@
-export enum NotifyStatus {
-  viewed = 'viewed',
-  notviewed = 'notviewed',
-}
+export type NotifyStatus = 'viewed' | 'notviewed';
 
 export interface INotify {
   _id: string;
+  initiator: {
+    _id: string;
+    name: string;
+    avatarCloudURL: string | null;
+  };
   message: string;
   statusNotify: NotifyStatus;
   createdAt: string;

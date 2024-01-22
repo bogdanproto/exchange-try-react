@@ -10,7 +10,9 @@ import {
   handleFulfilledGetAllProposalAccepted,
   handleFulfilledGetAllProposalPending,
   handleFulfilledGetAllSpots,
+  handleFulfilledGetQntUnviewedNotify,
   handleFulfilledRemoveOfferCustomer,
+  handleFulfilledUpdStatusAllNotify,
   handleFulfilledUpdateProposal,
   handleFulfilledUpdateProposalByCustomer,
   handleFulfilledUpdateProposalStatus,
@@ -29,6 +31,7 @@ import {
   getAllProposalAccepted,
   getAllProposalPending,
   getAllSpots,
+  getQntUnviewedNotify,
   removeOfferCustomer,
   updateProposal,
   updateProposalByCustomer,
@@ -42,6 +45,7 @@ import {
   setSuccesMsgDefault,
 } from '../reducers';
 import { ProposalStatusBack } from 'interfaces/data/proposal/IProposal';
+import { updateStatusNotifyToViewed } from '../operations/notify/updateStatusNotifyToViewed';
 
 const initialState: ISliceData = {
   proposals: {
@@ -114,9 +118,15 @@ const dataSlice = createSlice({
         handleFulfilledUpdateProposalStatus
       )
       .addCase(cancelProposal.fulfilled, handleFulfilledCancelProposal)
-      .addCase(getAllNotify.pending, handlePendingNotify)
       .addCase(getAllNotify.fulfilled, handleFulfilledGetAllNotify)
-      .addCase(getAllNotify.rejected, handleRejectedNotify)
+      .addCase(
+        updateStatusNotifyToViewed.fulfilled,
+        handleFulfilledUpdStatusAllNotify
+      )
+      .addCase(
+        getQntUnviewedNotify.fulfilled,
+        handleFulfilledGetQntUnviewedNotify
+      )
       .addMatcher(
         isAnyOf(
           getAllSpots.pending,
@@ -150,6 +160,22 @@ const dataSlice = createSlice({
           cancelProposal.rejected
         ),
         handleRejectedData
+      )
+      .addMatcher(
+        isAnyOf(
+          getAllNotify.pending,
+          updateStatusNotifyToViewed.pending,
+          getQntUnviewedNotify.pending
+        ),
+        handlePendingNotify
+      )
+      .addMatcher(
+        isAnyOf(
+          getAllNotify.rejected,
+          updateStatusNotifyToViewed.rejected,
+          getQntUnviewedNotify.rejected
+        ),
+        handleRejectedNotify
       );
   },
 });
