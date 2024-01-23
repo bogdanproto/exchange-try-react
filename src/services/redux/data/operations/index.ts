@@ -12,3 +12,4 @@ export * from './proposal/cancelProposal';
 export * from './proposal/getAllHistoryProposal';
 export * from './notify/getAllNotify';
 export * from './notify/getQntUnviewedNotify';
+export * from './notify/updateStatusNotifyToViewed';
