@@ -5,12 +5,14 @@ connect riders with each other, providing a platform to exchange equipment and
 gain new experiences.
 
 <div style="display:flex; flex-direction:row;">
-    <img src="./readme/photo_8.png" alt="Login" width="200" height="150" />
-    <img src="./readme/photo_5.png" alt="Profile" width="200" height="150" />
-    <img src="./readme/photo_7.png" alt="Add Proposal" width="200" height="150" />
-    <img src="./readme/photo_4.png" alt="Page Proposals" width="200" height="150" />
-    <img src="./readme/photo_1.png" alt="Page Goride" width="200" height="150" />
-    <img src="./readme/photo_2.png" alt="Notifications page" width="200" height="150" />
+    <img src="./readme/photo_8.png" alt="Login" width="200" height="356" />
+    <img src="./readme/photo_5.png" alt="Profile" width="200" height="356" />
+    <img src="./readme/photo_6.png" alt="Profile" width="200" height="356" />
+    <img src="./readme/photo_7.png" alt="Add Proposal" width="200" height="356" />
+    <img src="./readme/photo_4.png" alt="Page Proposals" width="200" height="356" />
+    <img src="./readme/photo_2.png" alt="Notifications page" width="200" height="356" />
+    <img src="./readme/photo_3.png" alt="Page Pending" width="200" height="356" />
+    <img src="./readme/photo_2.png" alt="Notifications page" width="200" height="356" />
 </div>
 
 ## Research
