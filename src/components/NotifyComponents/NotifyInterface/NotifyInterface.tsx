@@ -9,9 +9,11 @@ import {
 } from 'services/redux/data/selectors';
 import { NotifyList } from '../NotifyList/NotifyList';
 import { useEffect } from 'react';
-import { updateStatusNotifyToViewed } from 'services/redux/data/operations/notify/updateStatusNotifyToViewed';
 import { argument } from 'interfaces/common/argument';
-import { getAllNotify } from 'services/redux/data/operations';
+import {
+  getAllNotify,
+  updateStatusNotifyToViewed,
+} from 'services/redux/data/operations';
 
 export const NotifyInterface = () => {
   const notifys = useTypeSelector(selectAllNotify);
