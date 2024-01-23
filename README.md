@@ -115,34 +115,34 @@ store completed or inactive events.
 This FrontEnd was developed using TypeScript on the React framework, with the
 design of the app created using Material UI.
 
-#### UI Framework and Styling
+**UI Framework and Styling**
 
 - React: Used for building dynamic user interfaces.
 - styled-components: Employed for styling components.
 - @mui/styled-engine-sc: Utilized for integrating Styled Components with
   Material-UI.
 
-#### State Management
+**State Management**
 
 - redux-persist: Implemented for persisting Redux state.
 - @reduxjs/toolkit: Utilized for efficient Redux state management.
 - react-redux: Integrated for connecting React with Redux.
 
-#### Routing
+**Routing**
 
 - react-router-dom: Incorporated for declarative routing in React applications.
 
-#### Form Handling
+**Form Handling**
 
 - react-hook-form: Utilized for managing forms in React.
 - @hookform/resolvers: Employed for using resolvers with React Hook Form.
-  - yup: Utilized for form schema validation.
+- yup: Utilized for form schema validation.
 
-#### HTTP Requests
+**HTTP Requests**
 
 - axios: Employed for making HTTP requests.
 
-#### Date and Time Handling
+**Date and Time Handling**
 
 - dayjs: Used for efficient date and time manipulation.
 
@@ -151,60 +151,60 @@ design of the app created using Material UI.
 This Backend was developed using JavaScript and relies on a variety of
 dependencies to ensure functionality and security:
 
-#### Security:
+**Security:**
 
 - bcryptjs: Employed for password hashing.
 
-#### Image Management:
+**Image Management:**
 
 - cloudinary: Utilized for cloud-based image management.
 
-#### Cross-Origin Resource Sharing (CORS):
+**Cross-Origin Resource Sharing (CORS):**
 
 - cors: Implemented for Cross-Origin Resource Sharing.
 
-#### Environment Management:
+**Environment Management:**
 
 - cross-env: Used for environment variable management.
 - dotenv: Employed for environment configuration.
 
-#### Web Server Functionality:
+**Web Server Functionality:**
 
 - express: Utilized for web server functionality.
 
-#### Image Processing:
+**Image Processing:**
 
 - jimp: Employed for image processing.
 
-#### Input Validation:
+**Input Validation:**
 
 - joi: Used for input validation.
 
-#### Authentication:
+**Authentication:**
 
 - jsonwebtoken: Employed for JSON web tokens.
 
-#### Date and Time Manipulation:
+**Date and Time Manipulation:**
 
 - moment: Used for date and time manipulation.
 
-#### Database Modeling:
+**Database Modeling:**
 
 - mongoose: Employed for MongoDB object modeling.
 
-#### HTTP Request Logging:
+**HTTP Request Logging:**
 
 - morgan: Used for HTTP request logging.
 
-#### File Uploads:
+**File Uploads:**
 
 - multer: Implemented for handling file uploads.
 
-#### ID Generation:
+**ID Generation:**
 
 - nanoid: Employed for generating unique IDs.
 
-#### Data Validation:
+**Data Validation:**
 
 - validator: Used for data validation.
 
